@@ -62,21 +62,21 @@ Task("Build")
     });
 
 Task("UnitTests")
-	.IsDependentOn("Build")
+    .IsDependentOn("Build")
     .Does(() =>
-	{
-		XUnit2(string.Format("./test/**/bin/{0}/*.UnitTests.dll",configuration), 
-		new XUnit2Settings 
-		{
-			XmlReport = true,
-			OutputDirectory = buildArtifacts
-		});
+    {
+        XUnit2(string.Format("./test/**/bin/{0}/*.UnitTests.dll",configuration), 
+        new XUnit2Settings 
+        {
+            XmlReport = true,
+            OutputDirectory = buildArtifacts
+        });
     });
 
 Task("Package")
-	.IsDependentOn("UnitTests")
+    .IsDependentOn("UnitTests")
     .Does(() =>
-	{
+    {
         CreateAssemblyInfo("./src/CakeBuildDemo.ApiApp/Properties/AssemblyInfo.cs", new AssemblyInfoSettings 
         {
             Product = "CakeBuildDemo.ApiApp",
