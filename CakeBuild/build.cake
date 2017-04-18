@@ -73,18 +73,25 @@ Task("UnitTests")
         });
     });
 
-Task("Package")
-    .IsDependentOn("UnitTests")
+Task("PatchVersion")
+    .WithCriteria(isContinuousIntegrationBuild)
     .Does(() =>
     {
         CreateAssemblyInfo("./src/CakeBuildDemo.ApiApp/Properties/AssemblyInfo.cs", new AssemblyInfoSettings 
-        {
-            Product = "CakeBuildDemo.ApiApp",
-            Version = buildNumber,
-            FileVersion = buildNumber,
-            InformationalVersion = buildNumber,
-            Copyright = string.Format("Copyright © {0}", DateTime.Now.Year)
-        });
+            {
+                Product = "CakeBuildDemo.ApiApp",
+                Version = buildNumber,
+                FileVersion = buildNumber,
+                InformationalVersion = buildNumber,
+                Copyright = string.Format("Copyright © {0}", DateTime.Now.Year)
+            });
+    });
+
+Task("Package")
+    .IsDependentOn("UnitTests")
+    .IsDependentOn("PatchVersion")
+    .Does(() =>
+    {
         DotNetBuild("./src/CakeBuildDemo.ApiApp/CakeBuildDemo.ApiApp.csproj", settings => settings
             .SetConfiguration(configuration)
             .WithProperty("DeployOnBuild", "true")
