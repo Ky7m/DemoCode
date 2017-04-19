@@ -41,14 +41,6 @@ Task("Restore")
         NuGetRestore(solutionFile);
     });
 
-Task("Transform")
-    .WithCriteria(isContinuousIntegrationBuild)
-    .Does(() =>
-    {
-        var file = File("./test/CakeBuildDemo.RegressionTests/app.config");
-        XmlPoke(file, "/configuration/appSettings/add[@key = 'ApiEndpointBaseAddress']/@value", "developmenthost");
-    });
-
 Task("Build")
     .IsDependentOn("Restore")
     .IsDependentOn("Transform")
@@ -59,6 +51,14 @@ Task("Build")
             .WithTarget("Rebuild")
             //.WithProperty("TreatWarningsAsErrors", "True")
             .SetVerbosity(Verbosity.Minimal));
+    });
+
+Task("Transform")
+    .WithCriteria(isContinuousIntegrationBuild)
+    .Does(() =>
+    {
+        var file = File("./test/CakeBuildDemo.RegressionTests/app.config");
+        XmlPoke(file, "/configuration/appSettings/add[@key = 'ApiEndpointBaseAddress']/@value", "developmenthost");
     });
 
 Task("UnitTests")
