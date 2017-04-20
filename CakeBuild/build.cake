@@ -50,6 +50,7 @@ Task("Build")
             .SetConfiguration(configuration)
             .WithTarget("Rebuild")
             //.WithProperty("TreatWarningsAsErrors", "True")
+            //.UseToolVersion(MSBuildToolVersion.VS2015)
             .SetVerbosity(Verbosity.Minimal));
     });
 
