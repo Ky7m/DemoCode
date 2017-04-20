@@ -6,6 +6,7 @@
         {
             //new GeneralizedAsyncReturnTypes();
             //new RefLocalsAndReturnsPart1();
+            //new LocalFunctionsFindAndInvoke();
         }
     }
 }
