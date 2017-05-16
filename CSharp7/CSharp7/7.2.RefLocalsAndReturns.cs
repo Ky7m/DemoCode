@@ -18,7 +18,7 @@ namespace CSharp7
             list[0].X = 5;
             
             int a = 0;
-            ref int b = ref a;
+            ref var b = ref a;
             b = 5;
             WriteLine($"a={a},b={b},val={val}");
 
