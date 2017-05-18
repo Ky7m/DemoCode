@@ -8,6 +8,7 @@
             //new RefLocalsAndReturnsPart1();
             //new RefLocalsAndReturnsPart3();
             //new LocalFunctionsFindAndInvoke();
+            //new LocalFunctionsSubscribeAndRunOnce();
         }
     }
 }
