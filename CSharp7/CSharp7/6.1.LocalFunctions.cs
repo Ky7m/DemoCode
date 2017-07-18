@@ -17,8 +17,6 @@ namespace CSharp7
 
             int AddLocalWithClosure(int a) => a + bb;
             
-            void M() => _ = M();
-            
             async Task<int> AddAsyncLocal(int a, int b)
             {
                 await Task.Yield();
