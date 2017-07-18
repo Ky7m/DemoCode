@@ -5,8 +5,9 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <StartupObject>CSharp7.LiveDemo</StartupObject>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
-    <ItemGroup>
+  <ItemGroup>
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.4.0-preview2-25405-01" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.4.0-preview2-25405-01" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0-preview2-25405-01" />
