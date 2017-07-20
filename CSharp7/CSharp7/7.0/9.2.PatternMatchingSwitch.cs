@@ -4,7 +4,7 @@ using static System.Console;
 
 namespace CSharp7
 {
-    class PatternMatchingSwitch
+    public sealed class PatternMatchingSwitch
     {
         public PatternMatchingSwitch()
         {

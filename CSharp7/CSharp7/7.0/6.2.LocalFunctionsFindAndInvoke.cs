@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace CSharp7
 {
-    class LocalFunctionsFindAndInvoke
+    public sealed class LocalFunctionsFindAndInvoke
     {
         public LocalFunctionsFindAndInvoke()
         {

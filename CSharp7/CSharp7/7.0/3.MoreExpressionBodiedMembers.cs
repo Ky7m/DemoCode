@@ -2,7 +2,7 @@
 
 namespace CSharp7
 {
-    class MoreExpressionBodiedMembers
+    public sealed class MoreExpressionBodiedMembers
     {
         public MoreExpressionBodiedMembers() => WriteLine($"ctor {nameof(MoreExpressionBodiedMembers)}");
         ~MoreExpressionBodiedMembers() => WriteLine($"finalizer {nameof(MoreExpressionBodiedMembers)}");

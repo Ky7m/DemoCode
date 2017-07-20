@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CSharp7
 {
-    class LocalFunctions
+    public sealed class LocalFunctions
     {
         public LocalFunctions()
         {
@@ -32,7 +32,7 @@ namespace CSharp7
         }
     }
 
-    class MyAttr : Attribute
+    public sealed class MyAttr : Attribute
     {
     }
 }

@@ -3,7 +3,7 @@ using static System.Console;
 
 namespace CSharp7
 {
-    class ThrowExpressions
+    public sealed class ThrowExpressions
     {
         public ThrowExpressions(string param)
         {

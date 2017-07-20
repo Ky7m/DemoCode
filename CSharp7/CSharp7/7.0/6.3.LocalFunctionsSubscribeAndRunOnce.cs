@@ -2,7 +2,7 @@
 using System;
 namespace CSharp7
 {
-    class LocalFunctionsSubscribeAndRunOnce
+    public sealed class LocalFunctionsSubscribeAndRunOnce
     {
         private event EventHandler EventHandler;
 

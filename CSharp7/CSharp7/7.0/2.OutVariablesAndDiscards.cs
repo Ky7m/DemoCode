@@ -4,7 +4,7 @@ using static CSharp7.CacheManager;
 
 namespace CSharp7
 {
-    class OutVariablesAndDiscards
+    public sealed class OutVariablesAndDiscards
     {
         void OnlyOut(out int a, out int b, out int c)
         {

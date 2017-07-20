@@ -2,13 +2,11 @@
 {
     class LiveDemo
     {
-        static void Main()
-        {
-            //new GeneralizedAsyncReturnTypes();
+        static void Main() =>
+            new GeneralizedAsyncReturnTypes();
             //new RefLocalsAndReturnsPart1();
             //new RefLocalsAndReturnsPart3();
             //new LocalFunctionsFindAndInvoke();
             //new LocalFunctionsSubscribeAndRunOnce();
-        }
     }
 }

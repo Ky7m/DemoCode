@@ -4,7 +4,7 @@ using static System.Console;
 
 namespace CSharp7
 {
-    class Tuples
+    public sealed class Tuples
     {
         public Tuples()
         {

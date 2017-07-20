@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace CSharp7
 {
-    class RefLocalsAndReturnsPart3
+    public sealed class RefLocalsAndReturnsPart3
     {
         public RefLocalsAndReturnsPart3()
         {

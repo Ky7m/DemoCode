@@ -2,7 +2,7 @@
 
 namespace CSharp7
 {
-    class PatternMatchingIs
+    public sealed class PatternMatchingIs
     {
         public PatternMatchingIs()
         {

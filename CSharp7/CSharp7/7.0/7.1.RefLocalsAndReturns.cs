@@ -3,7 +3,7 @@ using static System.Console;
 
 namespace CSharp7
 {
-    class RefLocalsAndReturnsPart1
+    public sealed class RefLocalsAndReturnsPart1
     {
         public RefLocalsAndReturnsPart1(bool intro)
         {

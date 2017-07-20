@@ -4,19 +4,24 @@ using static System.Console;
 
 namespace CSharp7
 {
-    class GeneralizedAsyncReturnTypes
+    public sealed class GeneralizedAsyncReturnTypes
     {
         private static bool _cache;
         private static int _cacheResult;
 
         public GeneralizedAsyncReturnTypes()
         {
+            RunExampleAsync().Wait();
+        }
+
+        public static async Task RunExampleAsync()
+        {
             WriteLine($"Main Thread Id: {Thread.CurrentThread.ManagedThreadId}");
-            var result = AsyncCall().Result;
+            var result = await AsyncCall();
             WriteLine(result);
             WriteLine("-----------");
             WriteLine("2nd attempt");
-            result = AsyncCall().Result;
+            result = await AsyncCall();
             WriteLine(result);
         }
 

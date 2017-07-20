@@ -3,7 +3,7 @@ using static System.Console;
 
 namespace CSharp7
 {
-    class Deconstruction
+    public sealed class Deconstruction
     {
         public Deconstruction()
         {

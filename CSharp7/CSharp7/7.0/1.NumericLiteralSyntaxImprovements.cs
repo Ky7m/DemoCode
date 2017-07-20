@@ -2,7 +2,7 @@
 
 namespace CSharp7
 {
-    class NumericLiteralSyntaxImprovements
+    public sealed class NumericLiteralSyntaxImprovements
     {
         public NumericLiteralSyntaxImprovements()
         {
