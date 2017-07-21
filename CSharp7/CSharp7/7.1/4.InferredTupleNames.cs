@@ -16,7 +16,7 @@ namespace CSharp7
         public InferredTupleNames()
         {
             (var name, var age) = _employees
-                .Select(p => (p.Name, p.Age))
+                .Select(p => (p.Name, p.Age)) // old approach - (Name: p.Name, Age: p.Age)
                 .FirstOrDefault(tuple => tuple.Age > 50);
             WriteLine($"{name} - {age}");
         }
