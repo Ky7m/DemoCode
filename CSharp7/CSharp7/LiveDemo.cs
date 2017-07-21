@@ -1,12 +1,12 @@
 ﻿namespace CSharp7
 {
-    class LiveDemo
+    public static class LiveDemo
     {
-        static void Main() =>
-            new GeneralizedAsyncReturnTypes();
-            //new RefLocalsAndReturnsPart1();
-            //new RefLocalsAndReturnsPart3();
-            //new LocalFunctionsFindAndInvoke();
-            //new LocalFunctionsSubscribeAndRunOnce();
+        public static void Main() =>
+        new GeneralizedAsyncReturnTypes();
+        //new RefLocalsAndReturnsPart1();
+        //new RefLocalsAndReturnsPart3();
+        //new LocalFunctionsFindAndInvoke();
+        //new LocalFunctionsSubscribeAndRunOnce();
     }
 }
