@@ -26,7 +26,7 @@ namespace CSharp7
             int a, b;
             (a, b) = (0, 1);
 
-            var (x, y) = (0, 1);
+            var (x, _, y) = (0, 1, 2);
 
             var t = (1, 2, 3, 4, 5, 6, 7, 8);
 

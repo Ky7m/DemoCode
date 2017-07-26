@@ -9,9 +9,15 @@ namespace CSharp7
         {
             int? DoSomeWorkAndGetResult(int a = default, string s = default)
             {
-                if (s == default)
+                if (s == default || s is default)
                 {
                     return default;
+                }
+
+                switch(a)
+                {
+                    case (default): break;
+                    default: break;
                 }
 
                 int? result = default;
@@ -25,7 +31,7 @@ namespace CSharp7
                 return result;
             }
 
-            WriteLine(DoSomeWorkAndGetResult());
+            WriteLine(DoSomeWorkAndGetResult(default, string.Empty));
         }
     }
 }

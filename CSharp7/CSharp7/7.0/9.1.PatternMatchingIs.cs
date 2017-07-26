@@ -20,12 +20,16 @@ namespace CSharp7
 
         void PrintIfInt(object input)
         {
+            if(input is null)
+            {
+                throw new System.ArgumentNullException(nameof(input));
+            }
+
             if (input is int i)
             {
                 WriteLine(i);
             }
 
-            
             if (!(input is int notInt))
             {
                 //WriteLine(notInt.GetType());
