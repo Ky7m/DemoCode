@@ -9,7 +9,7 @@ namespace CSharp7
         {
             int? DoSomeWorkAndGetResult(int a = default, string s = default)
             {
-                if (s == default && s is default)
+                if (s == default || s is default)
                 {
                     return default;
                 }
