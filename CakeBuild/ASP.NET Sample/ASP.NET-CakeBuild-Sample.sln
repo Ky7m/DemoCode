@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeBuildDemo.UnitTests", "test\CakeBuildDemo.UnitTests\CakeBuildDemo.UnitTests.csproj", "{E6FD0933-8512-4FE0-9018-969F7B762B27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8DBA9869-DC3D-47F7-B78A-F9DD7B1DFB7E}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+		build.ps1 = build.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeBuildDemo.ApiApp", "src\CakeBuildDemo.ApiApp\CakeBuildDemo.ApiApp.csproj", "{C0C0A24E-57E0-4652-A11B-57D30DC3D020}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6FD0933-8512-4FE0-9018-969F7B762B27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6FD0933-8512-4FE0-9018-969F7B762B27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6FD0933-8512-4FE0-9018-969F7B762B27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6FD0933-8512-4FE0-9018-969F7B762B27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0C0A24E-57E0-4652-A11B-57D30DC3D020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0C0A24E-57E0-4652-A11B-57D30DC3D020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0C0A24E-57E0-4652-A11B-57D30DC3D020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0C0A24E-57E0-4652-A11B-57D30DC3D020}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4BCCFD4-2A2C-4E71-847F-5D6AE5312A1A}
+	EndGlobalSection
+EndGlobal
