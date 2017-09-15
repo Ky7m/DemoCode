@@ -64,6 +64,7 @@ Task("Build")
 
 Task("Inspect")
     .IsDependentOn("Restore")
+    .WithCriteria(IsRunningOnWindows())
     .Does(() =>
     {
         DupFinder(solutionFile, new DupFinderSettings {
@@ -92,7 +93,7 @@ Task("Inspect")
         if (FileExists(inspectReportFilePath)) {
             var settings = new ReadIssuesSettings(MakeAbsolute(Directory("./")));
             var issues = ReadIssues(InspectCodeIssuesFromFilePath(inspectReportFilePath), settings);
-            Information("{0} issues are found.", issues.Count())
+            Information("{0} issues are found.", issues.Count());
         }
     });
 
