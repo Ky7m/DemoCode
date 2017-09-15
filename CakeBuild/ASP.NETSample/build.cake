@@ -2,6 +2,13 @@
 // TOOLS
 //////////////////////////////////////////////////////////////////////
 #tool "nuget:?package=xunit.runner.console"
+#tool "nuget:?package=JetBrains.ReSharper.CommandLineTools"
+
+//////////////////////////////////////////////////////////////////////
+// ADDINS
+//////////////////////////////////////////////////////////////////////
+#addin "Cake.Prca"
+#addin "Cake.Prca.Issues.InspectCode"
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -15,7 +22,9 @@ var buildNumber = Argument("buildNumber", "1.0.0.0");
 ///////////////////////////////////////////////////////////////////////////////
 var outputDirectory = Directory("./build");
 var packageDirectory= Directory("./publish");
-var buildArtifacts = Directory("./BuildArtifacts/TestResults");
+var buildArtifacts = Directory("./BuildArtifacts");
+var testResults = buildArtifacts + Directory("_TestResults");
+var analysisResults = buildArtifacts + Directory("_AnalysisResults");
 var solutionFile = "./ASP.NET-CakeBuild-Sample.sln";
 var packageName = string.Format("./publish/CakeBuildDemo.{0}.zip",buildNumber);
 
@@ -53,6 +62,40 @@ Task("Build")
             );
     });
 
+Task("Inspect")
+    .IsDependentOn("Restore")
+    .Does(() =>
+    {
+        DupFinder(solutionFile, new DupFinderSettings {
+            ShowStats = true,
+            ShowText = true,
+            OutputFile = analysisResults + File("dupFinder-output.xml"),
+            ThrowExceptionOnFindingDuplicates = true
+        });
+        
+        var msBuildProperties = new Dictionary<string, string> {
+            {"Configuration", configuration}
+        };
+
+        var inspectReportFilePath = analysisResults + File("InspectCode-output.xml");
+        InspectCode(solutionFile, new InspectCodeSettings {
+            SolutionWideAnalysis = true,
+            ThrowExceptionOnFindingViolations = true,
+            Extensions = new string[] {
+                "EtherealCode.ReSpeller",
+                "Sizikov.AsyncSuffix"
+            },
+            ArgumentCustomization = args => args.Append("--toolset=15.0"),
+            OutputFile = inspectReportFilePath
+        });
+
+        if (FileExists(inspectReportFilePath)) {
+            var settings = new ReadIssuesSettings(MakeAbsolute(Directory("./")));
+            var issues = ReadIssues(InspectCodeIssuesFromFilePath(inspectReportFilePath), settings);
+            Information("{0} issues are found.", issues.Count())
+        }
+    });
+
 Task("Transform")
     .WithCriteria(isContinuousIntegrationBuild)
     .Does(() =>
@@ -69,7 +112,7 @@ Task("UnitTests")
         new XUnit2Settings 
         {
             XmlReport = true,
-            OutputDirectory = buildArtifacts
+            OutputDirectory = testResults
         });
     });
 
@@ -109,6 +152,7 @@ Task("Zip-Files")
     });
 
 Task("Default")
+    .IsDependentOn("Inspect")
     .IsDependentOn("Zip-Files");
 
 RunTarget(target);
