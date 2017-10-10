@@ -11,9 +11,19 @@ namespace CSharpInternals.Base
             _output = output;
         }
 
+        protected void WriteLine(object value)
+        {
+            WriteLine(value.ToString());
+        }
+        
         protected void WriteLine(string message)
         {
             _output.WriteLine(message);
+        }
+        
+        protected void WriteLine()
+        {
+            _output.WriteLine(string.Empty);
         }
     }
 }
