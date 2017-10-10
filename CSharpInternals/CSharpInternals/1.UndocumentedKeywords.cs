@@ -20,9 +20,12 @@ namespace CSharpInternals
         
         private void WithArglist(__arglist)
         {
-            Output.WriteLine(nameof(WithArglist));
-            DumpArgs(new ArgIterator(__arglist));
-            Output.WriteLine(string.Empty);
+            WriteLine(nameof(WithArglist));
+
+            var argIterator = new ArgIterator(__arglist);
+            DumpArgs(argIterator);
+
+            WriteLine(string.Empty);
             
             void DumpArgs(ArgIterator args)
             {
@@ -30,19 +33,19 @@ namespace CSharpInternals
                 {
                     TypedReference tr = args.GetNextArg();
                     var arg = TypedReference.ToObject(tr);
-                    Output.WriteLine(arg.ToString());
+                    WriteLine(arg.ToString());
                 }
             }
         }
         
         private void WithParams(params object[] args)
         {
-            Output.WriteLine(nameof(WithParams));
+            WriteLine(nameof(WithParams));
             foreach (var arg in args)
             {
-                Output.WriteLine(arg.ToString());
+                WriteLine(arg.ToString());
             }
-            Output.WriteLine(string.Empty);
+            WriteLine(string.Empty);
         }
     }
 }
