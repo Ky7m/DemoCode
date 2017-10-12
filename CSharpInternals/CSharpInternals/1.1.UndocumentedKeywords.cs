@@ -1,20 +1,15 @@
 ﻿using System;
-using BenchmarkDotNet.Attributes;
 using CSharpInternals.Base;
+using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace CSharpInternals
 {
+    [UsedImplicitly]
     public class UndocumentedKeywords : BaseTestHelpersClass
     {
-        private const int IterationCount = 10000000;
-        private int[] array;
-        
-        public UndocumentedKeywords(ITestOutputHelper output) : base(output)
-        {
-            array = new int[5];
-        }
+        public UndocumentedKeywords(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void ArglistAndParams()
@@ -56,6 +51,12 @@ namespace CSharpInternals
             
             Assert.Equal(expected, book.price);
         }
+
+        // [CS0610] Field or property cannot be of type 'TypedReference'
+        // Because a TypedReference can contain the address of a stack-allocated variable, 
+        // we’re not allowed to store them in fields, same as we’re not allowed to make a field of ref type. 
+        // That way CLR knows we’re never storing a reference to a “dead” stack variable.
+        // private TypedReference _typedReference;
         
         private void WithArglist(__arglist)
         {
