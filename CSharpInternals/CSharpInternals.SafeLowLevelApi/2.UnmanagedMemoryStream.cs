@@ -3,10 +3,10 @@ using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using Xunit;
 
-namespace CSharpInternals
+namespace CSharpInternals.SafeLowLevelApi
 {
     [UsedImplicitly]
-    public class SafeLowLevelApiUnmanagedMemoryStream 
+    public class UnmanagedMemoryStream 
     {
         [Fact]
         public static void ReadWriteStruct()

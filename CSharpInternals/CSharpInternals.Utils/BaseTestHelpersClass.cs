@@ -1,6 +1,6 @@
 ﻿using Xunit.Abstractions;
 
-namespace CSharpInternals.Base
+namespace CSharpInternals.Utils
 {
     public abstract class BaseTestHelpersClass
     {

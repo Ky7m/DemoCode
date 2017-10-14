@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using CSharpInternals.Base;
+using CSharpInternals.Utils;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace CSharpInternals
+namespace CSharpInternals.SafeLowLevelApi
 {
-    public class Misc : BaseTestHelpersClass
+    public class CreateNewInstance : BaseTestHelpersClass
     {
-        public Misc(ITestOutputHelper output) : base(output) { }
+        public CreateNewInstance(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void CreateNewInstanceWithoutCtorCall()

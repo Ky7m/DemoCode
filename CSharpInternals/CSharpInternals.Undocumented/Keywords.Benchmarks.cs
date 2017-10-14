@@ -1,13 +1,13 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace CSharpInternals
+namespace CSharpInternals.Undocumented
 {
-    public class UndocumentedKeywordsBenchmarks
+    public class KeywordsBenchmarks
     {
         private const int IterationCount = 10000000;
         private readonly int[] _array;
         
-        public UndocumentedKeywordsBenchmarks()
+        public KeywordsBenchmarks()
         {
             _array = new int[5];
         }

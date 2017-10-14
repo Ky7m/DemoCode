@@ -1,15 +1,15 @@
 ﻿using System;
-using CSharpInternals.Base;
+using CSharpInternals.Utils;
 using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace CSharpInternals
+namespace CSharpInternals.Undocumented
 {
     [UsedImplicitly]
-    public class UndocumentedKeywords : BaseTestHelpersClass
+    public class Keywords : BaseTestHelpersClass
     {
-        public UndocumentedKeywords(ITestOutputHelper output) : base(output) { }
+        public Keywords(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void ArglistAndParams()
@@ -57,7 +57,6 @@ namespace CSharpInternals
         // we’re not allowed to store them in fields, same as we’re not allowed to make a field of ref type. 
         // That way CLR knows we’re never storing a reference to a “dead” stack variable.
         // private TypedReference _typedReference;
-        
         private void WithArglist(__arglist)
         {
             WriteLine(nameof(WithArglist));
@@ -84,7 +83,7 @@ namespace CSharpInternals
             WriteLine(nameof(WithParams));
             foreach (var arg in args)
             {
-                WriteLine(arg);
+                WriteLine($"{arg} / {arg.GetType()}");
             }
             WriteLine();
         }
