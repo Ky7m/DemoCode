@@ -1,17 +1,25 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
+using CSharpInternals.Utils;
 using JetBrains.Annotations;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace CSharpInternals.SafeLowLevelApi
 {
     [UsedImplicitly]
-    public class UnmanagedMemoryStream 
+    public class SystemUnmanagedMemoryStream :BaseTestHelpersClass
     {
-        [Fact]
-        public void ReadWriteStruct()
+        private const int Capacity = 1073741824; //1GB
+        public SystemUnmanagedMemoryStream(ITestOutputHelper output) : base(output)
         {
-            const int capacity = 100;
+        }
+
+        [Fact]
+        public void ReadWriteStructUsingUma()
+        {
+            
             var inStruct = new TestStruct
             {
                 int1 = 1, 
@@ -21,17 +29,39 @@ namespace CSharpInternals.SafeLowLevelApi
                 bool2 = true 
             };
 
-            using (var buffer = new HGlobalSafeBuffer(capacity))
-            using (var stream = new UnmanagedMemoryAccessor(buffer, 0, capacity, FileAccess.ReadWrite))
+            var startMemory = GC.GetTotalMemory(true);
+            using (var buffer = new HGlobalSafeBuffer(Capacity))
+            using (var stream = new UnmanagedMemoryAccessor(buffer, 0, Capacity, FileAccess.ReadWrite))
             {
                 stream.Write(0, ref inStruct);
                 stream.Read(0, out TestStruct outStruct);
-                
+
                 Assert.Equal(inStruct.int1, outStruct.int1);
                 Assert.Equal(inStruct.int2, outStruct.int2);
                 Assert.Equal(inStruct.bool1, outStruct.bool1);
                 Assert.Equal(inStruct.char1, outStruct.char1);
                 Assert.Equal(inStruct.bool2, outStruct.bool2);
+
+                var endMemory = GC.GetTotalMemory(false);
+                WriteLine($"Memory: {endMemory - startMemory} bytes");
+            }
+        }
+
+        [Fact]
+        public void ReadWriteFromUnmanagedMemoryStream()
+        {
+            var startMemory = GC.GetTotalMemory(true);
+            using (var buffer = new HGlobalSafeBuffer(Capacity))
+            using (var stream = new UnmanagedMemoryStream(buffer, 0, Capacity, FileAccess.ReadWrite))
+            {
+                buffer.Write(0, (byte)100);
+
+                var position = stream.Position;
+                Assert.Equal(100, stream.ReadByte());
+                Assert.Equal(stream.Position, position + 1);
+
+                var endMemory = GC.GetTotalMemory(false);
+                WriteLine($"Memory: {endMemory - startMemory} bytes");
             }
         }
 

@@ -5,7 +5,7 @@ using Xunit;
 namespace CSharpInternals.SafeLowLevelApi
 {
     [UsedImplicitly]
-    public class SystemMemoryApi
+    public class Spans
     {
         [Fact]
         public static void Test()
