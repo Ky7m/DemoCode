@@ -9,7 +9,7 @@ namespace CSharpInternals.SafeLowLevelApi
     public class UnmanagedMemoryStream 
     {
         [Fact]
-        public static void ReadWriteStruct()
+        public void ReadWriteStruct()
         {
             const int capacity = 100;
             var inStruct = new TestStruct
