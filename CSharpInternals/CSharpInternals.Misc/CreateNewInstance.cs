@@ -4,7 +4,7 @@ using CSharpInternals.Utils;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace CSharpInternals.SafeLowLevelApi
+namespace CSharpInternals.Misc
 {
     public class CreateNewInstance : BaseTestHelpersClass
     {
