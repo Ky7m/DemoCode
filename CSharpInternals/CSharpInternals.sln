@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpInternals.Misc", "CSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpInternals.ExceptionHandling", "CSharpInternals.ExceptionHandling\CSharpInternals.ExceptionHandling.csproj", "{BD800BB0-0949-43FC-AA4A-EBF85B35B8C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpInternals.Strings", "CSharpInternals.Strings\CSharpInternals.Strings.csproj", "{CEB84728-F34B-4675-879F-653BD9F6C546}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpInternals.Numbers", "CSharpInternals.Numbers\CSharpInternals.Numbers.csproj", "{23EFC049-9EFB-465A-8590-2857FA7EBDF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BD800BB0-0949-43FC-AA4A-EBF85B35B8C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD800BB0-0949-43FC-AA4A-EBF85B35B8C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD800BB0-0949-43FC-AA4A-EBF85B35B8C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEB84728-F34B-4675-879F-653BD9F6C546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB84728-F34B-4675-879F-653BD9F6C546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB84728-F34B-4675-879F-653BD9F6C546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB84728-F34B-4675-879F-653BD9F6C546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23EFC049-9EFB-465A-8590-2857FA7EBDF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23EFC049-9EFB-465A-8590-2857FA7EBDF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23EFC049-9EFB-465A-8590-2857FA7EBDF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23EFC049-9EFB-465A-8590-2857FA7EBDF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
