@@ -16,7 +16,7 @@ namespace CSharpInternals.Strings
         public void StringLength()
         {
             //what do you think will be written?
-            WriteLine($"Length: {Emojis.Length}");    
+            WriteLine($"Length: {Emojis.Length}"); 
         }
         
         [Fact]

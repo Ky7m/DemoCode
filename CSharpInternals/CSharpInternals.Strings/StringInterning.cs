@@ -26,6 +26,7 @@ namespace CSharpInternals.Strings
             Assert.False(ReferenceEquals(str1, str4));
         }
         
+        // https://github.com/Microsoft/msbuild/blob/master/src/Shared/OpportunisticIntern.cs#L770,L1020
         [Fact]
         public void UsingClrPool()
         {

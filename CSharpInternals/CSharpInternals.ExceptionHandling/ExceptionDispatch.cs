@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
-using System.Threading.Tasks;
 using CSharpInternals.Utils;
-using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace CSharpInternals.ExceptionHandling
 {
-    [UsedImplicitly]
     public class ExceptionDispatch : BaseTestHelpersClass
     {
         public ExceptionDispatch(ITestOutputHelper output) : base(output)
@@ -17,7 +14,7 @@ namespace CSharpInternals.ExceptionHandling
         }
 
         [Fact]
-        public async Task RethrowWithHack()
+        public void RethrowWithHack()
         {
             Exception myEx;
 
@@ -30,12 +27,19 @@ namespace CSharpInternals.ExceptionHandling
                 ex.PreserveStackTrace();
                 myEx = ex;
             }
-            var exception = await Assert.ThrowsAsync<Exception>(() => throw myEx);
+            
+            void ThrowFunction() => throw myEx;
+            
+            var exception = Assert.Throws<Exception>(() =>
+            {
+                ThrowFunction();
+            });
+            
             WriteLine(exception.ToString());
         }
 
         [Fact]
-        public async Task RethrowWithExceptionDispatchInfo()
+        public void RethrowWithExceptionDispatchInfo()
         {
             ExceptionDispatchInfo myEx;
             try
@@ -47,16 +51,15 @@ namespace CSharpInternals.ExceptionHandling
                 myEx = ExceptionDispatchInfo.Capture(ex);
             }
 
-            var exception = await Assert.ThrowsAsync<Exception>(() =>
+            var exception =  Assert.Throws<Exception>(() =>
             {
                 myEx.Throw();
-                return Task.CompletedTask;
             });
             WriteLine(exception.ToString());
         }
     }
 
-    static class ExceptionExtensions
+    internal static class ExceptionExtensions
     {
         public static void PreserveStackTrace(this Exception exception)
         {

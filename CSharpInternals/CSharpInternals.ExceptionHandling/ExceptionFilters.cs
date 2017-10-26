@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Threading.Tasks;
 using CSharpInternals.Utils;
 using JetBrains.Annotations;
 using Xunit;
@@ -16,38 +15,36 @@ namespace CSharpInternals.ExceptionHandling
         }
 
         [Fact]
-        public async Task ExceptionFilter()
+        public void ExceptionFilter()
         {
-            var exception = await Assert.ThrowsAsync<Exception>(DoSomethingWithExceptionFilter);
+            var exception = Assert.Throws<Exception>(() => DoSomethingWithExceptionFilter());
             WriteLine(exception.ToString());
         }
         
         [Fact]
-        public async Task CatchBlockFilter()
+        public void CatchBlockFilter()
         {
-            var exception = await Assert.ThrowsAsync<Exception>(DoSomethingWithCatchBlockFilter);
+            var exception =  Assert.Throws<Exception>(() => DoSomethingWithCatchBlockFilter());
             WriteLine(exception.ToString());
         }
 
-        private Task DoSomethingWithExceptionFilter()
+        private void DoSomethingWithExceptionFilter()
         {
             try
             {
-                return DoSomethingWork();
+                DoSomethingWork();
             }
             catch (Exception e) when(!IsExceptionCritical(e))
             {
                 WriteLine(e);
             }
-            
-            return Task.CompletedTask;
         }
         
-        private Task DoSomethingWithCatchBlockFilter()
+        private void DoSomethingWithCatchBlockFilter()
         {
             try
             {
-                return DoSomethingWork();
+                DoSomethingWork();
             }
             catch (Exception e)
             {
@@ -60,11 +57,9 @@ namespace CSharpInternals.ExceptionHandling
                     throw;
                 }
             }
-            
-            return Task.CompletedTask;
         }
         
-        private static Task DoSomethingWork()
+        private static void DoSomethingWork()
         {
             throw new Exception
             {
