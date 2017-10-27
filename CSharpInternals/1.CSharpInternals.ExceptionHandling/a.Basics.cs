@@ -6,7 +6,7 @@ namespace CSharpInternals.ExceptionHandling
     public class Basics
     {        
         [Fact]
-        public void Test()
+        public void ThrowsNull()
         {
             Assert.Throws<NullReferenceException>(() => ThrowsNullReferenceException());
         }
