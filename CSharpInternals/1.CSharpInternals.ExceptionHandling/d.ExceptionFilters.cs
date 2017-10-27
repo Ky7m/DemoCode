@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections;
 using CSharpInternals.Utils;
-using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace CSharpInternals.ExceptionHandling
 {
-    [UsedImplicitly]
     public class ExceptionFilters : BaseTestHelpersClass
     {
         public ExceptionFilters(ITestOutputHelper output) : base(output)

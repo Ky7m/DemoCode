@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Threading;
 using CSharpInternals.Utils;
-using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace CSharpInternals.ExceptionHandling
 {
-    [UsedImplicitly]
     public class TryFinallyBlocks : BaseTestHelpersClass
     {
         public TryFinallyBlocks(ITestOutputHelper output) : base(output)
@@ -26,7 +24,7 @@ namespace CSharpInternals.ExceptionHandling
             catch (Exception exception)
             {
                 WriteLine(exception.ToString());
-                Environment.FailFast(causeOfFailure);
+                //Environment.FailFast(causeOfFailure);
             }
             finally
             {

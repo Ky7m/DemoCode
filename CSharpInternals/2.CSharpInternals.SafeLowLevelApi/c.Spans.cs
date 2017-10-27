@@ -8,7 +8,6 @@ using Xunit.Abstractions;
 
 namespace CSharpInternals.SafeLowLevelApi
 {
-    [UsedImplicitly]
     public class Spans : BaseTestHelpersClass
     {
         public Spans(ITestOutputHelper output) : base(output)

@@ -2,16 +2,14 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using CSharpInternals.Utils;
-using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace CSharpInternals.SafeLowLevelApi
 {
-    [UsedImplicitly]
-    public class Intro : BaseTestHelpersClass
+    public class Basics : BaseTestHelpersClass
     {
-        public Intro(ITestOutputHelper output) : base(output) { }
+        public Basics(ITestOutputHelper output) : base(output) { }
        
         [Fact]
         public void SafeCodeBreaking()
@@ -31,7 +29,7 @@ namespace CSharpInternals.SafeLowLevelApi
             WriteLine($"{nameof(MethodToPatch)} was called.");
         }
         
-        private static RuntimeMethodHandle GetMethodHandle(string methodName) => typeof(Intro)
+        private static RuntimeMethodHandle GetMethodHandle(string methodName) => typeof(Basics)
             .GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance).MethodHandle;
     }
 }

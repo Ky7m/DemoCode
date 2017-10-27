@@ -13,7 +13,7 @@ namespace CSharpInternals.Misc
         [Fact]
         public void CreateNewInstanceWithoutCtorCall()
         {
-            Assert.Throws<NotImplementedException>(() => new ClassWithExceptionInCtor());
+            Assert.Throws<ApplicationException>(() => new ClassWithExceptionInCtor());
             
             var instance = FormatterServices.GetUninitializedObject(typeof(ClassWithExceptionInCtor)) as ClassWithExceptionInCtor;
             Assert.NotNull(instance);
@@ -23,7 +23,7 @@ namespace CSharpInternals.Misc
         {
             public ClassWithExceptionInCtor()
             {
-                throw new NotImplementedException();
+                throw new ApplicationException();
             }
         }
     }

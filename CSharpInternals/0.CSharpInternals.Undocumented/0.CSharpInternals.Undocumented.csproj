@@ -197,8 +197,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Keywords.cs" />
-    <Compile Include="Keywords.Benchmarks.cs" />
+    <Compile Include="a.Keywords.cs" />
+    <Compile Include="b.Keywords.Benchmarks.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

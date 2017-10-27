@@ -2,13 +2,11 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using CSharpInternals.Utils;
-using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace CSharpInternals.SafeLowLevelApi
 {
-    [UsedImplicitly]
     public class SystemUnmanagedMemoryStream :BaseTestHelpersClass
     {
         private const int Capacity = 1073741824; //1GB

@@ -1,12 +1,10 @@
 ﻿using System;
 using CSharpInternals.Utils;
-using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace CSharpInternals.Undocumented
 {
-    [UsedImplicitly]
     public class Keywords : BaseTestHelpersClass
     {
         public Keywords(ITestOutputHelper output) : base(output) { }

@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27009.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpInternals.Undocumented", "CSharpInternals.Undocumented\CSharpInternals.Undocumented.csproj", "{422A2E3B-A99D-4AA7-80E5-9E5CD8FA6244}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0.CSharpInternals.Undocumented", "0.CSharpInternals.Undocumented\0.CSharpInternals.Undocumented.csproj", "{422A2E3B-A99D-4AA7-80E5-9E5CD8FA6244}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpInternals.Utils", "CSharpInternals.Utils\CSharpInternals.Utils.csproj", "{0DAEFD79-722D-4202-A1B8-E50324C664C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpInternals.SafeLowLevelApi", "CSharpInternals.SafeLowLevelApi\CSharpInternals.SafeLowLevelApi.csproj", "{4070EA35-1004-4F7B-989C-A6332D31A8A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2.CSharpInternals.SafeLowLevelApi", "2.CSharpInternals.SafeLowLevelApi\2.CSharpInternals.SafeLowLevelApi.csproj", "{4070EA35-1004-4F7B-989C-A6332D31A8A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpInternals.Misc", "CSharpInternals.Misc\CSharpInternals.Misc.csproj", "{08EC0DAD-D704-4AA8-B753-338934B4E30E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "99.CSharpInternals.Misc", "99.CSharpInternals.Misc\99.CSharpInternals.Misc.csproj", "{08EC0DAD-D704-4AA8-B753-338934B4E30E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpInternals.ExceptionHandling", "CSharpInternals.ExceptionHandling\CSharpInternals.ExceptionHandling.csproj", "{BD800BB0-0949-43FC-AA4A-EBF85B35B8C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.CSharpInternals.ExceptionHandling", "1.CSharpInternals.ExceptionHandling\1.CSharpInternals.ExceptionHandling.csproj", "{BD800BB0-0949-43FC-AA4A-EBF85B35B8C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpInternals.Strings", "CSharpInternals.Strings\CSharpInternals.Strings.csproj", "{CEB84728-F34B-4675-879F-653BD9F6C546}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.CSharpInternals.Strings", "3.CSharpInternals.Strings\3.CSharpInternals.Strings.csproj", "{CEB84728-F34B-4675-879F-653BD9F6C546}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpInternals.Numbers", "CSharpInternals.Numbers\CSharpInternals.Numbers.csproj", "{23EFC049-9EFB-465A-8590-2857FA7EBDF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.CSharpInternals.Numbers", "4.CSharpInternals.Numbers\4.CSharpInternals.Numbers.csproj", "{23EFC049-9EFB-465A-8590-2857FA7EBDF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
