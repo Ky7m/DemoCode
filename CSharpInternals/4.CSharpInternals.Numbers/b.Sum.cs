@@ -26,7 +26,7 @@ namespace CSharpInternals.Numbers
                 double.MaxValue, double.MaxValue, 
                 -double.MaxValue, -double.MaxValue 
             }; 
-            // In a world where we summed using a float accumulator, the 
+            // In a world where we summed using a double accumulator, the 
             // result would be infinity. 
             Assert.NotEqual(0.0, source.Sum()); 
         }

@@ -11,9 +11,7 @@ namespace CSharpInternals.Strings
 {
     public class StringInterpolation : BaseTestHelpersClass
     {
-        public StringInterpolation(ITestOutputHelper output) : base(output)
-        {
-        }
+        public StringInterpolation(ITestOutputHelper output) : base(output) { }
         
         [Fact]
         public void WholeProgramInString()
@@ -52,8 +50,6 @@ namespace CSharpInternals.Strings
                 }
             }
         }
-        
-        
     }
     
     // Do not use this code in production!

@@ -8,34 +8,31 @@ namespace CSharpInternals.ExceptionHandling
 {
     public class ExceptionFilters : BaseTestHelpersClass
     {
-        public ExceptionFilters(ITestOutputHelper output) : base(output)
-        {
-        }
+        public ExceptionFilters(ITestOutputHelper output) : base(output) { }
 
-        [Fact]
-        public void ExceptionFilter()
-        {
-            var exception = Assert.Throws<Exception>(() => DoSomethingWithExceptionFilter());
-            WriteLine(exception.ToString());
-        }
-        
         [Fact]
         public void CatchBlockFilter()
         {
             var exception =  Assert.Throws<Exception>(() => DoSomethingWithCatchBlockFilter());
             WriteLine(exception.ToString());
         }
-
-        private void DoSomethingWithExceptionFilter()
+        
+        [Fact]
+        public void ExceptionFilter()
         {
-            try
+            var exception = Assert.Throws<Exception>(() => DoSomethingWithExceptionFilter());
+            WriteLine(exception.ToString());
+        }
+
+        private static void DoSomethingWork()
+        {
+            throw new Exception
             {
-                DoSomethingWork();
-            }
-            catch (Exception e) when(!IsExceptionCritical(e))
-            {
-                WriteLine(e);
-            }
+                Data =
+                {
+                    {"ErrorCode", -1}
+                }
+            };
         }
         
         private void DoSomethingWithCatchBlockFilter()
@@ -57,17 +54,18 @@ namespace CSharpInternals.ExceptionHandling
             }
         }
         
-        private static void DoSomethingWork()
+        private void DoSomethingWithExceptionFilter()
         {
-            throw new Exception
+            try
             {
-                Data =
-                {
-                    {"ErrorCode", -1}
-                }
-            };
+                DoSomethingWork();
+            }
+            catch (Exception e) when(!IsExceptionCritical(e))
+            {
+                WriteLine(e);
+            }
         }
-        
+       
         private static bool IsExceptionCritical(Exception exception)
         {
             foreach (DictionaryEntry item in exception.Data)

@@ -37,7 +37,7 @@ namespace CSharpInternals.Undocumented
             // reflection
             const decimal expected = 199.99m;
             
-            var book = new BookStructType {title = "C# 5.0 All-in-One For Dummies", price = 19.99m};
+            var book = new BookStructType {title = "C# 7.0 All-in-One For Dummies", price = 19.99m};
             var fieldInfo = typeof(BookStructType).GetField("price");
             fieldInfo?.SetValue(book, expected);
             

@@ -59,8 +59,7 @@ namespace CSharpInternals.Strings
         {
             return new string(new[] {'s', 't', 'r', 'i', 'n', 'g'});
         }
-        
-        
+            
         private class LocalPool
         {
             private readonly Dictionary<string,string> _stringPool = new Dictionary<string, string>();

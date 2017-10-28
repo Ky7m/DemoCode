@@ -10,9 +10,7 @@ namespace CSharpInternals.SafeLowLevelApi
 {
     public class Spans : BaseTestHelpersClass
     {
-        public Spans(ITestOutputHelper output) : base(output)
-        {
-        }
+        public Spans(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void SpanBasics()
@@ -61,7 +59,6 @@ namespace CSharpInternals.SafeLowLevelApi
                 readOnlySpan = readOnlySpan.Slice(position + 1);  
             }
         }
-
 
         private void WriteArray<T>([NotNull] IEnumerable<T> array, string separator = ",")
         {

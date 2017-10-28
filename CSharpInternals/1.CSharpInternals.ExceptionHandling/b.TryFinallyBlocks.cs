@@ -8,9 +8,7 @@ namespace CSharpInternals.ExceptionHandling
 {
     public class TryFinallyBlocks : BaseTestHelpersClass
     {
-        public TryFinallyBlocks(ITestOutputHelper output) : base(output)
-        {
-        }
+        public TryFinallyBlocks(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void EnvironmentFailFast()
@@ -31,7 +29,6 @@ namespace CSharpInternals.ExceptionHandling
                 WriteLine("This finally block will not be executed.");
             }
         }
-
 
         [Fact]
         public void ThreadAbortExceptionAndFinally()

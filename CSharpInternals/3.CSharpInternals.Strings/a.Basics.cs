@@ -8,9 +8,7 @@ namespace CSharpInternals.Strings
     {
         private const string Emojis = "👶👶👶👶🍼🍼";
 
-        public StringBasics(ITestOutputHelper output) : base(output)
-        {
-        }
+        public StringBasics(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void StringLength()

@@ -9,9 +9,7 @@ namespace CSharpInternals.ExceptionHandling
 {
     public class ExceptionDispatch : BaseTestHelpersClass
     {
-        public ExceptionDispatch(ITestOutputHelper output) : base(output)
-        {
-        }
+        public ExceptionDispatch(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void RethrowWithHack()
@@ -24,7 +22,7 @@ namespace CSharpInternals.ExceptionHandling
             }
             catch (Exception ex)
             {
-                ex.PreserveStackTrace();
+                //ex.PreserveStackTrace();
                 myEx = ex;
             }
             
