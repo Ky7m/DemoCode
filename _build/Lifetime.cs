@@ -14,7 +14,7 @@ namespace Build
             context.Target = context.Argument("target", "Default");
             context.Configuration = context.Argument("configuration", "Release");
             context.AllSolutions = context.GetFiles("./**/*.sln")
-                                   - context.MakeAbsolute(context.File("./#build/Build.sln"));
+                                   - context.MakeAbsolute(context.File("./_build/Build.sln"));
         }
     }
 }

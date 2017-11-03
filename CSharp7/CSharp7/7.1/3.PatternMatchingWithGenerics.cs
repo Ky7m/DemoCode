@@ -13,11 +13,12 @@ namespace CSharp7
             WriteLine(M2<int>(1.1));
         }
 
-        public static T M1<T>(ValueType o)
+        private static T M1<T>(ValueType o)
         {
             return o is T t ? t : default;
         }
-        public static T M2<T>(ValueType o)
+
+        private static T M2<T>(ValueType o)
         {
             switch (o)
             {

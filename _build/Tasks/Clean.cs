@@ -9,11 +9,12 @@ namespace Build.Tasks
         public override void Run(Context context)
         {
             var toDelete = context.GetDirectories("./**/obj")
-                           - context.MakeAbsolute(DirectoryPath.FromString("./#build/obj"))
+                           - context.MakeAbsolute(DirectoryPath.FromString("./_build/obj"))
                            + context.GetDirectories("./**/bin")
-                           - context.MakeAbsolute(DirectoryPath.FromString("./#build/bin"))
+                           - context.MakeAbsolute(DirectoryPath.FromString("./_build/bin"))
                            + context.GetDirectories("./**/packages");
-            context.DeleteDirectories(toDelete, true);
+            
+            context.CleanDirectories(toDelete);
         }
     }
 }

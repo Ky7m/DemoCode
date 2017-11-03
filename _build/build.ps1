@@ -92,21 +92,9 @@ if (!(Test-Path $NugetPath)) {
 # RUN BUILD SCRIPT
 ###########################################################################
 
-# Build the argument list.
-$Arguments = @{
-    target=$Target;
-    configuration=$Configuration;
-    verbosity=$Verbosity;
-    dryrun=$WhatIf;
-}.GetEnumerator() | ForEach-Object { "--{0}=`"{1}`"" -f $_.key, $_.value };
-
 try {
-    Push-Location
-    Set-Location "#build"
-    Write-Output "Running..."
-    Invoke-Expression "dotnet run $Arguments"
+    Invoke-Expression "dotnet run"
 }
 finally {
-    Pop-Location
     exit $LASTEXITCODE;
 }
