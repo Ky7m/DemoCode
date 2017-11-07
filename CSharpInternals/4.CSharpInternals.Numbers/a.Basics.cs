@@ -15,5 +15,14 @@ namespace CSharpInternals.Numbers
         {
             Assert.Equal(.3m, .1m + .2m);
         }
+        
+        [Fact]
+        public void SuspiciousComparison()
+        {
+            byte b = 1;
+            int i = 1;
+            Assert.Equal(b, i);
+            Assert.False(b.Equals(i));
+        }
     }
 }
