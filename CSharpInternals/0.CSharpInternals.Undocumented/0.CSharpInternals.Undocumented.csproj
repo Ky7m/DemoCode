@@ -37,14 +37,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BenchmarkDotNet, Version=0.10.9.0, Culture=neutral, PublicKeyToken=aa0ca2f9092cefc4, processorArchitecture=MSIL">
-      <HintPath>..\packages\BenchmarkDotNet.0.10.9\lib\net46\BenchmarkDotNet.dll</HintPath>
+    <Reference Include="BenchmarkDotNet, Version=0.10.10.0, Culture=neutral, PublicKeyToken=aa0ca2f9092cefc4">
+      <HintPath>..\packages\BenchmarkDotNet.0.10.10\lib\net46\BenchmarkDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="BenchmarkDotNet.Core, Version=0.10.9.0, Culture=neutral, PublicKeyToken=aa0ca2f9092cefc4, processorArchitecture=MSIL">
-      <HintPath>..\packages\BenchmarkDotNet.Core.0.10.9\lib\net46\BenchmarkDotNet.Core.dll</HintPath>
+    <Reference Include="BenchmarkDotNet.Core, Version=0.10.10.0, Culture=neutral, PublicKeyToken=aa0ca2f9092cefc4">
+      <HintPath>..\packages\BenchmarkDotNet.Core.0.10.10\lib\net46\BenchmarkDotNet.Core.dll</HintPath>
     </Reference>
-    <Reference Include="BenchmarkDotNet.Toolchains.Roslyn, Version=0.10.9.0, Culture=neutral, PublicKeyToken=aa0ca2f9092cefc4, processorArchitecture=MSIL">
-      <HintPath>..\packages\BenchmarkDotNet.Toolchains.Roslyn.0.10.9\lib\net46\BenchmarkDotNet.Toolchains.Roslyn.dll</HintPath>
+    <Reference Include="BenchmarkDotNet.Toolchains.Roslyn, Version=0.10.10.0, Culture=neutral, PublicKeyToken=aa0ca2f9092cefc4">
+      <HintPath>..\packages\BenchmarkDotNet.Toolchains.Roslyn.0.10.10\lib\net46\BenchmarkDotNet.Toolchains.Roslyn.dll</HintPath>
     </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
