@@ -36,7 +36,7 @@ namespace CSharpInternals.Strings
         {
             using (var rng = RandomNumberGenerator.Create())
             {
-                var bytes = new byte[85000];
+                var bytes = new byte[85_000];
                 rng.GetBytes(bytes);
                 return new string(bytes.Select(Convert.ToChar).ToArray());
             }
