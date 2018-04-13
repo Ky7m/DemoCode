@@ -210,9 +210,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSharpInternals.Utils\CSharpInternals.Utils.csproj">
+    <ProjectReference Include="..\..\DemoCode.Utils\DemoCode.Utils.csproj">
       <Project>{0daefd79-722d-4202-a1b8-e50324c664c2}</Project>
-      <Name>CSharpInternals.Utils</Name>
+      <Name>DemoCode.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

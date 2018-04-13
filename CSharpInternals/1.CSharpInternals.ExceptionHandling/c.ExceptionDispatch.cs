@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
-using CSharpInternals.Utils;
+using DemoCode.Utils;
 using Xunit;
 using Xunit.Abstractions;
 

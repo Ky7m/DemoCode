@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using CSharpInternals.Utils;
+using DemoCode.Utils;
 using Xunit;
 using Xunit.Abstractions;
 

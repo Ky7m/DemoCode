@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using CSharpInternals.Utils;
+using DemoCode.Utils;
 using Xunit;
 using Xunit.Abstractions;
 

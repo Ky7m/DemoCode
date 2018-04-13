@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using CSharpInternals.Utils;
+using DemoCode.Utils;
 using JetBrains.Annotations;
 using Xunit;
 using Xunit.Abstractions;

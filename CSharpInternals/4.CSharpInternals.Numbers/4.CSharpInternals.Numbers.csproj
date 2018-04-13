@@ -9,6 +9,6 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSharpInternals.Utils\CSharpInternals.Utils.csproj" />
+    <ProjectReference Include="..\..\DemoCode.Utils\DemoCode.Utils.csproj" />
   </ItemGroup>
 </Project>

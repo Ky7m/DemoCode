@@ -1,27 +1,38 @@
 ﻿using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace UnderstandingAsync
 {
     class Program
     {
+        // https://sharplab.io/#v2:D4AQDABCCMDcCwAocVoFYGKSAzFATBAMIQDeSElUeIAHFAGyq0AUAlBBVeYlXxADcAhgCcIAZwD2AWwCmAESEAXIRAC8EAEQAxAJYA7ACYBZWZsz8qMAJwtobC5ajXik/VIA2sgHQB5AK5K3gDqIrpKsgAyBrIAguIAnvoAxixScooqDlyWNiz42bxOeekKykKFfAC+SFVAA
         static async Task Main()
         {
-            var stringData = await GetDataFromRemoteService();
-            await Console.Out.WriteLineAsync(stringData);
+            var someData = "FindMe";
+            Console.WriteLine(1);
+            await Console.Out.WriteLineAsync(someData);
+            Console.WriteLine(2);
+            Console.WriteLine(someData);
         }
 
-        private static async Task<string> GetDataFromRemoteService()
+        // https://sharplab.io/#v2:D4AQDABCCMCsDcBYAUCkBmKAmCBhCA3ihCVJiABxQBsEAIgJ4B2AhgLYCWAxgIIDOzLgAoAlBGKkiyUjJIA3FgCcIAFwgBeGgDo6AUwA2LBkOhgwIpNNmkQATghCAJs3bcxKyzIC+KL0A===
+        static async Task DynamicAsync()
         {
-            const string url = "https://www.ifesenko.com/humans.txt";
-
-            using (var httpClient = new HttpClient())
-            using (var response = await httpClient.GetAsync(url))
-            using (var content = response.Content)
+            var t = Task.Delay(100);
+            await (dynamic) t;
+        }
+        
+        // https://sharplab.io/#v2:D4AQDABCCMDcCwAocVoFYGKSAzFATBAMIQDeSElUeIAHFAGwQByApgM4AurAJgCoAnAJ4AhADYB7AMYBrdgAoAlBApVyiKpqgBOYhIB27CWNYA6APIBXTqYDqAgJbcAMg/2sAguyH6p8gETQ/oqYWlScwqph6mFhILpEBkYmFtZ2ji5unt6+AfjBobEAvlFaAGZuAIZiYkKlmjGxmvF6hsZmVjb2Tqyu7l4+fv4ALAUqGsWlJYhFQA==
+        static async Task NestedTryBlocks()
+        {
+            await Console.Out.WriteLineAsync("1");
+            try
             {
-                var data = await content.ReadAsStringAsync();
-                return data ?? string.Empty;
+                await Console.Out.WriteLineAsync("2");
+            }
+            finally
+            {
+                await Console.Out.WriteLineAsync("3"); 
             }
         }
     }

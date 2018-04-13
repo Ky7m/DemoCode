@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using CSharpInternals.Utils;
+using DemoCode.Utils;
 using Xunit;
 using Xunit.Abstractions;
 

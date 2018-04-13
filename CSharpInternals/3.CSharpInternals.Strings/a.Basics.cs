@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-using CSharpInternals.Utils;
+using DemoCode.Utils;
 using Xunit;
 using Xunit.Abstractions;
 
