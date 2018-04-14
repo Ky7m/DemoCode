@@ -18,7 +18,7 @@ namespace AsyncVoid
                 WriteLine("Catch");
             }
 
-            //await Task.Delay(2000);
+            await Task.Delay(2000);
             WriteLine("Finished");
         }
         

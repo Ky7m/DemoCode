@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="AsyncLambda" type="DotNetProject" factoryName=".NET Project">
-    <option name="EXE_PATH" value="$PROJECT_DIR$/Asynchronous/AsyncLambda/bin/Debug/netcoreapp2.0/AsyncLambda.dll" />
+  <configuration default="false" name="6.AsyncGotchas" type="DotNetProject" factoryName=".NET Project">
+    <option name="EXE_PATH" value="$PROJECT_DIR$/6.AsyncGotchas/bin/Release/netcoreapp2.0/AsyncGotchas.dll" />
     <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Asynchronous/AsyncLambda" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/6.AsyncGotchas" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
-    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Asynchronous/AsyncLambda/AsyncLambda.csproj" />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/6.AsyncGotchas/6.AsyncGotchas.csproj" />
     <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
     <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
     <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />

@@ -1,22 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Asynchronous", "Asynchronous", "{FD011864-FE66-47ED-8E4A-23FEAA4E98F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0.UnderstandingAsync", "0.UnderstandingAsync\0.UnderstandingAsync.csproj", "{68E9695B-EEFF-4378-B78E-190B65A82FE3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Multithreading", "Multithreading", "{491F4393-11EB-4BC4-B2F7-B4254F8C1B9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.AsyncVoid", "1.AsyncVoid\1.AsyncVoid.csproj", "{DDE05866-5AA4-4CF5-8527-04C9838548FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderstandingAsync", "Asynchronous\UnderstandingAsync\UnderstandingAsync.csproj", "{68E9695B-EEFF-4378-B78E-190B65A82FE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2.AsyncLambda", "2.AsyncLambda\2.AsyncLambda.csproj", "{D1EAF061-1E46-4459-808F-DB7B1E67423C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncVoid", "Asynchronous\AsyncVoid\AsyncVoid.csproj", "{DDE05866-5AA4-4CF5-8527-04C9838548FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.UnobservedInFullFramework", "3.UnobservedInFullFramework\3.UnobservedInFullFramework.csproj", "{B1F96B47-D453-4BA2-B19B-97037375D05C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncLambda", "Asynchronous\AsyncLambda\AsyncLambda.csproj", "{D1EAF061-1E46-4459-808F-DB7B1E67423C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.AsyncFriendlyStackTrace", "4.AsyncFriendlyStackTrace\4.AsyncFriendlyStackTrace.csproj", "{E0C3AA32-73A6-4481-B856-6C2ADCD7A69B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnobservedInFullFramework", "Asynchronous\UnobservedInFullFramework\UnobservedInFullFramework.csproj", "{B1F96B47-D453-4BA2-B19B-97037375D05C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5.AsyncPerformance", "5.AsyncPerformance\5.AsyncPerformance.csproj", "{5670497C-8966-4B3D-BE60-D037558D8D92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncFriendlyStackTrace", "Asynchronous\AsyncFriendlyExceptionStackTrace\AsyncFriendlyExceptionStackTrace.csproj", "{E0C3AA32-73A6-4481-B856-6C2ADCD7A69B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncPerformance", "Asynchronous\AsyncPerformance\AsyncPerformance.csproj", "{5670497C-8966-4B3D-BE60-D037558D8D92}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncGotchas", "Asynchronous\AsyncGotchas\AsyncGotchas.csproj", "{E18C6A04-B296-492A-9F07-B372F918CFB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.AsyncGotchas", "6.AsyncGotchas\6.AsyncGotchas.csproj", "{E18C6A04-B296-492A-9F07-B372F918CFB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,13 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{68E9695B-EEFF-4378-B78E-190B65A82FE3} = {FD011864-FE66-47ED-8E4A-23FEAA4E98F4}
-		{DDE05866-5AA4-4CF5-8527-04C9838548FA} = {FD011864-FE66-47ED-8E4A-23FEAA4E98F4}
-		{D1EAF061-1E46-4459-808F-DB7B1E67423C} = {FD011864-FE66-47ED-8E4A-23FEAA4E98F4}
-		{B1F96B47-D453-4BA2-B19B-97037375D05C} = {FD011864-FE66-47ED-8E4A-23FEAA4E98F4}
-		{E0C3AA32-73A6-4481-B856-6C2ADCD7A69B} = {FD011864-FE66-47ED-8E4A-23FEAA4E98F4}
-		{5670497C-8966-4B3D-BE60-D037558D8D92} = {FD011864-FE66-47ED-8E4A-23FEAA4E98F4}
-		{E18C6A04-B296-492A-9F07-B372F918CFB5} = {FD011864-FE66-47ED-8E4A-23FEAA4E98F4}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{68E9695B-EEFF-4378-B78E-190B65A82FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
