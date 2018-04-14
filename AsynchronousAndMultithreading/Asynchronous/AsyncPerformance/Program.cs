@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Running;
 
 namespace AsyncPerformance
@@ -22,6 +23,8 @@ namespace AsyncPerformance
             Add(DefaultConfig.Instance.GetLoggers().ToArray());
             Add(DefaultConfig.Instance.GetColumnProviders().ToArray());
 
+            Add(HtmlExporter.Default);
+            
             Set(new BenchmarkDotNet.Reports.SummaryStyle
             {
                 PrintUnitsInHeader = true,

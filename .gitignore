@@ -303,3 +303,6 @@ __pycache__/
 !.vscode/extensions.json
 
 # End of https://www.gitignore.io/api/visualstudiocode
+
+
+**/BenchmarkDotNet.Artifacts

@@ -5,10 +5,10 @@ namespace AsyncPerformance
 {
     public class TaskFromResultOrCompletedTask
     {
-        [Benchmark] 
-        public Task TaskFromResult() => Task.FromResult(0);
+        [Benchmark(Baseline = true)] 
+        public Task TaskCompletedTask() => Task.CompletedTask;
         
         [Benchmark] 
-        public Task TaskCompletedTask() => Task.CompletedTask;
+        public Task TaskFromResult() => Task.FromResult(0);
     }
 }
