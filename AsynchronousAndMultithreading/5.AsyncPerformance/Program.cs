@@ -1,35 +1,17 @@
-﻿using System.Linq;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Diagnosers;
-using BenchmarkDotNet.Exporters;
-using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Running;
 
 namespace AsyncPerformance
 {
     class Program
     {
-        static void Main(string[] args) => 
-            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly)
-            .Run(args, new BenchmarkConfig());
-    }
-    
-    public class BenchmarkConfig : ManualConfig
-    {
-        public BenchmarkConfig()
-        {
-            Add(MemoryDiagnoser.Default);
-
-            Add(DefaultConfig.Instance.GetValidators().ToArray());
-            Add(DefaultConfig.Instance.GetLoggers().ToArray());
-            Add(DefaultConfig.Instance.GetColumnProviders().ToArray());
-
-            Add(HtmlExporter.Default);
-            
-            Set(new BenchmarkDotNet.Reports.SummaryStyle
-            {
-                PrintUnitsInHeader = true,
-                PrintUnitsInContent = true,
-            });
-        }
+        static void Main(string[] args) =>
+            BenchmarkSwitcher.FromTypes(new[]
+                    {
+                        typeof(TaskFromResultOrCompletedTask),
+                        typeof(ReturnTaskOfT),
+                        typeof(ReturnAwaitOrReturnTask),
+                        typeof(ValueTaskVsTaskRecommendedScenario),
+                    }
+                ).Run(args, new BenchmarkConfig());
     }
 }

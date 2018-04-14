@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5.AsyncPerformance", "5.Asy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.AsyncGotchas", "6.AsyncGotchas\6.AsyncGotchas.csproj", "{E18C6A04-B296-492A-9F07-B372F918CFB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7.MultithreadedAsync", "7.MultithreadedAsync\7.MultithreadedAsync.csproj", "{679CD869-8D4E-4DFD-BF70-F0838886CB93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCode.Utils", "..\DemoCode.Utils\DemoCode.Utils.csproj", "{6A27CB78-4A3E-4235-A798-36E99E5FC177}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,5 +54,13 @@ Global
 		{E18C6A04-B296-492A-9F07-B372F918CFB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E18C6A04-B296-492A-9F07-B372F918CFB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E18C6A04-B296-492A-9F07-B372F918CFB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{679CD869-8D4E-4DFD-BF70-F0838886CB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{679CD869-8D4E-4DFD-BF70-F0838886CB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{679CD869-8D4E-4DFD-BF70-F0838886CB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{679CD869-8D4E-4DFD-BF70-F0838886CB93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A27CB78-4A3E-4235-A798-36E99E5FC177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A27CB78-4A3E-4235-A798-36E99E5FC177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A27CB78-4A3E-4235-A798-36E99E5FC177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A27CB78-4A3E-4235-A798-36E99E5FC177}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -7,21 +7,21 @@ namespace AsyncPerformance
     public class ReturnAwaitOrReturnTask
     {
         [Benchmark(Baseline = true)] 
-        public async Task DirectGet()
+        public async Task<string> DirectGet()
         {
-            var result = await GetData();
+            return await GetData();
         }
         
         [Benchmark] 
-        public async Task ViaAsync()
+        public async Task<string> ViaAsync()
         {
-            var result = await Async();
+            return await Async();
         }
         
         [Benchmark] 
-        public async Task ViaSync()
+        public async Task<string> ViaSync()
         {
-            var result = await Sync();
+            return await Sync();
         }
 
         private static async Task<string> Async()
