@@ -31,9 +31,9 @@ namespace AsyncLambda
             action();
         }
         
-        private static void Process(Func<Task> action)
-        {
-            action();
-        }
+//        private static void Process(Func<Task> action)
+//        {
+//            action();
+//        }
     }
 }
