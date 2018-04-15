@@ -25,8 +25,5 @@ namespace AsyncPerformance
         
         [Benchmark] 
         public async Task<int> TaskWithAsyncKeyword() => 0;
-        
-        [Benchmark] 
-        public ValueTask<int> ValueTask() => new ValueTask<int>(0);
     }
 }

@@ -9,8 +9,8 @@ namespace AsyncPerformance
                     {
                         typeof(TaskFromResultOrCompletedTask),
                         typeof(ReturnTaskOfT),
-                        typeof(ReturnAwaitOrReturnTask),
                         typeof(ValueTaskVsTaskRecommendedScenario),
+                        typeof(ReturnAwaitOrReturnTask),
                     }
                 ).Run(args, new BenchmarkConfig());
     }
