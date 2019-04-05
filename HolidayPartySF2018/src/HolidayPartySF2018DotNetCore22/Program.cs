@@ -13,7 +13,7 @@ namespace HolidayPartySF2018DotNetCore22
                 Console.ReadLine();
                 Console.WriteLine("Started!" + Environment.NewLine);
 
-                //GC.TryStartNoGCRegion(8 * amount + 50 * amount);
+                GC.TryStartNoGCRegion(8 * amount + 50 * amount);
 
                 var tonsOfObjects = new object[amount];
                 for (var i = 0; i < amount; i++)
@@ -25,7 +25,7 @@ namespace HolidayPartySF2018DotNetCore22
                     }
                 }
 
-                //GC.EndNoGCRegion();
+                GC.EndNoGCRegion();
 
                 Console.WriteLine("Finished!");
                 Console.ReadLine();
