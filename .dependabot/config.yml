@@ -6,9 +6,6 @@ update_configs:
     directory: "/DemoCode.Utils" # DemoCode.Utils.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
-    directory: "/_build" # Build.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
     directory: "/ApplicationDiagnosticsNetCore/DefaultWebApp" # DefaultWebApp.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
