@@ -9,14 +9,16 @@ namespace CSharp7
         {
             int? DoSomeWorkAndGetResult(int a = default, string s = default)
             {
-                if (s == default || s is default)
+                if (s == default 
+                    // || s is default // starting from C# 8 it is not valid
+                    )
                 {
                     return default;
                 }
 
                 switch(a)
                 {
-                    case (default): break;
+                    // case (default): break; // starting from C# 8 it is not valid
                     default: break;
                 }
 
