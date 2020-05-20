@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        projects: ["ApplicationDiagnosticsNetCore", "CSharp7", "CSharp8"]
+        dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "HolidayPartySF2018", "MicrosoftTeamsApps/Microsoft.Teams.Bot", "MicrosoftTeamsApps/Microsoft.Teams.Tabs"]
 
     steps:
     - uses: actions/checkout@v2
@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 3.1.300
     - name: Install dependencies
-      run: dotnet restore ${{ matrix.projects }}
+      run: dotnet restore ${{ matrix.dotnetCoreProjects }}
     - name: Build
-      run: dotnet build ${{ matrix.projects }} --configuration Release --no-restore
+      run: dotnet build ${{ matrix.dotnetCoreProjects }} --configuration Release --no-restore
     - name: Test
-      run: dotnet test ${{ matrix.projects }} --no-restore --verbosity normal
+      run: dotnet test ${{ matrix.dotnetCoreProjects }} --no-restore --verbosity normal
