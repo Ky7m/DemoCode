@@ -21,7 +21,7 @@ namespace CSharpInternals.SafeLowLevelApi
             Assert.Equal(4, span.Length);
             
             ref var sourceRef = ref array[6];
-            ref var pinnableRef = ref span.DangerousGetPinnableReference(); // "ref span[0]"
+            ref var pinnableRef = ref span.GetPinnableReference(); // "ref span[0]"
             
             Assert.True(Unsafe.AreSame(ref sourceRef, ref pinnableRef));
             
