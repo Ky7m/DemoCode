@@ -99,20 +99,8 @@ update_configs:
     directory: "/ExceptionHandlingAdvancedTipsAndTricks/WrappingExceptionsInExceptionsDemo" # WrappingExceptionsInExceptionsDemo.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
-    directory: "/CakeBuild/ConsoleAppSample/build" # Build.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
     directory: "/HolidayPartySF2018/src/HolidayPartySF2018DotNetCore22" # HolidayPartySF2018DotNetCore22.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
     directory: "/HolidayPartySF2018/src/HolidayPartySF2018AspNetCore22" # HolidayPartySF2018AspNetCore22.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
-    directory: "/CakeBuild/ConsoleAppSample/src/ConsoleAppSample" # ConsoleAppSample.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
-    directory: "/CakeBuild/ASP.NETSample/test/CakeBuildDemo.UnitTests" # CakeBuildDemo.UnitTests.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
-    directory: "/CakeBuild/ASP.NETSample/src/CakeBuildDemo.ApiApp" # CakeBuildDemo.ApiApp.csproj
     update_schedule: "live"
