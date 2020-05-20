@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macOS-latest]
+        projects: ["ApplicationDiagnosticsNetCore"]
 
     steps:
     - uses: actions/checkout@v2
@@ -20,8 +21,8 @@ jobs:
       with:
         dotnet-version: 3.1.300
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore ${{ matrix.projects }}
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ${{ matrix.projects }} --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ${{ matrix.projects }} --no-restore --verbosity normal
