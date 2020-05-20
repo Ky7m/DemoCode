@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "HolidayPartySF2018", "MicrosoftTeamsApps/Microsoft.Teams.Bot", "MicrosoftTeamsApps/Microsoft.Teams.Tabs"]
+        dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "HolidayPartySF2018"]
 
     steps:
     - uses: actions/checkout@v2
