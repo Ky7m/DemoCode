@@ -9,19 +9,12 @@ namespace AsyncPerformance
     {
         public BenchmarkConfig()
         {
-            Add(MemoryDiagnoser.Default);
+            AddDiagnoser(MemoryDiagnoser.Default);
+            AddValidator(DefaultConfig.Instance.GetValidators().ToArray());
+            AddLogger(DefaultConfig.Instance.GetLoggers().ToArray());
+            AddColumnProvider(DefaultConfig.Instance.GetColumnProviders().ToArray());
 
-            Add(DefaultConfig.Instance.GetValidators().ToArray());
-            Add(DefaultConfig.Instance.GetLoggers().ToArray());
-            Add(DefaultConfig.Instance.GetColumnProviders().ToArray());
-
-            Add(HtmlExporter.Default);
-            
-            Set(new BenchmarkDotNet.Reports.SummaryStyle
-            {
-                PrintUnitsInHeader = true,
-                PrintUnitsInContent = true,
-            });
+            AddExporter(HtmlExporter.Default);
         }
     }
 }

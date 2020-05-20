@@ -24,6 +24,8 @@ namespace AsyncPerformance
         public Task<int> TaskFromResult() => Task.FromResult(0);
         
         [Benchmark] 
+#pragma warning disable 1998
         public async Task<int> TaskWithAsyncKeyword() => 0;
+#pragma warning restore 1998
     }
 }
