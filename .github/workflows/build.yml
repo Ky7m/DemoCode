@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        projects: ["ApplicationDiagnosticsNetCore"]
+        projects: ["ApplicationDiagnosticsNetCore", "CSharp7", "CSharp8"]
 
     steps:
     - uses: actions/checkout@v2
