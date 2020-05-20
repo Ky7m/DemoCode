@@ -54,12 +54,6 @@ update_configs:
     directory: "/CiklumLvivDotNetSaturday/CSharpSevenFeatures" # 3.CSharpSevenFeatures.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
-    directory: "/MicrosoftTeamsApps/Microsoft.Teams.Tabs" # Microsoft.Teams.Tabs.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
-    directory: "/MicrosoftTeamsApps/Microsoft.Teams.Bot" # Microsoft.Teams.Bot.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
     directory: "/AsynchronousAndMultithreading/3.UnobservedInFullFramework" # 3.UnobservedInFullFramework.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
@@ -103,15 +97,6 @@ update_configs:
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
     directory: "/ExceptionHandlingAdvancedTipsAndTricks/WrappingExceptionsInExceptionsDemo" # WrappingExceptionsInExceptionsDemo.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
-    directory: "/ApplicationInsightsWorkshop/src/ToDoList.API" # ToDoList.API.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
-    directory: "/ApplicationInsightsWorkshop/src/ToDoList.DataAPI" # ToDoList.DataAPI.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
-    directory: "/ApplicationInsightsWorkshop/src/ToDoList.Web" # ToDoList.Web.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
     directory: "/CakeBuild/ConsoleAppSample/build" # Build.csproj
