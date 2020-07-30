@@ -6,7 +6,7 @@ namespace PulumiDemo
 {
     internal class Mocks : IMocks
     {
-        public Task<(string id, object state)> NewResourceAsync(string type, string name, ImmutableDictionary<string, object> inputs, string? provider, string? id)
+        public Task<(string id, object state)> NewResourceAsync(string type, string name, ImmutableDictionary<string, object> inputs, string provider, string id)
         {
             var outputs = ImmutableDictionary.CreateBuilder<string, object>();
             
@@ -38,7 +38,7 @@ namespace PulumiDemo
             return Task.FromResult((id, (object)outputs));
         }
 
-        public Task<object> CallAsync(string token, ImmutableDictionary<string, object> inputs, string? provider)
+        public Task<object> CallAsync(string token, ImmutableDictionary<string, object> inputs, string provider)
         {
             // We don't use this method in this particular test suite.
             // Default to returning whatever we got as input.
