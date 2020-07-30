@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Testing;
 
-namespace PulumiDemo
+namespace PulumiDemoTests
 {
     internal class Mocks : IMocks
     {

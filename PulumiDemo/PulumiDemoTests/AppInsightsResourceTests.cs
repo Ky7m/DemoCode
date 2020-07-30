@@ -7,7 +7,7 @@ using Pulumi.Azure.Core;
 using Pulumi.Testing;
 using Xunit;
 
-namespace PulumiDemo
+namespace PulumiDemoTests
 {
     public class AppInsightsResourceTests
     {
@@ -21,15 +21,6 @@ namespace PulumiDemo
 
 		    var appInsights = resources.OfType<Insights>().ToList();
 		    appInsights.Count.Should().Be(1, "a single app insights instance is expected");
-	    }
-
-	    private class AppInsightsResourceTestStack : Stack
-	    {
-		    public AppInsightsResourceTestStack()
-		    {
-			    var resourceGroup = new ResourceGroup("www-prod-rg");
-			    var _ = new AppInsightsResource("appi", resourceGroup.Name);
-		    }
 	    }
     }
 }
