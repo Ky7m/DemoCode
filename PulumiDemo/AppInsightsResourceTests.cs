@@ -12,7 +12,7 @@ namespace PulumiDemo
     public class AppInsightsResourceTests
     {
 	    [Fact]
-	    public async Task AppInsightsKeyExists()
+	    public async Task AppInsightsResourceExists()
 	    {
 		    var resources = await Deployment.TestAsync<AppInsightsResourceTestStack>(new Mocks(), new TestOptions {StackName = "dev"});
 
