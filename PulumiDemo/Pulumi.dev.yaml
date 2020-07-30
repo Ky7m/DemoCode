@@ -1,0 +1,10 @@
+config:
+  CommonInfrastructureTemplate:DefaultLocation: CentralUS
+  CommonInfrastructureTemplate:DefaultName: pulumidemo-app
+  CommonInfrastructureTemplate:StorageAccountName:
+  CommonInfrastructureTemplate:DeploymentRegions:
+    - centralus
+    - westeurope
+  CommonInfrastructureTemplate:AppSlots:
+    - integration
+    - staging
