@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Diagnostics.NETCore.Client" Version="0.2.141901" />
-      <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="2.0.58" />
+      <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="2.0.59" />
     </ItemGroup>
 
 </Project>
