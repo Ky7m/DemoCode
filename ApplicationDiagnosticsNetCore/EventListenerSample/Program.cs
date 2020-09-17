@@ -2,9 +2,9 @@
 
 namespace EventListenerSample
 {
-    static class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             const int amount = 500000;
 

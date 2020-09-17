@@ -30,7 +30,7 @@ namespace EventSourceSample
         {
             LittleBitMoreThanMinimalEventSource.Log.RequestStart(requestId, request);
 
-            foreach (var phase in new string[] { "initialize", "query_db", "query_webservice", "process_results", "send_results" })
+            foreach (var phase in new[] { "initialize", "query_db", "query_webservice", "process_results", "send_results" })
             {
                 LittleBitMoreThanMinimalEventSource.Log.RequestPhase(requestId, phase);
                 // simulate error on request for "/home/catalog/121"

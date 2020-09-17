@@ -8,3 +8,4 @@ config:
   CommonInfrastructureTemplate:AppSlots:
     - integration
     - staging
+    - qa

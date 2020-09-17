@@ -6,7 +6,7 @@ namespace DiagnosticSourceSample
 {
     class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main()
         {
             using var subscription = DiagnosticListener.AllListeners.Subscribe(new HttpCoreDiagnosticSourceListener());
             await new HttpClient().GetAsync("https://example.com");

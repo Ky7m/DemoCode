@@ -10,12 +10,12 @@ using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 
 namespace MicrosoftDiagnosticsClientSample
 {
-    static class Program
+    internal static class Program
     {
         // from https://docs.microsoft.com/en-us/dotnet/framework/performance/garbage-collection-etw-events
         private const int GCStart = 1;
 
-        static void Main()
+        private static void Main()
         {
             Console.Write("Enter process id: ");
             var processId = int.Parse(Console.ReadLine() ?? string.Empty);

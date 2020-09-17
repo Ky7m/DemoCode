@@ -31,7 +31,7 @@ namespace EventListenerSample
                 var timestamp = eventData.TimeStamp.ToString("HH:mm:ss.fff", CultureInfo.InvariantCulture);
                 var sb = new StringBuilder($"{timestamp}: GC was triggered for Gen#");
 
-                for (var i = 0; i < eventData.Payload.Count; i++)
+                for (var i = 0; i < eventData.Payload?.Count; i++)
                 {
                     var payloadValue = eventData.Payload[i];
                     if (payloadValue is null)
@@ -39,12 +39,12 @@ namespace EventListenerSample
                         continue;
                     }
 
-                    if (eventData.PayloadNames[i] == "Depth") // the generation that is being collected
+                    if (eventData.PayloadNames?[i] == "Depth") // the generation that is being collected
                     {
                         sb.Append($"{payloadValue}. Reason: ");
                     }
 
-                    if (eventData.PayloadNames[i] == "Reason") // why the garbage collection was triggered
+                    if (eventData.PayloadNames?[i] == "Reason") // why the garbage collection was triggered
                     {
                         switch (Convert.ToUInt32(payloadValue))
                         {
