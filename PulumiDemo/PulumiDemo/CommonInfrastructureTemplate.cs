@@ -79,9 +79,7 @@ namespace PulumiDemo
                         {"AppConfiguration__ConnectionString", configurationStoreReadOnlyConnectionString},
                         {"AppConfiguration__Environment", "production"}
                     },
-                    SiteConfig = new AppServiceSiteConfigArgs
-                    {
-                    }
+                    SiteConfig = new AppServiceSiteConfigArgs()
                 });
 
                 productionBackendPoolList.Add(new FrontdoorBackendPoolBackendArgs

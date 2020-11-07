@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Data.AppConfiguration" Version="1.0.1" />
-    <PackageReference Include="Pulumi.Azure" Version="3.13.1" />
-    <PackageReference Include="Pulumi.AzureAD" Version="2.4.0" />
-    <PackageReference Include="Pulumi.Random" Version="2.2.0" />
+    <PackageReference Include="Azure.Data.AppConfiguration" Version="1.0.2" />
+    <PackageReference Include="Pulumi.Azure" Version="3.30.0" />
+    <PackageReference Include="Pulumi.AzureAD" Version="2.6.0" />
+    <PackageReference Include="Pulumi.Random" Version="2.4.1" />
   </ItemGroup>
 
 </Project>
