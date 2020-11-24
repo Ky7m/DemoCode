@@ -12,14 +12,14 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "HolidayPartySF2018"]
+        dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "HolidayPartySF2018", "DebuggingScenarios"]
 
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.300
+        dotnet-version: 5.0.100
     - name: Install dependencies
       run: dotnet restore ${{ matrix.dotnetCoreProjects }}
     - name: Build
