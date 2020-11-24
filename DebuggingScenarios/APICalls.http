@@ -1,0 +1,4 @@
+GET https://localhost:5001/DebuggingScenarios/exception
+Accept: application/json
+###
+
