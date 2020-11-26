@@ -28,22 +28,25 @@ namespace DebuggingScenarios.Controllers
 
             if (dotProduct > 100 && rng.Next(-10, 10) > 0)
             {
+                if (Debugger.IsAttached)
+                {
+                    dotProduct = dotProduct;
+                }
                 dotProduct = rng.Next(-10, 10);
             }
-            
-            return Enumerable.Range(1, 30)
+
+            var array = Enumerable.Range(1, 30).ToArray();
+            return array
                 .LogLinq("source", x => x.ToString())
+                .Where(x => x > 10)
+                .LogLinq("filtered", x=> x.ToString())
                 .Select(index => new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(index),
                     TemperatureC = rng.Next(-20, 55),
                     Summary = Summaries[rng.Next(Summaries.Length)]
                 })
-                .LogLinq("forecast", x=> x.Summary)
-                .Where(x => x.Date <= DateTime.Now.AddDays(20))
-                .LogLinq("filtered", x=> x.Summary)
-                .Take(5)
-                .LogLinq("limited", x=> x.Summary)
+                //.Take(5).LogLinq("limited", x=> x.Summary)
                 .ToArray();
         }
     }
@@ -61,6 +64,8 @@ namespace DebuggingScenarios.Controllers
             }
         }
         
+        //[Conditional("DEBUG")]
+        [DebuggerStepThrough]
         public static IEnumerable<T> LogLinq<T>(this IEnumerable<T> enumerable, string logName, Func<T, string> printMethod)
         {
 #if DEBUG
