@@ -1,3 +1,6 @@
+GET https://localhost:5001/WeatherForecast
+Accept: application/json
+###
 GET https://localhost:5001/DebuggingScenarios/exception
 Accept: application/json
 ###

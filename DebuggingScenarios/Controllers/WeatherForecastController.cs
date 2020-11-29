@@ -25,14 +25,18 @@ namespace DebuggingScenarios.Controllers
             int[] vectorB = { 1, 3, 5, 7, 8 };
 
             var dotProduct = vectorA.Combine(vectorB, (a, b) => a * b).Sum();
-
-            if (dotProduct > 100 && rng.Next(-10, 10) > 0)
+            if (dotProduct > 100 && rng.Next(1, 10) > 0)
             {
                 if (Debugger.IsAttached)
                 {
-                    dotProduct = dotProduct;
+                    _ = dotProduct;
                 }
-                dotProduct = rng.Next(-10, 10);
+                dotProduct = rng.Next(-10, -5);
+                // Debug.Assert(dotProduct > 0);
+                if (dotProduct < 0)
+                {
+                    Debugger.Launch();
+                }
             }
 
             var array = Enumerable.Range(1, 30).ToArray();
