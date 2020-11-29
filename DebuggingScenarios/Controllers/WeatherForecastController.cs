@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace DebuggingScenarios.Controllers
 {
@@ -10,9 +11,16 @@ namespace DebuggingScenarios.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = {
+        private static readonly string[] Summaries =
+        {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+        private readonly ILogger<WeatherForecastController> _logger;
+        
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        {
+            _logger = logger;
+        }
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
@@ -33,7 +41,7 @@ namespace DebuggingScenarios.Controllers
                 // Debug.Assert(dotProduct > 0);
                 if (dotProduct < 0)
                 {
-                    Debugger.Launch();
+                    // Debugger.Launch();
                 }
             }
             
@@ -58,7 +66,9 @@ namespace DebuggingScenarios.Controllers
                     TemperatureC = rng.Next(-20, 55),
                     Summary = Summaries[rng.Next(Summaries.Length)]
                 };
+                _logger.LogDebug(System.Text.Json.JsonSerializer.Serialize(extraDay));
                 weatherForecasts.Add(extraDay);
+                
             }
             
             AddExtraDay();
