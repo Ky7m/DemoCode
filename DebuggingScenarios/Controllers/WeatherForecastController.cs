@@ -38,9 +38,8 @@ namespace DebuggingScenarios.Controllers
                     Debugger.Launch();
                 }
             }
-
-            var array = Enumerable.Range(1, 30).ToArray();
-            return array
+            
+            var weatherForecasts = Enumerable.Range(1, 30)
                 .LogLinq("source", x => x.ToString())
                 .Where(x => x > 10)
                 .LogLinq("filtered", x=> x.ToString())
@@ -51,7 +50,22 @@ namespace DebuggingScenarios.Controllers
                     Summary = Summaries[rng.Next(Summaries.Length)]
                 })
                 //.Take(5).LogLinq("limited", x=> x.Summary)
-                .ToArray();
+                .ToList();
+
+            void AddExtraDay()
+            {
+                var extraDay = new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(31),
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                };
+                weatherForecasts.Add(extraDay);
+            }
+            
+            AddExtraDay();
+            
+            return weatherForecasts;
         }
     }
 
