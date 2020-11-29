@@ -4,7 +4,7 @@ using System.Diagnostics;
 // [assembly: DebuggerDisplay("Date: {Date,d,nq} | Summary: {Summary,nq}", Target = typeof(WeatherForecast))]
 namespace DebuggingScenarios
 {
-    [DebuggerDisplay("Date: {Date,d,nq} | Summary: {Summary,nq}")]
+    [DebuggerDisplay("Date: {" + nameof(Date) + ",nq} | Summary: {" + nameof(Summary) + ",nq}")]
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
