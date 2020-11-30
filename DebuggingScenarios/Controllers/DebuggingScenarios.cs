@@ -13,7 +13,7 @@ namespace DebuggingScenarios.Controllers
          object o1 = new object();
         object o2 = new object();
 
-        private static Processor p = new Processor();
+        private static Processor _p = new Processor();
 
         [HttpGet]
         [Route("deadlock/")]
@@ -66,7 +66,7 @@ namespace DebuggingScenarios.Controllers
 
             while (true)
             {
-                p = new Processor();
+                _p = new Processor();
                 watch.Stop();
                 if (watch.ElapsedMilliseconds > seconds * 1000)
                     break;
@@ -75,13 +75,13 @@ namespace DebuggingScenarios.Controllers
                 int it = (2000 * 1000);
                 for (int i = 0; i < it; i++)
                 {
-                    p.ProcessTransaction(new Customer(Guid.NewGuid().ToString()));
+                    _p.ProcessTransaction(new Customer(Guid.NewGuid().ToString()));
                 }
 
                 Thread.Sleep(5000); // Sleep for 5 seconds before cleaning up
 
                 // Cleanup
-                p = null;
+                _p = null;
 
                 // GC
                 GC.Collect();
@@ -100,7 +100,7 @@ namespace DebuggingScenarios.Controllers
             int it = (kb * 1000) / 100;
             for (int i = 0; i < it; i++)
             {
-                p.ProcessTransaction(new Customer(Guid.NewGuid().ToString()));
+                _p.ProcessTransaction(new Customer(Guid.NewGuid().ToString()));
             }
 
             return "success:memleak";
@@ -134,31 +134,31 @@ namespace DebuggingScenarios.Controllers
 
     class Customer
     {
-        private string id;
+        public string Id { get; set; }
 
         public Customer(string id)
         {
-            this.id = id;
+            Id = id;
         }
     }
 
     class CustomerCache
     {
-        private List<Customer> cache = new List<Customer>();
+        public readonly List<Customer> Cache = new List<Customer>();
 
         public void AddCustomer(Customer c)
         {
-            cache.Add(c);
+            Cache.Add(c);
         }
     }
 
     class Processor
     {
-        private CustomerCache cache = new CustomerCache();
+        private readonly CustomerCache _cache = new CustomerCache();
 
         public void ProcessTransaction(Customer customer)
         {
-            cache.AddCustomer(customer);
+            _cache.AddCustomer(customer);
         }
     }
 }
