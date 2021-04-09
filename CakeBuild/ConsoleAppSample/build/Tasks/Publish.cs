@@ -4,15 +4,15 @@ using Cake.Frosting;
 
 namespace Build.Tasks
 {
-    public sealed class Publish : FrostingTask<Context>
+    public sealed class Publish : FrostingTask<BuildContext>
     {
-        public override void Run(Context context)
+        public override void Run(BuildContext context)
         {
             context.DotNetCorePublish(
                 context.ProjectPath,
-                new DotNetCorePublishSettings()
+                new DotNetCorePublishSettings
                 {
-                    Configuration = context.Configuration,
+                    Configuration = context.MsBuildConfiguration,
                     OutputDirectory = context.OutputPath
                     //Runtime = "win10-x64"
                 });

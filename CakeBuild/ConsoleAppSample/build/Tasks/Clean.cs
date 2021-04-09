@@ -3,11 +3,12 @@ using Cake.Frosting;
 
 namespace Build.Tasks
 {
-    public sealed class Clean : FrostingTask<Context>
+    public sealed class Clean : FrostingTask<BuildContext>
     {
-        public override void Run(Context context) =>
+        public override void Run(BuildContext context) =>
             context.CleanDirectories(context.GetDirectories(context.ProjectPath + "/obj") +
                                      context.GetDirectories(context.ProjectPath + "/bin") +
-                                     context.OutputPath);
+                                     context.OutputPath +
+                                     context.PackagePath);
     }
 }
