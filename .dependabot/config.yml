@@ -104,3 +104,9 @@ update_configs:
   - package_manager: "dotnet:nuget"
     directory: "/HolidayPartySF2018/src/HolidayPartySF2018AspNetCore22" # HolidayPartySF2018AspNetCore22.csproj
     update_schedule: "live"
+  - package_manager: "dotnet:nuget"
+    directory: "/PulumiDemo/PulumiDemo" # PulumiDemo.csproj
+    update_schedule: "live"
+  - package_manager: "dotnet:nuget"
+    directory: "/PulumiDemo/PulumiDemoTests" # PulumiDemoTests.csproj
+    update_schedule: "live"
