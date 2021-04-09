@@ -99,12 +99,6 @@ update_configs:
     directory: "/ExceptionHandlingAdvancedTipsAndTricks/WrappingExceptionsInExceptionsDemo" # WrappingExceptionsInExceptionsDemo.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
-    directory: "/HolidayPartySF2018/src/HolidayPartySF2018DotNetCore22" # HolidayPartySF2018DotNetCore22.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
-    directory: "/HolidayPartySF2018/src/HolidayPartySF2018AspNetCore22" # HolidayPartySF2018AspNetCore22.csproj
-    update_schedule: "live"
-  - package_manager: "dotnet:nuget"
     directory: "/PulumiDemo/PulumiDemo" # PulumiDemo.csproj
     update_schedule: "live"
   - package_manager: "dotnet:nuget"
