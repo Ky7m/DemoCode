@@ -6,7 +6,7 @@ namespace PulumiDemoTests
 {
     internal class Mocks : IMocks
     {
-        public Task<(string? id, object state)> NewResourceAsync(MockResourceArgs args)
+        public Task<(string id, object state)> NewResourceAsync(MockResourceArgs args)
         {
             var outputs = ImmutableDictionary.CreateBuilder<string, object>();
             
