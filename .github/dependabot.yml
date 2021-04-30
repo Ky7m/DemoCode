@@ -1,0 +1,232 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/DemoCode.Utils"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ApplicationDiagnosticsNetCore/DefaultWebApp"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ApplicationDiagnosticsNetCore/EventListenerSample"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ApplicationDiagnosticsNetCore/DiagnosticSourceSample"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ApplicationDiagnosticsNetCore/MicrosoftDiagnosticsClientSample"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ApplicationDiagnosticsNetCore/EventSourceSample"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CSharp7/CSharp7"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CSharp8/CSharp8"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CSharpInternals/1.CSharpInternals.ExceptionHandling"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CSharpInternals/2.CSharpInternals.SafeLowLevelApi"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Microsoft.NET.Test.Sdk
+    versions:
+    - 16.9.4
+- package-ecosystem: nuget
+  directory: "/CSharpInternals/0.CSharpInternals.Undocumented"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CSharpInternals/3.CSharpInternals.Strings"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CSharpInternals/99.CSharpInternals.Misc"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Microsoft.NET.Test.Sdk
+    versions:
+    - 16.9.4
+- package-ecosystem: nuget
+  directory: "/CSharpInternals/4.CSharpInternals.Numbers"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CiklumLvivDotNetSaturday/CSharpSixFeatures"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CiklumLvivDotNetSaturday/NewInTheDotNETFramework"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/CiklumLvivDotNetSaturday/CSharpSevenFeatures"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/AsynchronousAndMultithreading/3.UnobservedInFullFramework"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/AsynchronousAndMultithreading/4.AsyncFriendlyStackTrace"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Ben.Demystifier
+    versions:
+    - 0.4.0
+- package-ecosystem: nuget
+  directory: "/AsynchronousAndMultithreading/5.AsyncPerformance"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/AsynchronousAndMultithreading/1.AsyncVoid"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/AsynchronousAndMultithreading/7.MultithreadedAsync"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/AsynchronousAndMultithreading/2.AsyncLambda"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/AsynchronousAndMultithreading/0.UnderstandingAsync"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/AsynchronousAndMultithreading/6.AsyncGotchas"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/EffectiveMemoryManagement/EffectiveMemoryManagement"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ExceptionHandlingAdvancedTipsAndTricks/TryFinallyBlocksDemo"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ExceptionHandlingAdvancedTipsAndTricks/CorruptedStateExceptionsDemo"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ExceptionHandlingAdvancedTipsAndTricks/LiskovSubstitutionPrinciple"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ExceptionHandlingAdvancedTipsAndTricks/AsyncFriendlyStackTraceDemo"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ExceptionHandlingAdvancedTipsAndTricks/ExceptionDispatchInfoDemo"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/ExceptionHandlingAdvancedTipsAndTricks/WrappingExceptionsInExceptionsDemo"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/PulumiDemo/PulumiDemo"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Pulumi.Azure
+    versions:
+    - 3.55.0
+    - 4.0.0
+    - 4.0.1
+- package-ecosystem: nuget
+  directory: "/PulumiDemo/PulumiDemoTests"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Pulumi.Random
+    versions:
+    - 4.0.0
+  - dependency-name: Pulumi.AzureAD
+    versions:
+    - 3.6.0
+    - 4.0.0
