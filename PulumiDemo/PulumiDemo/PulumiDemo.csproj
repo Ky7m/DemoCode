@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Data.AppConfiguration" Version="1.0.2" />
+    <PackageReference Include="Azure.Data.AppConfiguration" Version="1.0.3" />
     <PackageReference Include="Pulumi.Azure" Version="4.2.0" />
     <PackageReference Include="Pulumi.AzureAD" Version="4.0.0" />
     <PackageReference Include="Pulumi.Random" Version="4.1.1" />
