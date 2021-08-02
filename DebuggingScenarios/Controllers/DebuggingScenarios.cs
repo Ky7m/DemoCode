@@ -16,7 +16,7 @@ namespace DebuggingScenarios.Controllers
         private static Processor _p = new Processor();
 
         [HttpGet]
-        [Route("deadlock/")]
+        [Route("deadlock")]
         public ActionResult<string> Deadlock()
         {
             new Thread(() =>

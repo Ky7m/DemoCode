@@ -4,21 +4,27 @@ using System.Threading.Tasks;
 using JetBrains.dotMemoryUnit;
 using WorkflowCore.Interface;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace DarkSideOfCSharp
 {
     public sealed class TaskEverywhere
     {
+        public TaskEverywhere(ITestOutputHelper output)
+        {
+            DotMemoryUnitTestOutput.SetOutputMethod(output.WriteLine);
+        }
+
         [Fact]
         [AssertTraffic(AllocatedObjectsCount = 1, Types = new[] {typeof(Task<string?>)})]
         public async Task InMemoryQueueProvider()
         {
             var queueProvider = new InMemoryQueueProvider();
-            var i = 1000;
+            var i = 999;
 
             while (i --> 0)
             {
-                var id = await queueProvider.DequeueWork(QueueType.Workflow, CancellationToken.None);
+                await queueProvider.DequeueWork(QueueType.Workflow, CancellationToken.None);
             }
         }
     }
@@ -67,10 +73,10 @@ namespace DarkSideOfCSharp
                     break;
             }
 
-            // if (id is null)
-            // {
-            //     return _nullValue;
-            // }
+            if (id is null)
+            {
+                // return _nullValue;
+            }
 
             return Task.FromResult<string?>(id);
         }
