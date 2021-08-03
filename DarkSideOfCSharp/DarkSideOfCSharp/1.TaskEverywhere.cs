@@ -17,7 +17,7 @@ namespace DarkSideOfCSharp
 
         [Fact]
         [AssertTraffic(AllocatedObjectsCount = 1, Types = new[] {typeof(Task<string?>)})]
-        public async Task InMemoryQueueProvider()
+        public async Task TaskFromResultMemoryTraffic()
         {
             var queueProvider = new InMemoryQueueProvider();
             var i = 999;
@@ -25,6 +25,8 @@ namespace DarkSideOfCSharp
             while (i --> 0)
             {
                 await queueProvider.DequeueWork(QueueType.Workflow, CancellationToken.None);
+                await queueProvider.DequeueWork(QueueType.Event, CancellationToken.None);
+                await queueProvider.DequeueWork(QueueType.Index, CancellationToken.None);
             }
         }
     }
@@ -75,6 +77,7 @@ namespace DarkSideOfCSharp
 
             if (id is null)
             {
+                // uncomment to fix memory traffic
                 // return _nullValue;
             }
 
