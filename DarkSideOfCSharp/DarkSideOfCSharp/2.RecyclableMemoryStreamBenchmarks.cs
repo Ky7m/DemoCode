@@ -19,7 +19,7 @@ namespace DarkSideOfCSharp
         };
         private readonly RecyclableMemoryStreamManager _memoryStreamManager = new ();
         private readonly JsonSerializer _jsonSerializer = new();
-        private static readonly byte[] HmacKey = Encoding.Unicode.GetBytes(".NET fwdays'21 conference");
+        private static readonly byte[] HmacKey = Encoding.UTF8.GetBytes(".NET fwdays'21 conference");
 
         [Fact]
         public void AssertThatAllMethodsProduceSameResult()
@@ -27,13 +27,14 @@ namespace DarkSideOfCSharp
             var expected = SerializeAndSign();
             Assert.Equal(expected,SerializeAndSignUsingMemoryStream());
             Assert.Equal(expected,SerializeAndSignUsingMemoryStream());
+            Assert.Equal(expected,SerializeAndSignUsingSystemTextJson());
         }
         
         [Benchmark(Baseline = true)]
         public byte[] SerializeAndSign()
         {
-            var widgetEnvJson = JsonConvert.SerializeObject(_webhookResponse);
-            var jsonBytes = Encoding.UTF8.GetBytes(widgetEnvJson);
+            var json = JsonConvert.SerializeObject(_webhookResponse);
+            var jsonBytes = Encoding.UTF8.GetBytes(json);
             using var hmac = new HMACSHA256(HmacKey);
             return hmac.ComputeHash(jsonBytes);
         }
@@ -75,23 +76,23 @@ namespace DarkSideOfCSharp
             using var hmac = new HMACSHA256(HmacKey);
             return hmac.ComputeHash(jsonStream);
         }
-
-        private sealed class WebhookResponse<T>
+    }
+    
+    public sealed class WebhookResponse<T>
+    {
+        public T[]? Data { get; set; }
+    }
+    public sealed class CountryIndicator
+    {
+        public CountryIndicator(string country, string indicator, int value)
         {
-            public T[]? Data { get; set; }
+            Country = country;
+            Indicator = indicator;
+            Value = value;
         }
-        private sealed class CountryIndicator
-        {
-            public CountryIndicator(string country, string indicator, int value)
-            {
-                Country = country;
-                Indicator = indicator;
-                Value = value;
-            }
 
-            public string Country { get; set; }
-            public string Indicator { get; set; }
-            public int Value { get; set; }
-        }
+        public string Country { get; set; }
+        public string Indicator { get; set; }
+        public int Value { get; set; }
     }
 }
