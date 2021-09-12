@@ -8,7 +8,6 @@ using Pulumi.Azure.Core;
 using Pulumi.Azure.FrontDoor.Inputs;
 using Pulumi.Azure.Storage;
 using Pulumi.AzureAD;
-using Pulumi.Random;
 
 namespace PulumiDemo
 {
@@ -176,22 +175,11 @@ namespace PulumiDemo
         {
             var msa = new Application(name, new ApplicationArgs
             {
-                Name = name,
-                Oauth2AllowImplicitFlow = false,
-                AvailableToOtherTenants = true,
-                PublicClient = true
+                DisplayName = name,
+                SignInAudience = "AzureADMultipleOrgs"
             });
-
-            var pwd = new RandomPassword($"{name}-password", new RandomPasswordArgs
-            {
-                Length = 16,
-                MinNumeric = 1,
-                MinSpecial = 1,
-                MinUpper = 1,
-                MinLower = 1
-            });
-
-            var msaSecret = new ApplicationPassword($"{name}-secret", new ApplicationPasswordArgs {ApplicationObjectId = msa.ObjectId, EndDate = "2299-12-29T00:00:00Z", Value = pwd.Result});
+            
+            var msaSecret = new ApplicationPassword($"{name}-secret", new ApplicationPasswordArgs {ApplicationObjectId = msa.ObjectId, EndDate = "2299-12-29T00:00:00Z"});
 
             return (msa.ApplicationId, msaSecret.Value);
         }
