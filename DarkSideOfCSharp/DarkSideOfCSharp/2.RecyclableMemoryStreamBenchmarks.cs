@@ -19,7 +19,7 @@ namespace DarkSideOfCSharp
         };
         private readonly RecyclableMemoryStreamManager _memoryStreamManager = new ();
         private readonly JsonSerializer _jsonSerializer = new();
-        private static readonly byte[] HmacKey = Encoding.UTF8.GetBytes(".NET fwdays'21 conference");
+        private static readonly byte[] HmacKey = Encoding.UTF8.GetBytes("Dark side of C#");
 
         [Fact]
         public void AssertThatAllMethodsProduceSameResult()
