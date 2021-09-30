@@ -26,7 +26,7 @@ namespace DarkSideOfCSharp
         {
             var expected = SerializeAndSign();
             Assert.Equal(expected,SerializeAndSignUsingMemoryStream());
-            Assert.Equal(expected,SerializeAndSignUsingMemoryStream());
+            Assert.Equal(expected,SerializeAndSignUsingRecyclableMemoryStream());
             Assert.Equal(expected,SerializeAndSignUsingSystemTextJson());
         }
         
