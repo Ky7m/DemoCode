@@ -210,23 +210,15 @@ updates:
     interval: daily
     time: "13:00"
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: Pulumi.Azure
-    versions:
-    - 3.55.0
-    - 4.0.0
-    - 4.0.1
 - package-ecosystem: nuget
   directory: "/PulumiDemo/PulumiDemoTests"
   schedule:
     interval: daily
     time: "13:00"
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: Pulumi.Random
-    versions:
-    - 4.0.0
-  - dependency-name: Pulumi.AzureAD
-    versions:
-    - 3.6.0
-    - 4.0.0
+  - package-ecosystem: nuget
+  directory: "/MakingDotNETApplicationsFaster/MakingDotNETApplicationsFaster"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
