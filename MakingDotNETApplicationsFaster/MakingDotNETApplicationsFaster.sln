@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakingDotNETApplicationsFaster", "MakingDotNETApplicationsFaster\MakingDotNETApplicationsFaster.csproj", "{1958193D-017D-4CEA-9E10-9DD488E078E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionExtension", "ReflectionExtension\ReflectionExtension.csproj", "{0A2F14E5-B903-4CB2-B26D-4B73E04D1D03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionInterface", "ReflectionInterface\ReflectionInterface.csproj", "{3D119DBA-BF97-409D-89E8-F5EDE6329226}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1958193D-017D-4CEA-9E10-9DD488E078E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1958193D-017D-4CEA-9E10-9DD488E078E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1958193D-017D-4CEA-9E10-9DD488E078E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1958193D-017D-4CEA-9E10-9DD488E078E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A2F14E5-B903-4CB2-B26D-4B73E04D1D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A2F14E5-B903-4CB2-B26D-4B73E04D1D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A2F14E5-B903-4CB2-B26D-4B73E04D1D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A2F14E5-B903-4CB2-B26D-4B73E04D1D03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D119DBA-BF97-409D-89E8-F5EDE6329226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D119DBA-BF97-409D-89E8-F5EDE6329226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D119DBA-BF97-409D-89E8-F5EDE6329226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D119DBA-BF97-409D-89E8-F5EDE6329226}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDD863E5-D324-4017-915C-E4A296CCD142}
+	EndGlobalSection
+EndGlobal
