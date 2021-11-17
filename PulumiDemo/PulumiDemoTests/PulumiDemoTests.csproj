@@ -18,7 +18,7 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="FluentAssertions" Version="6.2.0" />
-        <PackageReference Include="Pulumi.Azure" Version="4.26.0" />
+        <PackageReference Include="Pulumi.Azure" Version="4.27.0" />
     </ItemGroup>
 
     <ItemGroup>
