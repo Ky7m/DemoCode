@@ -1,5 +1,5 @@
 using Pulumi;
-using Pulumi.Azure.Core;
+using Pulumi.AzureNative.Resources;
 using PulumiDemo;
 
 namespace PulumiDemoTests

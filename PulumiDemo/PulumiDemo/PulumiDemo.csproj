@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Data.AppConfiguration" Version="1.2.0" />
-    <PackageReference Include="Pulumi.AzureAD" Version="5.10.0" />
-    <PackageReference Include="Pulumi.Azure" Version="4.30.0" />
+    <PackageReference Include="Pulumi.AzureNative" Version="1.48.0" />
   </ItemGroup>
 
 </Project>
