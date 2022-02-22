@@ -28,8 +28,7 @@ public static class SerilogConfigurationExtensions
                 .ReadFrom.Services(services)
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-                .MinimumLevel.Override("Microsoft.AspNetCore.HttpLogging.HttpLoggingMiddleware",
-                    LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft.AspNetCore.HttpLogging.HttpLoggingMiddleware", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .Enrich.WithSpan()
                 .Enrich.WithExceptionDetails(new DestructuringOptionsBuilder()

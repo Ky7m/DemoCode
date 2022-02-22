@@ -6,7 +6,7 @@ using Shared;
 namespace BillingService;
 
 [UsedImplicitly]
-public class OrderPlacedHandler : IHandleMessages<OrderPlaced>
+public partial class OrderPlacedHandler : IHandleMessages<OrderPlaced>
 {
     private readonly ILogger<OrderPlacedHandler> _logger;
 
@@ -14,10 +14,15 @@ public class OrderPlacedHandler : IHandleMessages<OrderPlaced>
     {
         _logger = logger;
     }
+    
+    [LoggerMessage(
+        Level = LogLevel.Information,
+        Message = "BillingService has received OrderPlaced, OrderId = {OrderId}")]
+    public static partial void LogOrderReceivedEvent(ILogger logger, string orderId);
 
     public Task Handle(OrderPlaced message, IMessageHandlerContext context)
     {
-        _logger.LogInformation("BillingService has received OrderPlaced, OrderId = {OrderId}", message.OrderId);
+        LogOrderReceivedEvent(_logger, message.OrderId);
         var currentActivity = context.Extensions.Get<ICurrentActivity>();
         currentActivity.Current?.AddTag("payment.transaction.id", Guid.NewGuid().ToString());
         return Task.CompletedTask;
