@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "DebuggingScenarios", "PulumiDemo", "DarkSideOfCSharp", "MakingDotNETApplicationsFaster"]
+        dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "DebuggingScenarios", "PulumiDemo", "DarkSideOfCSharp", "MakingDotNETApplicationsFaster", "WorkWithTelemetryInDotNET"]
 
     steps:
     - uses: actions/checkout@v2
