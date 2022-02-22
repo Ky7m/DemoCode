@@ -22,7 +22,10 @@ public partial class OrderPlacedHandler : IHandleMessages<OrderPlaced>
 
     public Task Handle(OrderPlaced message, IMessageHandlerContext context)
     {
-        LogOrderReceivedEvent(_logger, message.OrderId);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            LogOrderReceivedEvent(_logger, message.OrderId);
+        }
         var currentActivity = context.Extensions.Get<ICurrentActivity>();
         currentActivity.Current?.AddTag("payment.transaction.id", Guid.NewGuid().ToString());
         return Task.CompletedTask;
