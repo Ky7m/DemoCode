@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run All" type="CompoundRunConfigurationType">
+    <toRun name="BillingService" type="LaunchSettings" />
+    <toRun name="OrderGenerator" type="LaunchSettings" />
+    <toRun name="OrderService" type="LaunchSettings" />
+    <toRun name="ShippingService" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>

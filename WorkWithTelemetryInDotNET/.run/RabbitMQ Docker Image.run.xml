@@ -1,0 +1,24 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RabbitMQ Docker Image" type="docker-deploy" factoryName="docker-image" server-name="Docker">
+    <deployment type="docker-image">
+      <settings>
+        <option name="imageTag" value="rabbitmq:management-alpine" />
+        <option name="containerName" value="rabbitmq" />
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="15672" />
+              <option name="hostPort" value="15672" />
+            </DockerPortBindingImpl>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="5672" />
+              <option name="hostPort" value="5672" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="commandLineOptions" value="--hostname rabbitmq" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,18 @@
+###
+POST https://localhost:5001/api/orders
+X-Correlation-ID: {{$uuid}}
+Content-Type: application/json
+
+{
+    "customerId": "12345",
+    "orderItems": [
+        {
+            "productId": "12345",
+            "quantity": 1
+        },
+        {
+            "productId": "54321",
+            "quantity": 2
+        }
+    ]
+}
