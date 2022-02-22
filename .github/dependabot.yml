@@ -216,8 +216,38 @@ updates:
     interval: daily
     time: "13:00"
   open-pull-requests-limit: 10
-  - package-ecosystem: nuget
+- package-ecosystem: nuget
   directory: "/MakingDotNETApplicationsFaster/MakingDotNETApplicationsFaster"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/WorkWithTelemetryInDotNET/BillingService"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/WorkWithTelemetryInDotNET/OrderGenerator"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/WorkWithTelemetryInDotNET/OrderService"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/WorkWithTelemetryInDotNET/Shared"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: nuget
+  directory: "/WorkWithTelemetryInDotNET/ShippingService"
   schedule:
     interval: daily
     time: "13:00"
