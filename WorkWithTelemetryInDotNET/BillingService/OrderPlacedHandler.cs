@@ -15,9 +15,7 @@ public partial class OrderPlacedHandler : IHandleMessages<OrderPlaced>
         _logger = logger;
     }
     
-    [LoggerMessage(
-        Level = LogLevel.Information,
-        Message = "BillingService has received OrderPlaced, OrderId = {OrderId}")]
+    [LoggerMessage(Level = LogLevel.Information, Message = "BillingService has received OrderPlaced, OrderId = {OrderId}")]
     public static partial void LogOrderReceivedEvent(ILogger logger, string orderId);
 
     public Task Handle(OrderPlaced message, IMessageHandlerContext context)

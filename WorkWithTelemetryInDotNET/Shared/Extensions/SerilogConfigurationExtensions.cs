@@ -36,8 +36,7 @@ public static class SerilogConfigurationExtensions
                     .WithDestructurers(new IExceptionDestructurer[]
                     {
                         new DbUpdateExceptionDestructurer(),
-                        new ApiExceptionDestructurer(destructureCommonExceptionProperties: false,
-                            destructureHttpContent: false)
+                        new ApiExceptionDestructurer(destructureCommonExceptionProperties: false, destructureHttpContent: false)
                     }))
                 .Enrich.WithMachineName()
                 .Enrich.WithAssemblyVersion(true)
@@ -74,7 +73,7 @@ public static class SerilogConfigurationExtensions
                 configuration
                     .MinimumLevel.Information()
                     .WriteTo.Async(x => x.File(
-                        Path.Combine(homeFolder!, "LogFiles", "Application", "diagnostics.txt"),
+                        Path.Combine(homeFolder, "LogFiles", "Application", "diagnostics.txt"),
                         rollingInterval: RollingInterval.Day,
                         fileSizeLimitBytes: 10 * 1024 * 1024,
                         retainedFileCountLimit: 2,
