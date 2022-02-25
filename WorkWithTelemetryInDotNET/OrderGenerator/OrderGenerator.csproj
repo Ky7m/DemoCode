@@ -14,7 +14,7 @@
         <PackageReference Include="NServiceBus" Version="7.6.0" />
         <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.1.0" />
         <PackageReference Include="NServiceBus.RabbitMQ" Version="6.1.1" />
-        <PackageReference Include="RabbitMQ.Client" Version="6.2.3" />
+        <PackageReference Include="RabbitMQ.Client" Version="6.2.4" />
         <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
