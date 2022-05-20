@@ -10,7 +10,7 @@
     <PackageReference Include="Serilog.Enrichers.AssemblyName" Version="1.0.9" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
     <PackageReference Include="Serilog.Exceptions" Version="8.1.0+build.526" />
-    <PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.1.0+build.526" />
+    <PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.2.0+build.634" />
     <PackageReference Include="Serilog.Exceptions.Refit" Version="8.2.0+build.634" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
