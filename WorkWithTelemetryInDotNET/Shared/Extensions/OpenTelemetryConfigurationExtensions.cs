@@ -39,7 +39,9 @@ public static class OpenTelemetryConfigurationExtensions
                         opts.Filter = req =>
                         {
                             // filter app insights
-                            if (string.Equals(req.RequestUri?.Host, "dc.services.visualstudio.com", StringComparison.OrdinalIgnoreCase))
+                            if (string.Equals(req.RequestUri?.Host, "dc.services.visualstudio.com", StringComparison.OrdinalIgnoreCase)
+                                ||
+                                req.RequestUri?.Host.Contains("applicationinsights.azure.com", StringComparison.OrdinalIgnoreCase) == true)
                             {
                                 return false;
                             }
