@@ -24,6 +24,11 @@ jobs:
       with:
         languages: 'csharp'
         
+    - name: Setup .NET 6.* SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.*'
+        
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
 
