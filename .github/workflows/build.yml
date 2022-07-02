@@ -35,7 +35,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore ${{ matrix.dotnetCoreProjects }}
     - name: Build
-      run: dotnet build ${{ matrix.dotnetCoreProjects }} --configuration Release --no-restore
+      run: dotnet build ${{ matrix.dotnetCoreProjects }} /p:UseSharedCompilation=false --configuration Release --no-restore
     - name: Perform CodeQL Analysis
       if: matrix.operating-system == 'ubuntu-latest'
       uses: github/codeql-action/analyze@v2
