@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.operating-system }}
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     env:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
@@ -23,9 +27,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.x
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: 'csharp'
     - name: Install dependencies
       run: dotnet restore ${{ matrix.dotnetCoreProjects }}
     - name: Build
       run: dotnet build ${{ matrix.dotnetCoreProjects }} --configuration Release --no-restore
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
     - name: Test
       run: dotnet test ${{ matrix.dotnetCoreProjects }} --no-restore --verbosity normal
