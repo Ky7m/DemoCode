@@ -14,13 +14,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
-    env:
-      DOTNET_NOLOGO: true
-      DOTNET_CLI_TELEMETRY_OPTOUT: true
-    strategy:
-      matrix:
-        dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "DebuggingScenarios", "PulumiDemo", "DarkSideOfCSharp", "MakingDotNETApplicationsFaster", "WorkWithTelemetryInDotNET"]
-
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -30,16 +24,8 @@ jobs:
       with:
         languages: 'csharp'
         
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.x
-    
-    - name: Install dependencies
-      run: dotnet restore ${{ matrix.dotnetCoreProjects }}
-    
-    - name: Build
-      run: dotnet build ${{ matrix.dotnetCoreProjects }} --configuration Release --no-restore
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
