@@ -28,6 +28,7 @@ jobs:
       with:
         dotnet-version: 6.x
     - name: Initialize CodeQL
+      if: matrix.operating-system == 'ubuntu-latest' 
       uses: github/codeql-action/init@v2
       with:
         languages: 'csharp'
@@ -36,6 +37,7 @@ jobs:
     - name: Build
       run: dotnet build ${{ matrix.dotnetCoreProjects }} --configuration Release --no-restore
     - name: Perform CodeQL Analysis
+      if: matrix.operating-system == 'ubuntu-latest'
       uses: github/codeql-action/analyze@v2
     - name: Test
       run: dotnet test ${{ matrix.dotnetCoreProjects }} --no-restore --verbosity normal
