@@ -22,7 +22,7 @@ jobs:
         dotnetCoreProjects: ["ApplicationDiagnosticsNetCore", "CakeBuild/ConsoleAppSample", "CSharp7", "CSharp8", "DemoCode.Utils", "DebuggingScenarios", "PulumiDemo", "DarkSideOfCSharp", "MakingDotNETApplicationsFaster", "WorkWithTelemetryInDotNET"]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v2
       with:
