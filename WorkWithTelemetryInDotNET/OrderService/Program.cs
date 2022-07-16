@@ -8,7 +8,7 @@ var host = Host.CreateDefaultBuilder(args)
         var endpointConfiguration = new EndpointConfiguration(nameof(OrderService));
         var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
         transport.ConnectionString("host=localhost");
-        transport.UseConventionalRoutingTopology();
+        transport.UseConventionalRoutingTopology(QueueType.Quorum);
         endpointConfiguration.EnableInstallers();
         return endpointConfiguration;
     })

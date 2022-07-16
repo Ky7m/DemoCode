@@ -24,7 +24,7 @@ try
             var endpointConfiguration = new EndpointConfiguration(nameof(OrderGenerator));
             var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
             transport.ConnectionString("host=localhost");
-            transport.UseConventionalRoutingTopology();
+            transport.UseConventionalRoutingTopology(QueueType.Quorum);
             transport.Routing()
                 .RouteToEndpoint(
                 messageType: typeof(PlaceOrder),
