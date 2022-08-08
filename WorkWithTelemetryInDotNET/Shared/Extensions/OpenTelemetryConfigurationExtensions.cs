@@ -34,7 +34,6 @@ public static class OpenTelemetryConfigurationExtensions
                     })
                     .AddHttpClientInstrumentation(opts =>
                     {
-                        opts.SetHttpFlavor = false;
                         opts.RecordException = true;
                         opts.Filter = req =>
                         {
