@@ -11,7 +11,7 @@
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
     <PackageReference Include="Serilog.Exceptions" Version="8.3.0+build.654" />
     <PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.3.0+build.654" />
-    <PackageReference Include="Serilog.Exceptions.Refit" Version="8.3.0+build.654" />
+    <PackageReference Include="Serilog.Exceptions.Refit" Version="8.4.0+build.694" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
     <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
@@ -28,7 +28,7 @@
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc9.5" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.6" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.5" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.5" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.6" />
     <PackageReference Include="NServiceBus.Extensions.Diagnostics" Version="2.1.1" />
   </ItemGroup>
 </Project>
