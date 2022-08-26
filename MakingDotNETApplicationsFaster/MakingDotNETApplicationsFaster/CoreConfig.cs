@@ -17,7 +17,7 @@ namespace MakingDotNETApplicationsFaster
         
         private class FastestToSlowestOrderer : IOrderer
         {
-            public IEnumerable<BenchmarkCase> GetExecutionOrder(ImmutableArray<BenchmarkCase> benchmarksCase) =>
+            public IEnumerable<BenchmarkCase> GetExecutionOrder(ImmutableArray<BenchmarkCase> benchmarksCase, IEnumerable<BenchmarkLogicalGroupRule> order = null) =>
                 from benchmark in benchmarksCase
                 orderby benchmark.Parameters["X"] descending,
                     benchmark.Descriptor.WorkloadMethodDisplayInfo
@@ -39,12 +39,12 @@ namespace MakingDotNETApplicationsFaster
                 return GetLogicalGroupKey(allBenchmarksCases, benchmarkCase);
             }
 
-            public string GetLogicalGroupKey(ImmutableArray<BenchmarkCase> allBenchmarksCases, BenchmarkCase benchmarkCase) =>
-                benchmarkCase.Job.DisplayInfo + "_" + benchmarkCase.Parameters.DisplayInfo;
-
-            public IEnumerable<IGrouping<string, BenchmarkCase>> GetLogicalGroupOrder(IEnumerable<IGrouping<string, BenchmarkCase>> logicalGroups) =>
+            public IEnumerable<IGrouping<string, BenchmarkCase>> GetLogicalGroupOrder(IEnumerable<IGrouping<string, BenchmarkCase>> logicalGroups, IEnumerable<BenchmarkLogicalGroupRule> order = null) => 
                 logicalGroups.OrderBy(it => it.Key);
 
+            public string GetLogicalGroupKey(ImmutableArray<BenchmarkCase> allBenchmarksCases, BenchmarkCase benchmarkCase) =>
+                benchmarkCase.Job.DisplayInfo + "_" + benchmarkCase.Parameters.DisplayInfo;
+            
             public bool SeparateLogicalGroups => true;
         }
     }
