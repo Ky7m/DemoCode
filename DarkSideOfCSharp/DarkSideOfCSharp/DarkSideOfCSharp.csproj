@@ -18,7 +18,7 @@
     <ItemGroup>
         <PackageReference Include="BenchmarkDotNet" Version="0.13.2" />
         <PackageReference Include="JetBrains.dotMemoryUnit" Version="3.2.20220510" />
-        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.9" />
+        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.10" />
         <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.2.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
