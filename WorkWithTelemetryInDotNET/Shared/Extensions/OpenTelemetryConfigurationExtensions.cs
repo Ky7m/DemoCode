@@ -35,7 +35,7 @@ public static class OpenTelemetryConfigurationExtensions
                     .AddHttpClientInstrumentation(opts =>
                     {
                         opts.RecordException = true;
-                        opts.Filter = req =>
+                        opts.FilterHttpWebRequest = req =>
                         {
                             // filter app insights
                             if (string.Equals(req.RequestUri?.Host, "dc.services.visualstudio.com", StringComparison.OrdinalIgnoreCase)
