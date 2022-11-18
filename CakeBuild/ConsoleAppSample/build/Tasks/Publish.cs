@@ -1,5 +1,6 @@
-﻿using Cake.Common.Tools.DotNetCore;
-using Cake.Common.Tools.DotNetCore.Publish;
+﻿
+using Cake.Common.Tools.DotNet;
+using Cake.Common.Tools.DotNet.Publish;
 using Cake.Frosting;
 
 namespace Build.Tasks
@@ -8,9 +9,9 @@ namespace Build.Tasks
     {
         public override void Run(BuildContext context)
         {
-            context.DotNetCorePublish(
+            context.DotNetPublish(
                 context.ProjectPath,
-                new DotNetCorePublishSettings
+                new DotNetPublishSettings
                 {
                     Configuration = context.MsBuildConfiguration,
                     OutputDirectory = context.OutputPath
