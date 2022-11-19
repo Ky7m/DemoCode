@@ -58,8 +58,8 @@ public static class OpenTelemetryConfigurationExtensions
                     {
                         options.RecordException = true;
                         options.SetDbStatementForText = true;
-                    })
-                    .AddSource("NServiceBus.Extensions.Diagnostics");
+                    });
+                    // .AddSource("NServiceBus.Extensions.Diagnostics");
 
                 var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
                 if (!string.IsNullOrEmpty(appiConnectionString))

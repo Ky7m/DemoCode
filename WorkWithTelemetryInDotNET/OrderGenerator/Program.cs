@@ -38,10 +38,10 @@ try
             endpointConfiguration.EnableInstallers();
             
             var settings = endpointConfiguration.GetSettings();
-            settings.Set(new NServiceBus.Extensions.Diagnostics.InstrumentationOptions
-            {
-                CaptureMessageBody = true
-            });
+            // settings.Set(new NServiceBus.Extensions.Diagnostics.InstrumentationOptions
+            // {
+            //     CaptureMessageBody = true
+            // });
             
             return endpointConfiguration;
         });
