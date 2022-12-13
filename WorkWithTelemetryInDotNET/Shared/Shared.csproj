@@ -30,6 +30,6 @@
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.9" />
     <PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.9" />
 <!--    <PackageReference Include="NServiceBus.Extensions.Diagnostics" Version="2.1.1" />-->
-    <PackageReference Include="OpenTelemetry" Version="1.4.0-beta.3" />
+    <PackageReference Include="OpenTelemetry" Version="1.4.0-rc.1" />
   </ItemGroup>
 </Project>
