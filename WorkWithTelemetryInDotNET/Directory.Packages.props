@@ -1,39 +1,39 @@
 <Project>
-    <PropertyGroup>
-        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageVersion Include="JetBrains.Annotations" Version="2022.3.1" />
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
-        <PackageVersion Include="NServiceBus" Version="8.0.2" />
-        <PackageVersion Include="NServiceBus.Extensions.Hosting" Version="2.0.0" />
-        <PackageVersion Include="NServiceBus.RabbitMQ" Version="8.0.0" />
-        <PackageVersion Include="RabbitMQ.Client" Version="6.4.0" />
-    </ItemGroup>
-    <ItemGroup>
-        <PackageVersion Include="Serilog.Enrichers.AssemblyName" Version="1.0.9" />
-        <PackageVersion Include="Serilog.Enrichers.Environment" Version="2.2.0" />
-        <PackageVersion Include="Serilog.Exceptions" Version="8.4.0+build.694" />
-        <PackageVersion Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.4.0+build.694" />
-        <PackageVersion Include="Serilog.Exceptions.Refit" Version="8.4.0+build.694" />
-        <PackageVersion Include="Serilog.Sinks.Seq" Version="5.2.2" />
-        <PackageVersion Include="Serilog.AspNetCore" Version="6.1.0" />
-        <PackageVersion Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
-        <PackageVersion Include="Serilog.Enrichers.Span" Version="3.1.0" />
-        <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
-        <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
-        <PackageVersion Include="Serilog.Sinks.Console" Version="4.1.0" />
-        <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
-    </ItemGroup>
-    <ItemGroup>
-        <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0-beta.6" />
-        <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.4.0-rc.2" />
-        <PackageVersion Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0-rc.2" />
-        <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0-rc.2" />
-        <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.11" />
-        <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.11" />
-        <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.11" />
-        <PackageVersion Include="NServiceBus.Extensions.Diagnostics" Version="2.1.1" />
-        <PackageVersion Include="OpenTelemetry" Version="1.4.0-rc.2" />
-    </ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="JetBrains.Annotations" Version="2022.3.1" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageVersion Include="NServiceBus" Version="8.0.3" />
+    <PackageVersion Include="NServiceBus.Extensions.Hosting" Version="2.0.0" />
+    <PackageVersion Include="NServiceBus.RabbitMQ" Version="8.0.0" />
+    <PackageVersion Include="RabbitMQ.Client" Version="6.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Serilog.Enrichers.AssemblyName" Version="1.0.9" />
+    <PackageVersion Include="Serilog.Enrichers.Environment" Version="2.2.0" />
+    <PackageVersion Include="Serilog.Exceptions" Version="8.4.0+build.694" />
+    <PackageVersion Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.4.0+build.694" />
+    <PackageVersion Include="Serilog.Exceptions.Refit" Version="8.4.0+build.694" />
+    <PackageVersion Include="Serilog.Sinks.Seq" Version="5.2.2" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageVersion Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
+    <PackageVersion Include="Serilog.Enrichers.Span" Version="3.1.0" />
+    <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0-beta.6" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.4.0-rc.2" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0-rc.2" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0-rc.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.11" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.11" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.11" />
+    <PackageVersion Include="NServiceBus.Extensions.Diagnostics" Version="2.1.1" />
+    <PackageVersion Include="OpenTelemetry" Version="1.4.0-rc.2" />
+  </ItemGroup>
 </Project>
