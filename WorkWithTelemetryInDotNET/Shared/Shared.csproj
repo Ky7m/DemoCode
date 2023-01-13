@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
-    <PackageReference Include="NServiceBus" Version="8.0.2" />
+    <PackageReference Include="NServiceBus" Version="8.0.3" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog.Enrichers.AssemblyName" Version="1.0.9" />
