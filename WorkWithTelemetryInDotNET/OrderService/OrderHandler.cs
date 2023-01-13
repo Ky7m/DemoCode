@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using NServiceBus;
 using Shared;
 
 namespace OrderService;

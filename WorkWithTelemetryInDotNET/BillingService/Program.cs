@@ -1,4 +1,3 @@
-using NServiceBus;
 using Shared.Extensions;
 
 var host = Host.CreateDefaultBuilder(args)

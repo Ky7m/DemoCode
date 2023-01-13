@@ -1,6 +1,5 @@
+using System.Diagnostics;
 using JetBrains.Annotations;
-using NServiceBus;
-// using NServiceBus.Extensions.Diagnostics;
 using Shared;
 
 namespace BillingService;
@@ -24,8 +23,7 @@ public partial class OrderPlacedHandler : IHandleMessages<OrderPlaced>
         {
             LogOrderReceivedEvent(_logger, message.OrderId);
         }
-        // var currentActivity = context.Extensions.Get<ICurrentActivity>();
-        // currentActivity.Current?.AddTag("payment.transaction.id", Guid.NewGuid().ToString());
+        Activity.Current?.AddTag("payment.transaction.id", Guid.NewGuid().ToString());
         return Task.CompletedTask;
     }
 }

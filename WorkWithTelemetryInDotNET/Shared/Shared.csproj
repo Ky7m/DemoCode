@@ -32,7 +32,6 @@
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" />
     <PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" />
-<!--    <PackageReference Include="NServiceBus.Extensions.Diagnostics" />-->
     <PackageReference Include="OpenTelemetry" />
   </ItemGroup>
 </Project>

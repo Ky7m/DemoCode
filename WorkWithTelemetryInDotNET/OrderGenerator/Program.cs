@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpLogging;
-using NServiceBus;
-using NServiceBus.Configuration.AdvancedExtensibility;
 using OrderGenerator;
 using Serilog;
 using Serilog.Events;
@@ -36,13 +34,8 @@ try
                 destination: "OrderService"
             );
             endpointConfiguration.EnableInstallers();
-            
-            var settings = endpointConfiguration.GetSettings();
-            // settings.Set(new NServiceBus.Extensions.Diagnostics.InstrumentationOptions
-            // {
-            //     CaptureMessageBody = true
-            // });
-            
+            endpointConfiguration.EnableOpenTelemetry();
+
             return endpointConfiguration;
         });
 

@@ -1,4 +1,3 @@
-using NServiceBus;
 using Shared;
 
 namespace OrderGenerator;
