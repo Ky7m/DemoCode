@@ -3,6 +3,10 @@ using Azure.Monitor.OpenTelemetry.Exporter;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OpenTelemetry.Instrumentation.AspNetCore;
+using OpenTelemetry.Instrumentation.Http;
+using OpenTelemetry.Instrumentation.SqlClient;
+using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
@@ -13,54 +17,66 @@ public static class OpenTelemetryConfigurationExtensions
 {
     public static IServiceCollection AddSharedOpenTelemetryTracing(this IServiceCollection services, IConfiguration configuration, string applicationName)
     {
-        return services
-            .AddOpenTelemetryTracing(builder =>
+        services.Configure<AspNetCoreInstrumentationOptions>(options =>
+        {
+            options.Filter = httpContext =>
+            {
+                var request = httpContext.Request;
+                return !(
+                    (request.Path.Equals("/", StringComparison.OrdinalIgnoreCase) &&
+                     request.Method.Equals("GET", StringComparison.OrdinalIgnoreCase)) ||
+                    request.Path.Equals("/health", StringComparison.OrdinalIgnoreCase) ||
+                    request.Path.Equals("/robots933456.txt", StringComparison.OrdinalIgnoreCase) ||
+                    request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase));
+            };
+            options.RecordException = true;
+        });
+
+        services.Configure<HttpClientInstrumentationOptions>(options =>
+        {
+            options.FilterHttpRequestMessage = req =>
+            {
+                // filter app insights
+                if (string.Equals(req.RequestUri?.Host, "dc.services.visualstudio.com", StringComparison.OrdinalIgnoreCase)
+                    ||
+                    req.RequestUri?.Host.Contains("applicationinsights.azure.com", StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    return false;
+                }
+            
+                if (string.Equals(req.RequestUri?.Host, "localhost", StringComparison.OrdinalIgnoreCase))
+                {
+                    // filter log request to SEQ
+                    return req.RequestUri?.Port != 5341;
+                }
+            
+                return true;
+            };
+            options.RecordException = true;
+        });
+        
+        services.Configure<SqlClientInstrumentationOptions>(options =>
+        {
+            options.RecordException = true;
+            options.SetDbStatementForText = true;
+            options.SetDbStatementForStoredProcedure = true;
+        });
+
+        services
+            .AddOpenTelemetry()
+            .ConfigureResource(builder => builder.AddService(
+                    serviceName: applicationName,
+                    serviceVersion: typeof(OpenTelemetryConfigurationExtensions).Assembly.GetName().Version
+                        ?.ToString() ?? "unknown",
+                    serviceInstanceId: Environment.MachineName)
+                .AddTelemetrySdk())
+            .WithTracing(builder =>
             {
                 builder
-                    .AddSource(applicationName)
-                    .SetResourceBuilder(ResourceBuilder
-                        .CreateDefault()
-                        .AddService(applicationName)
-                        .AddTelemetrySdk())
-                    .AddAspNetCoreInstrumentation(options =>
-                    {
-                        options.Filter = req => !(
-                            (req.Request.Path.Equals("/", StringComparison.OrdinalIgnoreCase) &&
-                             req.Request.Method.Equals("GET", StringComparison.OrdinalIgnoreCase)) ||
-                            req.Request.Path.Equals("/health", StringComparison.OrdinalIgnoreCase) ||
-                            req.Request.Path.Equals("/robots933456.txt", StringComparison.OrdinalIgnoreCase) ||
-                            req.Request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase));
-                        options.RecordException = true;
-                    })
-                    .AddHttpClientInstrumentation(opts =>
-                    {
-                        opts.RecordException = true;
-                        opts.FilterHttpWebRequest = req =>
-                        {
-                            // filter app insights
-                            if (string.Equals(req.RequestUri?.Host, "dc.services.visualstudio.com", StringComparison.OrdinalIgnoreCase)
-                                ||
-                                req.RequestUri?.Host.Contains("applicationinsights.azure.com", StringComparison.OrdinalIgnoreCase) == true)
-                            {
-                                return false;
-                            }
-
-                            if (string.Equals(req.RequestUri?.Host, "localhost", StringComparison.OrdinalIgnoreCase))
-                            {
-                                // filter log request to SEQ
-                                return req.RequestUri?.Port != 5341;
-                            }
-
-                            return true;
-                        };
-                    })
-                    .AddSqlClientInstrumentation(options =>
-                    {
-                        options.RecordException = true;
-                        options.SetDbStatementForText = true;
-                    })
-                    .AddSource("NServiceBus.Core");
-
+                    .AddSource(applicationName, "NServiceBus.Core")
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddSqlClientInstrumentation();
                 var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
                 if (!string.IsNullOrEmpty(appiConnectionString))
                 {
@@ -69,5 +85,22 @@ public static class OpenTelemetryConfigurationExtensions
 
                 builder.AddJaegerExporter();
             });
+            // .WithMetrics(builder =>
+            // {
+            //     builder.AddMeter("NServiceBus.Core")
+            //         .AddProcessInstrumentation()
+            //         .AddRuntimeInstrumentation()
+            //         .AddAspNetCoreInstrumentation()
+            //         .AddHttpClientInstrumentation();
+            //     var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
+            //     if (!string.IsNullOrEmpty(appiConnectionString))
+            //     {
+            //         builder.AddAzureMonitorMetricExporter(x => x.ConnectionString = appiConnectionString);
+            //     }
+            //
+            //     builder.AddConsoleExporter();
+            // });
+
+        return services;
     }
 }

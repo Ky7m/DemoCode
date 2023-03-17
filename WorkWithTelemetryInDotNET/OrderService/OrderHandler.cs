@@ -18,7 +18,7 @@ public class OrderHandler : IHandleMessages<PlaceOrder>, IHandleMessages<CancelO
        _logger.LogInformation("Received PlaceOrder, OrderId = {OrderId}", message.OrderId);
 
         // This is normally where some business logic would occur
-        await Task.Delay(TimeSpan.FromSeconds(5));
+        await Task.Delay(TimeSpan.FromSeconds(5), context.CancellationToken);
 
         // test throwing transient exceptions
         if (Random.Shared.Next(0, 5) == 0)

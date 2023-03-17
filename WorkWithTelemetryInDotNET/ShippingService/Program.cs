@@ -9,6 +9,7 @@ var host = Host.CreateDefaultBuilder(args)
         transport.ConnectionString("host=localhost");
         transport.UseConventionalRoutingTopology(QueueType.Quorum);
         endpointConfiguration.EnableInstallers();
+        endpointConfiguration.EnableOpenTelemetry();
         return endpointConfiguration;
     })
     .ConfigureServices((context, services) =>

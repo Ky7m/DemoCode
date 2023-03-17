@@ -4,10 +4,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="JetBrains.Annotations" Version="2022.3.1" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
     <PackageVersion Include="NServiceBus" Version="8.0.3" />
     <PackageVersion Include="NServiceBus.Extensions.Hosting" Version="2.0.0" />
-    <PackageVersion Include="NServiceBus.RabbitMQ" Version="8.0.0" />
+    <PackageVersion Include="NServiceBus.RabbitMQ" Version="8.0.1" />
     <PackageVersion Include="RabbitMQ.Client" Version="6.4.0" />
   </ItemGroup>
   <ItemGroup>
@@ -26,14 +26,15 @@
     <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0-beta.6" />
-    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.4.0-rc.2" />
-    <PackageVersion Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0-rc.2" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0-rc.2" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.11" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.11" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.11" />
-    <PackageVersion Include="NServiceBus.Extensions.Diagnostics" Version="2.1.1" />
-    <PackageVersion Include="OpenTelemetry" Version="1.4.0-rc.2" />
+    <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0-beta.9" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.4.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.14" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.14" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.14" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Process" Version="0.5.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.1.0-rc.2" />
+    <PackageVersion Include="OpenTelemetry" Version="1.4.0" />
   </ItemGroup>
 </Project>
