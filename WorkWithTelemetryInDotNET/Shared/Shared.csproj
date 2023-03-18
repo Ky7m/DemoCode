@@ -7,6 +7,7 @@
     <PackageReference Include="NServiceBus" />
     <PackageReference Include="NServiceBus.Extensions.Hosting" />
     <PackageReference Include="NServiceBus.RabbitMQ" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
     <PackageReference Include="RabbitMQ.Client" />
   </ItemGroup>
   <ItemGroup>

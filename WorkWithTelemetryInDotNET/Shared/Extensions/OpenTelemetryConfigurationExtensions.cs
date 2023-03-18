@@ -84,22 +84,23 @@ public static class OpenTelemetryConfigurationExtensions
                 }
 
                 builder.AddJaegerExporter();
+                builder.AddOtlpExporter();
+            })
+            .WithMetrics(builder =>
+            {
+                builder.AddMeter("NServiceBus.Core")
+                    .AddProcessInstrumentation()
+                    .AddRuntimeInstrumentation()
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation();
+                var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
+                if (!string.IsNullOrEmpty(appiConnectionString))
+                {
+                    builder.AddAzureMonitorMetricExporter(x => x.ConnectionString = appiConnectionString);
+                }
+            
+                builder.AddOtlpExporter();
             });
-            // .WithMetrics(builder =>
-            // {
-            //     builder.AddMeter("NServiceBus.Core")
-            //         .AddProcessInstrumentation()
-            //         .AddRuntimeInstrumentation()
-            //         .AddAspNetCoreInstrumentation()
-            //         .AddHttpClientInstrumentation();
-            //     var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
-            //     if (!string.IsNullOrEmpty(appiConnectionString))
-            //     {
-            //         builder.AddAzureMonitorMetricExporter(x => x.ConnectionString = appiConnectionString);
-            //     }
-            //
-            //     builder.AddConsoleExporter();
-            // });
 
         return services;
     }
