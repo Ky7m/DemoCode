@@ -39,7 +39,7 @@ try
             return endpointConfiguration;
         });
 
-    builder.Services.AddSharedOpenTelemetryTracing(builder.Configuration, builder.Environment.ApplicationName);
+    builder.Services.AddOpenTelemetrySharedConfiguration(builder.Configuration, builder.Environment.ApplicationName);
     builder.Services.AddHttpLogging(logging =>
     {
         logging.LoggingFields = HttpLoggingFields.All;
@@ -77,6 +77,8 @@ try
         return Results.Ok(command);
     });
 
+    app.UseOpenTelemetryPrometheusScrapingEndpoint();
+    
     app.Run();
 }
 catch (Exception ex)

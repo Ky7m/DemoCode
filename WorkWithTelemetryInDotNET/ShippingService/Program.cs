@@ -13,7 +13,7 @@ var host = Host.CreateDefaultBuilder(args)
         return endpointConfiguration;
     })
     .ConfigureServices((context, services) =>
-        services.AddSharedOpenTelemetryTracing(context.Configuration, context.HostingEnvironment.ApplicationName)
+        services.AddOpenTelemetrySharedConfiguration(context.Configuration, context.HostingEnvironment.ApplicationName)
     )
     .Build();
 

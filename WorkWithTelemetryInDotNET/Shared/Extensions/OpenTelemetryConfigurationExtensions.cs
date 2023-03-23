@@ -15,7 +15,7 @@ namespace Shared.Extensions;
 [PublicAPI]
 public static class OpenTelemetryConfigurationExtensions
 {
-    public static IServiceCollection AddSharedOpenTelemetryTracing(this IServiceCollection services, IConfiguration configuration, string applicationName)
+    public static IServiceCollection AddOpenTelemetrySharedConfiguration(this IServiceCollection services, IConfiguration configuration, string applicationName)
     {
         services.Configure<AspNetCoreInstrumentationOptions>(options =>
         {
