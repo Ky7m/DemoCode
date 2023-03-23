@@ -77,8 +77,6 @@ try
         return Results.Ok(command);
     });
 
-    app.UseOpenTelemetryPrometheusScrapingEndpoint();
-    
     app.Run();
 }
 catch (Exception ex)
