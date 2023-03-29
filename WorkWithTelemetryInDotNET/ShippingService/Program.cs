@@ -1,19 +1,16 @@
 using Shared.Extensions;
+using ShippingService;
 
 var host = Host.CreateDefaultBuilder(args)
     .UseSharedSerilogConfiguration()
-    .UseNServiceBus(_ =>
-    {
-        var endpointConfiguration = new EndpointConfiguration(nameof(ShippingService));
-        var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
-        transport.ConnectionString("host=localhost");
-        transport.UseConventionalRoutingTopology(QueueType.Quorum);
-        endpointConfiguration.EnableInstallers();
-        endpointConfiguration.EnableOpenTelemetry();
-        return endpointConfiguration;
-    })
     .ConfigureServices((context, services) =>
-        services.AddOpenTelemetrySharedConfiguration(context.Configuration, context.HostingEnvironment.ApplicationName)
+        services
+            .AddMassTransitSharedConfiguration(x =>
+            {
+                x.AddConsumer<OrderPlacedConsumer>()
+                    .Endpoint(x => x.Name = "shipping");
+            })
+            .AddOpenTelemetrySharedConfiguration(context.Configuration, context.HostingEnvironment.ApplicationName)
     )
     .Build();
 

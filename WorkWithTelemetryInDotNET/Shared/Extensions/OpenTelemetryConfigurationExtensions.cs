@@ -73,7 +73,7 @@ public static class OpenTelemetryConfigurationExtensions
             .WithTracing(builder =>
             {
                 builder
-                    .AddSource(applicationName, "NServiceBus.Core")
+                    .AddSource(applicationName, "MassTransit")
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddSqlClientInstrumentation();
@@ -88,7 +88,7 @@ public static class OpenTelemetryConfigurationExtensions
             })
             .WithMetrics(builder =>
             {
-                builder.AddMeter("NServiceBus.Core")
+                builder
                     .AddProcessInstrumentation()
                     .AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()

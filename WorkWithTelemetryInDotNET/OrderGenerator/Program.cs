@@ -1,9 +1,10 @@
+using MassTransit;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpLogging;
 using OrderGenerator;
 using Serilog;
 using Serilog.Events;
-using Shared;
+using Shared.Contracts;
 using Shared.Extensions;
 
 Log.Logger = new LoggerConfiguration()
@@ -16,30 +17,10 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Host
-        .UseSharedSerilogConfiguration()
-        .UseNServiceBus(_ =>
-        {
-            var endpointConfiguration = new EndpointConfiguration(nameof(OrderGenerator));
-            var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
-            transport.ConnectionString("host=localhost");
-            transport.UseConventionalRoutingTopology(QueueType.Quorum);
-            transport.Routing()
-                .RouteToEndpoint(
-                messageType: typeof(PlaceOrder),
-                destination: "OrderService"
-            );
-            transport.Routing()
-                .RouteToEndpoint(
-                messageType: typeof(CancelOrder),
-                destination: "OrderService"
-            );
-            endpointConfiguration.EnableInstallers();
-            endpointConfiguration.EnableOpenTelemetry();
-
-            return endpointConfiguration;
-        });
+        .UseSharedSerilogConfiguration();
 
     builder.Services.AddOpenTelemetrySharedConfiguration(builder.Configuration, builder.Environment.ApplicationName);
+    builder.Services.AddMassTransitSharedConfiguration();
     builder.Services.AddHttpLogging(logging =>
     {
         logging.LoggingFields = HttpLoggingFields.All;
@@ -58,7 +39,7 @@ try
     app.UseHttpLogging();
     app.UseSerilogRequestLogging();
     
-    app.MapPost("/api/orders", async (PlaceOrder? order, IMessageSession messageSession, HttpContext context) =>
+    app.MapPost("/api/orders", async (PlaceOrder? order, IBus bus, HttpContext context) =>
     {
         if (order is null)
         {
@@ -70,10 +51,10 @@ try
         
         var command = new PlaceOrder
         {
-            OrderId = Guid.NewGuid().ToString()
+            OrderId = Guid.NewGuid()
         };
         app.Logger.LogInformation("Sending PlaceOrder command via WebAPI, OrderId = {OrderId}", command.OrderId);
-        await messageSession.Send(command);
+        await bus.Publish(command);
         return Results.Ok(command);
     });
 

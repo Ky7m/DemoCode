@@ -1,16 +1,17 @@
-using Shared;
+using MassTransit;
+using Shared.Contracts;
 
 namespace OrderGenerator;
 
 public class OrderGeneratorWorker : BackgroundService
 {
     private readonly ILogger<OrderGeneratorWorker> _logger;
-    private readonly IMessageSession _messageSession;
+    private readonly IBus _bus;
 
-    public OrderGeneratorWorker(ILogger<OrderGeneratorWorker> logger, IMessageSession messageSession)
+    public OrderGeneratorWorker(ILogger<OrderGeneratorWorker> logger, IBus bus)
     {
         _logger = logger;
-        _messageSession = messageSession;
+        _bus = bus;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -18,7 +19,7 @@ public class OrderGeneratorWorker : BackgroundService
         var random = Random.Shared;
         while (!stoppingToken.IsCancellationRequested)
         {
-            var orderId = Guid.NewGuid().ToString();
+            var orderId = Guid.NewGuid();
 
             await PlaceOrder(orderId);
 
@@ -32,23 +33,23 @@ public class OrderGeneratorWorker : BackgroundService
         }
     }
 
-    private Task PlaceOrder(string orderId)
+    private Task PlaceOrder(Guid orderId)
     {
-        var command = new PlaceOrder
+        var message = new PlaceOrder
         {
             OrderId = orderId
         };
-        _logger.LogInformation("Sending PlaceOrder command, OrderId = {OrderId}", orderId);
-        return _messageSession.Send(command);
+        _logger.LogInformation("Sending PlaceOrder, OrderId = {OrderId}", orderId);
+        return _bus.Publish(message);
     }
 
-    private Task CancelOrder(string orderId)
+    private Task CancelOrder(Guid orderId)
     {
-        var command = new CancelOrder
+        var message = new CancelOrder
         {
             OrderId = orderId
         };
-        _logger.LogInformation("Sending CancelOrder command,OrderId = {OrderId}", orderId);
-        return _messageSession.Send(command);
+        _logger.LogInformation("Sending CancelOrder, OrderId = {OrderId}", orderId);
+        return _bus.Publish(message);
     }
 }

@@ -11,12 +11,8 @@
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" />
         <PackageReference Include="Microsoft.Extensions.Hosting" />
-        <PackageReference Include="NServiceBus" />
-        <PackageReference Include="NServiceBus.Extensions.Hosting" />
-        <PackageReference Include="NServiceBus.RabbitMQ" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Process" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
-        <PackageReference Include="RabbitMQ.Client" />
     </ItemGroup>
 
     <ItemGroup>
