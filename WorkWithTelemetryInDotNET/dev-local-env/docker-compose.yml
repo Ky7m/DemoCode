@@ -51,6 +51,8 @@ services:
     image: grafana/grafana:latest
     volumes:
       - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
+      - ./dotnet-otel-dashboard.json:/etc/grafana/provisioning/dashboards/dotnet-otel-dashboard.json
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin

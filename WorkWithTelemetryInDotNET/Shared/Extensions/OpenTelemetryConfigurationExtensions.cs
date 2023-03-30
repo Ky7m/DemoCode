@@ -26,6 +26,7 @@ public static class OpenTelemetryConfigurationExtensions
                     (request.Path.Equals("/", StringComparison.OrdinalIgnoreCase) &&
                      request.Method.Equals("GET", StringComparison.OrdinalIgnoreCase)) ||
                     request.Path.Equals("/health", StringComparison.OrdinalIgnoreCase) ||
+                    request.Path.Equals("/metrics", StringComparison.OrdinalIgnoreCase) ||
                     request.Path.Equals("/robots933456.txt", StringComparison.OrdinalIgnoreCase) ||
                     request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase));
             };
