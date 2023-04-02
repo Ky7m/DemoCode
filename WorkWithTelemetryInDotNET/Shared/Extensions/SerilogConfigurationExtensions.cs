@@ -41,8 +41,7 @@ public static class SerilogConfigurationExtensions
                     }))
                 .Enrich.WithMachineName()
                 .Enrich.WithAssemblyVersion(true)
-                .Enrich.WithCorrelationIdHeader("X-Correlation-ID")
-                .Enrich.WithMessageTemplate();
+                .Enrich.WithCorrelationIdHeader("X-Correlation-ID");
 
             if (context.HostingEnvironment.IsDevelopment())
             {
@@ -84,6 +83,9 @@ public static class SerilogConfigurationExtensions
                         flushToDiskInterval: TimeSpan.FromSeconds(1)));
             }
 
+
+            configuration.Enrich.WithMessageTemplate();
+            configuration.Enrich.WithTraceIdAndSpanId();
             configuration.WriteTo.Async(x => x.OpenTelemetry(resourceAttributes: new Dictionary<string, object>
             {
                 {"service.name", context.HostingEnvironment.ApplicationName},
