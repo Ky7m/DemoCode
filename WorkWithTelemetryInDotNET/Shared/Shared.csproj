@@ -12,6 +12,7 @@
     <PackageReference Include="Serilog.Exceptions" />
     <PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" />
     <PackageReference Include="Serilog.Exceptions.Refit" />
+    <PackageReference Include="Serilog.Sinks.OpenTelemetry" />
     <PackageReference Include="Serilog.Sinks.Seq" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Serilog.Enrichers.CorrelationId" />

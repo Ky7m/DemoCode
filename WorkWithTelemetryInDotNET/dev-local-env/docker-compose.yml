@@ -28,7 +28,7 @@ services:
       - "14250:14250"
       - "9411:9411"
   otel-collector:
-    image: otel/opentelemetry-collector:latest
+    image: otel/opentelemetry-collector-contrib:latest
     command: "--config=/etc/otel-collector-config.yml"
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
@@ -52,10 +52,18 @@ services:
     volumes:
       - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
       - ./dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
-      - ./dotnet-otel-dashboard.json:/etc/grafana/provisioning/dashboards/dotnet-otel-dashboard.json
+      - ./otel-dashboard.json:/etc/grafana/provisioning/dashboards/otel-dashboard.json
+      - ./logs-dashboard.json:/etc/grafana/provisioning/dashboards/logs-dashboard.json
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
     ports:
       - "3000:3000"
+  loki:
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki.yml:/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"

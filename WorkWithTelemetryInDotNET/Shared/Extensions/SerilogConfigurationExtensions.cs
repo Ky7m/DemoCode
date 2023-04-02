@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using JetBrains.Annotations;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -40,7 +41,8 @@ public static class SerilogConfigurationExtensions
                     }))
                 .Enrich.WithMachineName()
                 .Enrich.WithAssemblyVersion(true)
-                .Enrich.WithCorrelationIdHeader("X-Correlation-ID");
+                .Enrich.WithCorrelationIdHeader("X-Correlation-ID")
+                .Enrich.WithMessageTemplate();
 
             if (context.HostingEnvironment.IsDevelopment())
             {
@@ -81,6 +83,12 @@ public static class SerilogConfigurationExtensions
                         shared: true,
                         flushToDiskInterval: TimeSpan.FromSeconds(1)));
             }
+
+            configuration.WriteTo.Async(x => x.OpenTelemetry(resourceAttributes: new Dictionary<string, object>
+            {
+                {"service.name", context.HostingEnvironment.ApplicationName},
+                {"service.instance.id", Environment.MachineName}
+            }));
         });
     }
     
