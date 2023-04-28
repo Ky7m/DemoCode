@@ -74,7 +74,7 @@ public static class OpenTelemetryConfigurationExtensions
             .WithTracing(builder =>
             {
                 builder
-                    .AddSource(applicationName, "MassTransit")
+                    .AddSource(applicationName, MassTransit.Logging.DiagnosticHeaders.DefaultListenerName)
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddSqlClientInstrumentation();
@@ -90,6 +90,7 @@ public static class OpenTelemetryConfigurationExtensions
             .WithMetrics(builder =>
             {
                 builder
+                    .AddMeter(MassTransit.Monitoring.InstrumentationOptions.MeterName)
                     .AddProcessInstrumentation()
                     .AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()

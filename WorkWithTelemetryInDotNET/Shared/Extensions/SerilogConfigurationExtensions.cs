@@ -82,10 +82,7 @@ public static class SerilogConfigurationExtensions
                         shared: true,
                         flushToDiskInterval: TimeSpan.FromSeconds(1)));
             }
-
-
-            configuration.Enrich.WithMessageTemplate();
-            configuration.Enrich.WithTraceIdAndSpanId();
+            
             configuration.WriteTo.Async(x => x.OpenTelemetry(resourceAttributes: new Dictionary<string, object>
             {
                 {"service.name", context.HostingEnvironment.ApplicationName},
