@@ -83,10 +83,13 @@ public static class SerilogConfigurationExtensions
                         flushToDiskInterval: TimeSpan.FromSeconds(1)));
             }
             
-            configuration.WriteTo.Async(x => x.OpenTelemetry(resourceAttributes: new Dictionary<string, object>
+            configuration.WriteTo.Async(x => x.OpenTelemetry(options =>
             {
-                {"service.name", context.HostingEnvironment.ApplicationName},
-                {"service.instance.id", Environment.MachineName}
+                options.ResourceAttributes = new Dictionary<string, object>
+                {
+                    {"service.name", context.HostingEnvironment.ApplicationName},
+                    {"service.instance.id", Environment.MachineName}
+                };
             }));
         });
     }
