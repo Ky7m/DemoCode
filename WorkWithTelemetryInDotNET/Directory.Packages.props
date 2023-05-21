@@ -14,17 +14,17 @@
     <PackageVersion Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.4.0+build.694" />
     <PackageVersion Include="Serilog.Exceptions.Refit" Version="8.4.0+build.694" />
     <PackageVersion Include="Serilog.Sinks.Seq" Version="5.2.2" />
-    <PackageVersion Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="7.0.0" />
     <PackageVersion Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
     <PackageVersion Include="Serilog.Enrichers.Span" Version="3.1.0" />
     <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
     <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageVersion Include="Serilog.Sinks.OpenTelemetry" Version="1.0.0-dev-00188" />
+    <PackageVersion Include="Serilog.Sinks.OpenTelemetry" Version="1.0.0-dev-00204" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0-beta.10" />
+    <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0-beta.11" />
     <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.4.0" />
     <PackageVersion Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0" />
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.4.0" />
