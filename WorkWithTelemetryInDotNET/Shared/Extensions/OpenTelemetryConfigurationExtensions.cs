@@ -3,6 +3,9 @@ using Azure.Monitor.OpenTelemetry.Exporter;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using OpenTelemetry.Extensions.AzureMonitor;
 using OpenTelemetry.Instrumentation.AspNetCore;
 using OpenTelemetry.Instrumentation.Http;
 using OpenTelemetry.Instrumentation.SqlClient;
@@ -63,25 +66,34 @@ public static class OpenTelemetryConfigurationExtensions
             options.SetDbStatementForStoredProcedure = true;
         });
 
+        Action<ResourceBuilder> configureResource = builder => builder.AddService(
+                serviceName: applicationName,
+                serviceVersion: typeof(OpenTelemetryConfigurationExtensions).Assembly.GetName().Version
+                    ?.ToString() ?? "unknown",
+                serviceInstanceId: Environment.MachineName)
+            .AddTelemetrySdk();
         services
             .AddOpenTelemetry()
-            .ConfigureResource(builder => builder.AddService(
-                    serviceName: applicationName,
-                    serviceVersion: typeof(OpenTelemetryConfigurationExtensions).Assembly.GetName().Version
-                        ?.ToString() ?? "unknown",
-                    serviceInstanceId: Environment.MachineName)
-                .AddTelemetrySdk())
+            .ConfigureResource(configureResource)
             .WithTracing(builder =>
             {
                 builder
                     .AddSource(applicationName, MassTransit.Logging.DiagnosticHeaders.DefaultListenerName)
+                    .SetSampler(new AlwaysOffSampler())
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddSqlClientInstrumentation();
                 var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
                 if (!string.IsNullOrEmpty(appiConnectionString))
                 {
-                    builder.AddAzureMonitorTraceExporter(x => x.ConnectionString = appiConnectionString);
+                    builder
+                        .SetSampler(sp =>
+                        {
+                            var options = sp.GetRequiredService<IOptionsMonitor<ApplicationInsightsSamplerOptions>>()
+                                .Get(Options.DefaultName);
+                            return new ApplicationInsightsSampler(options);
+                        })
+                        .AddAzureMonitorTraceExporter(x => x.ConnectionString = appiConnectionString);
                 }
 
                 builder.AddJaegerExporter();
@@ -100,8 +112,22 @@ public static class OpenTelemetryConfigurationExtensions
                 {
                     builder.AddAzureMonitorMetricExporter(x => x.ConnectionString = appiConnectionString);
                 }
-            
+
                 builder.AddOtlpExporter();
+            });
+            
+            services.AddLogging(builder =>
+            {
+                builder.AddOpenTelemetry(options =>
+                {
+                    var resourceBuilder = ResourceBuilder.CreateDefault();
+                    configureResource(resourceBuilder);
+                    options.SetResourceBuilder(resourceBuilder);
+                    
+                    options.IncludeFormattedMessage = true;
+                    options.ParseStateValues = true;
+                    options.IncludeScopes = true;
+                });
             });
 
         return services;

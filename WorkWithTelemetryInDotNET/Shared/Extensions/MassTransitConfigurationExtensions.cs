@@ -2,7 +2,6 @@ using System;
 using JetBrains.Annotations;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
-using Shared.Contracts;
 
 namespace Shared.Extensions;
 
