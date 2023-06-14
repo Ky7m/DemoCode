@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0.302 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0.304 AS build
 WORKDIR /src
 COPY ["ShippingService/ShippingService.csproj", "ShippingService/"]
 RUN dotnet restore "ShippingService/ShippingService.csproj"
