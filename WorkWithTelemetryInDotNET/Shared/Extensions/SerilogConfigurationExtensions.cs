@@ -39,7 +39,6 @@ public static class SerilogConfigurationExtensions
                         new DbUpdateExceptionDestructurer(),
                         new ApiExceptionDestructurer(destructureCommonExceptionProperties: false, destructureHttpContent: false)
                     }))
-                .Enrich.WithMachineName()
                 .Enrich.WithAssemblyVersion(true)
                 .Enrich.WithCorrelationIdHeader("X-Correlation-ID");
 
@@ -47,8 +46,7 @@ public static class SerilogConfigurationExtensions
             {
                 configuration
                     .MinimumLevel.Debug()
-                    .WriteTo.Console(LogEventLevel.Information)
-                    .WriteTo.Seq("http://localhost:5341");
+                    .WriteTo.Console(LogEventLevel.Information);
             }
             else
             {

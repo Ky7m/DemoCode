@@ -13,7 +13,6 @@
     <PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" />
     <PackageReference Include="Serilog.Exceptions.Refit" />
     <PackageReference Include="Serilog.Sinks.OpenTelemetry" />
-    <PackageReference Include="Serilog.Sinks.Seq" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Serilog.Enrichers.CorrelationId" />
     <PackageReference Include="Serilog.Enrichers.Span" />
@@ -28,6 +27,7 @@
     <PackageReference Include="OpenTelemetry.Exporter.Console" />
     <PackageReference Include="OpenTelemetry.Exporter.Jaeger" />
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol.Logs" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" />

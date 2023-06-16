@@ -17,6 +17,9 @@ exporters:
   
   loki:
     endpoint: "http://loki:3100/loki/api/v1/push"
+    
+  otlphttp:
+    endpoint: "http://seq:5341/ingest/otlp"
 
 processors:
   batch:
@@ -40,5 +43,5 @@ service:
       processors: [batch]
       exporters: [logging, prometheus]
     logs:
-        receivers: [otlp]
-        exporters: [logging, loki]
+      receivers: [otlp]
+      exporters: [logging, loki, otlphttp]
