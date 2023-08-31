@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="JetBrains.Annotations" Version="2023.2.0" />
-    <PackageVersion Include="MassTransit.RabbitMQ" Version="8.0.16" />
+    <PackageVersion Include="MassTransit.RabbitMQ" Version="8.1.0" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
   </ItemGroup>
   <ItemGroup>
@@ -20,7 +20,7 @@
     <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageVersion Include="Serilog.Sinks.OpenTelemetry" Version="1.0.1" />
+    <PackageVersion Include="Serilog.Sinks.OpenTelemetry" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.0.0-beta.4" />
