@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Data.AppConfiguration" Version="1.2.0" />
+    <PackageReference Include="Azure.Data.AppConfiguration" Version="1.2.1" />
     <PackageReference Include="Pulumi.AzureNative" Version="2.6.0" />
   </ItemGroup>
 
