@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnetCoreProjects: ["DemoCode.Utils", "PulumiDemo", "WorkWithTelemetryInDotNET"]
+        dotnetCoreProjects: ["DemoCode.Utils", "WorkWithTelemetryInDotNET"]
 
     steps:
     - uses: actions/checkout@v4
