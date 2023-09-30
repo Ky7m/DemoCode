@@ -46,16 +46,6 @@ updates:
   schedule:
     interval: "daily" 
 
-- package-ecosystem: "nuget"
-  directory: "/PulumiDemo/PulumiDemoTests"
-  schedule:
-    interval: "daily" 
-
-- package-ecosystem: "nuget"
-  directory: "/PulumiDemo/PulumiDemo"
-  schedule:
-    interval: "daily" 
-
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
