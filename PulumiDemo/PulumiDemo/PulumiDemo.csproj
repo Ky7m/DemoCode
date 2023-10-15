@@ -8,7 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Data.AppConfiguration" Version="1.2.1" />
-    <PackageReference Include="Pulumi.AzureNative" Version="2.9.0" />
+    <PackageReference Include="Pulumi" Version="3.57.0" />
+    <PackageReference Include="Pulumi.AzureNative" Version="2.11.0" />
   </ItemGroup>
 
 </Project>

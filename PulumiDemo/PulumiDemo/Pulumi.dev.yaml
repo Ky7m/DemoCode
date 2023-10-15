@@ -1,11 +1,10 @@
 config:
-  CommonInfrastructureTemplate:DefaultLocation: CentralUS
-  CommonInfrastructureTemplate:DefaultName: pulumidemo-app
-  CommonInfrastructureTemplate:StorageAccountName:
-  CommonInfrastructureTemplate:DeploymentRegions:
+  azure-native:location: centralus
+  PulumiDemo:name: pulumidemo
+  PulumiDemo:deploymentRegions:
     - centralus
     - westeurope
-  CommonInfrastructureTemplate:AppSlots:
+  PulumiDemo:appSlots:
     - integration
     - staging
     - qa

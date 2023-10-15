@@ -1,5 +1,7 @@
 using Pulumi;
-using Pulumi.AzureNative.Insights;
+using Pulumi.AzureNative.Insights.V20200202;
+using Pulumi.AzureNative.OperationalInsights;
+using Pulumi.AzureNative.OperationalInsights.Inputs;
 
 namespace PulumiDemo
 {
@@ -7,15 +9,27 @@ namespace PulumiDemo
     {
         [Output] public Output<string> ConnectionString { get; private set; }
         public AppInsightsResource(string resourceName, Input<string> resourceGroupName, ComponentResourceOptions options = null) 
-            : base("resource:azure:app-insights", resourceName, options)
+            : base("pulumidemo:azure:app-insights", resourceName, options)
         {
-            var appInsights = new Component(resourceName, new ComponentArgs
+            var log = new Workspace(resourceName.Replace("appi-","log-"), new()
             {
-                ResourceName = resourceName,
-                ResourceGroupName = resourceGroupName, 
-                Kind = "web"
+                ResourceGroupName = resourceGroupName,
+                Sku = new WorkspaceSkuArgs
+                {
+                    Name = "PerGB2018",
+                },
+                RetentionInDays = 30,
             });
-            ConnectionString = appInsights.ConnectionString;
+            var appi = new Component(resourceName, new ComponentArgs
+            {
+                ResourceGroupName = resourceGroupName, 
+                Kind = "web",
+                ApplicationType = ApplicationType.Web,
+                IngestionMode = IngestionMode.LogAnalytics,
+                WorkspaceResourceId = log.Id
+            });
+            
+            ConnectionString = appi.ConnectionString;
         }
     }
 }
