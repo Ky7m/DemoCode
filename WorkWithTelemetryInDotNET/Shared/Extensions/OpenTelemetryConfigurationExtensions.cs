@@ -3,8 +3,6 @@ using Azure.Monitor.OpenTelemetry.Exporter;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using OpenTelemetry.Extensions.AzureMonitor;
 using OpenTelemetry.Instrumentation.AspNetCore;
 using OpenTelemetry.Instrumentation.Http;
 using OpenTelemetry.Instrumentation.SqlClient;
@@ -72,24 +70,16 @@ public static class OpenTelemetryConfigurationExtensions
             {
                 builder
                     .AddSource(applicationName, MassTransit.Logging.DiagnosticHeaders.DefaultListenerName)
-                    .SetSampler(new AlwaysOffSampler())
+                    .SetSampler(new AlwaysOnSampler())
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddSqlClientInstrumentation();
                 var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
                 if (!string.IsNullOrEmpty(appiConnectionString))
                 {
-                    builder
-                        .SetSampler(sp =>
-                        {
-                            var options = sp.GetRequiredService<IOptionsMonitor<ApplicationInsightsSamplerOptions>>()
-                                .Get(Options.DefaultName);
-                            return new ApplicationInsightsSampler(options);
-                        })
-                        .AddAzureMonitorTraceExporter(x => x.ConnectionString = appiConnectionString);
+                    builder.AddAzureMonitorTraceExporter(x => x.ConnectionString = appiConnectionString);
                 }
-
-                builder.AddJaegerExporter();
+                
                 builder.AddOtlpExporter();
             })
             .WithMetrics(builder =>
