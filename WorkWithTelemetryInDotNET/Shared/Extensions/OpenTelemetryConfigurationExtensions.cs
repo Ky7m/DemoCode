@@ -3,6 +3,7 @@ using Azure.Monitor.OpenTelemetry.Exporter;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using OpenTelemetry.Instrumentation.AspNetCore;
 using OpenTelemetry.Instrumentation.Http;
 using OpenTelemetry.Instrumentation.SqlClient;
@@ -15,7 +16,7 @@ namespace Shared.Extensions;
 [PublicAPI]
 public static class OpenTelemetryConfigurationExtensions
 {
-    public static IServiceCollection AddOpenTelemetrySharedConfiguration(this IServiceCollection services, IConfiguration configuration, string applicationName)
+    public static IServiceCollection AddOpenTelemetryDefaults(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
         services.Configure<AspNetCoreInstrumentationOptions>(options =>
         {
@@ -47,8 +48,8 @@ public static class OpenTelemetryConfigurationExtensions
             
                 if (string.Equals(req.RequestUri?.Host, "localhost", StringComparison.OrdinalIgnoreCase))
                 {
-                    // filter log request to SEQ
-                    return req.RequestUri?.Port != 5341;
+                    // filter log request to SEQ or opentelemetry.proto.collector.logs
+                    return req.RequestUri?.Port != 5341 && req.RequestUri?.Port != 4317;
                 }
             
                 return true;
@@ -62,6 +63,10 @@ public static class OpenTelemetryConfigurationExtensions
             options.SetDbStatementForText = true;
             options.SetDbStatementForStoredProcedure = true;
         });
+        
+        services.Configure<MassTransit.Monitoring.InstrumentationOptions>(_ =>
+        {
+        });
 
         services
             .AddOpenTelemetry()
@@ -69,11 +74,17 @@ public static class OpenTelemetryConfigurationExtensions
             .WithTracing(builder =>
             {
                 builder
-                    .AddSource(applicationName, MassTransit.Logging.DiagnosticHeaders.DefaultListenerName)
-                    .SetSampler(new AlwaysOnSampler())
+                    .AddSource(environment.ApplicationName, MassTransit.Logging.DiagnosticHeaders.DefaultListenerName)
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddSqlClientInstrumentation();
+                
+                if (environment.IsDevelopment())
+                {
+                    // We want to view all traces in development
+                    builder.SetSampler(new AlwaysOnSampler());
+                }
+                
                 var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
                 if (!string.IsNullOrEmpty(appiConnectionString))
                 {
@@ -86,6 +97,7 @@ public static class OpenTelemetryConfigurationExtensions
             {
                 builder
                     .AddMeter(MassTransit.Monitoring.InstrumentationOptions.MeterName)
+                    .AddBuiltInMeters()
                     .AddProcessInstrumentation()
                     .AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()
@@ -118,9 +130,15 @@ public static class OpenTelemetryConfigurationExtensions
         return services;
 
         void ConfigureResource(ResourceBuilder builder) =>
-            builder.AddService(serviceName: applicationName,
+            builder.AddService(serviceName: environment.ApplicationName,
                     serviceVersion: typeof(OpenTelemetryConfigurationExtensions).Assembly.GetName().Version?.ToString() ?? "unknown",
                     serviceInstanceId: Environment.MachineName)
                 .AddTelemetrySdk();
     }
+    
+    private static MeterProviderBuilder AddBuiltInMeters(this MeterProviderBuilder meterProviderBuilder) =>
+        meterProviderBuilder.AddMeter(
+            "Microsoft.AspNetCore.Hosting",
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "System.Net.Http");
 }

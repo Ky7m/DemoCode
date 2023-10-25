@@ -1,19 +1,19 @@
 version: "3.9"
 services:
   rabbitmq:
-      image: rabbitmq:management-alpine
+      image: rabbitmq:3.12.7-management-alpine
       ports:
       - "15672:15672"
       - "5672:5672"
   seq:
-      image: datalust/seq:latest
+      image: datalust/seq:2023.4
       ports:
       - "5341:5341"
       - "15341:80"
       environment:
       - ACCEPT_EULA=Y
   jaeger:
-    image: jaegertracing/all-in-one:latest
+    image: jaegertracing/all-in-one:1.50.0
     environment:
       - METRICS_STORAGE_TYPE=prometheus
       - PROMETHEUS_SERVER_URL=http://prometheus:9090
@@ -27,7 +27,7 @@ services:
       - "14250:14250"
       - "9411:9411"
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:latest
+    image: otel/opentelemetry-collector-contrib:0.88.0
     command: "--config=/etc/otel-collector-config.yml"
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
@@ -41,13 +41,13 @@ services:
     depends_on:
       - jaeger
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.47.2
     volumes:
       - "./prometheus.yml:/etc/prometheus/prometheus.yml"
     ports:
       - "9090:9090"
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:10.2.0
     volumes:
       - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
       - ./dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
@@ -60,7 +60,7 @@ services:
     ports:
       - "3000:3000"
   loki:
-    image: grafana/loki:latest
+    image: grafana/loki:main-60ea954
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - ./loki.yml:/etc/loki/local-config.yaml

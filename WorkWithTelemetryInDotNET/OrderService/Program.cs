@@ -2,14 +2,14 @@ using OrderService;
 using Shared.Extensions;
 
 var host = Host.CreateDefaultBuilder(args)
-    .UseSharedSerilogConfiguration()
+    .UseSerilogDefaults()
     .ConfigureServices((context, services) =>
         services
             .AddMassTransitSharedConfiguration(x =>
             {
                 x.AddConsumer<OrderConsumer>();
             })    
-            .AddOpenTelemetrySharedConfiguration(context.Configuration, context.HostingEnvironment.ApplicationName)
+            .AddOpenTelemetryDefaults(context.Configuration, context.HostingEnvironment)
     )
     .Build();
 

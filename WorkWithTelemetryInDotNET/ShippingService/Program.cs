@@ -2,7 +2,7 @@ using Shared.Extensions;
 using ShippingService;
 
 var host = Host.CreateDefaultBuilder(args)
-    .UseSharedSerilogConfiguration()
+    .UseSerilogDefaults()
     .ConfigureServices((context, services) =>
         services
             .AddMassTransitSharedConfiguration(x =>
@@ -10,7 +10,7 @@ var host = Host.CreateDefaultBuilder(args)
                 x.AddConsumer<OrderPlacedConsumer>()
                     .Endpoint(x => x.Name = "shipping");
             })
-            .AddOpenTelemetrySharedConfiguration(context.Configuration, context.HostingEnvironment.ApplicationName)
+            .AddOpenTelemetryDefaults(context.Configuration, context.HostingEnvironment)
     )
     .Build();
 

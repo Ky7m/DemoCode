@@ -20,7 +20,7 @@ namespace Shared.Extensions;
 [PublicAPI]
 public static class SerilogConfigurationExtensions
 {
-    public static IHostBuilder UseSharedSerilogConfiguration(this IHostBuilder builder)
+    public static IHostBuilder UseSerilogDefaults(this IHostBuilder builder)
     {
         return builder.UseSerilog((context, services, configuration) =>
         {

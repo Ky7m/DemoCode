@@ -17,9 +17,9 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Host
-        .UseSharedSerilogConfiguration();
+        .UseSerilogDefaults();
 
-    builder.Services.AddOpenTelemetrySharedConfiguration(builder.Configuration, builder.Environment.ApplicationName);
+    builder.Services.AddOpenTelemetryDefaults(builder.Configuration, builder.Environment);
     builder.Services.AddMassTransitSharedConfiguration();
     builder.Services.AddHttpLogging(logging =>
     {
