@@ -10,6 +10,7 @@ using OpenTelemetry.Instrumentation.SqlClient;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Shared.Metrics;
 
 namespace Shared.Extensions;
 
@@ -96,7 +97,7 @@ public static class OpenTelemetryConfigurationExtensions
             .WithMetrics(builder =>
             {
                 builder
-                    .AddMeter(MassTransit.Monitoring.InstrumentationOptions.MeterName)
+                    .AddMeter(MassTransit.Monitoring.InstrumentationOptions.MeterName, OrderMetrics.MeterName)
                     .AddBuiltInMeters()
                     .AddProcessInstrumentation()
                     .AddRuntimeInstrumentation()

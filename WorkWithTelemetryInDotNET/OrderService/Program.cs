@@ -1,5 +1,6 @@
 using OrderService;
 using Shared.Extensions;
+using Shared.Metrics;
 
 var host = Host.CreateDefaultBuilder(args)
     .UseSerilogDefaults()
@@ -10,6 +11,7 @@ var host = Host.CreateDefaultBuilder(args)
                 x.AddConsumer<OrderConsumer>();
             })    
             .AddOpenTelemetryDefaults(context.Configuration, context.HostingEnvironment)
+            .AddSingleton<OrderMetrics>()
     )
     .Build();
 

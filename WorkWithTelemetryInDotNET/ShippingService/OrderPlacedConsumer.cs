@@ -5,18 +5,11 @@ using Shared.Contracts;
 namespace ShippingService;
 
 [UsedImplicitly]
-public class OrderPlacedConsumer : IConsumer<OrderPlaced>
+public class OrderPlacedConsumer(ILogger<OrderPlacedConsumer> logger) : IConsumer<OrderPlaced>
 {
-    private readonly ILogger<OrderPlacedConsumer> _logger;
-
-    public OrderPlacedConsumer(ILogger<OrderPlacedConsumer> logger)
-    {
-        _logger = logger;
-    }
-
     public Task Consume(ConsumeContext<OrderPlaced> context)
     {
-        _logger.LogInformation("ShippingService has received OrderPlaced, OrderId = {OrderId}", context.Message.OrderId);
+        logger.LogInformation("ShippingService has received OrderPlaced, OrderId = {OrderId}", context.Message.OrderId);
         return Task.CompletedTask;
     }
 }
