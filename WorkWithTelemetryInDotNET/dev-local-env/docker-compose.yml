@@ -13,7 +13,7 @@ services:
       environment:
       - ACCEPT_EULA=Y
   jaeger:
-    image: jaegertracing/all-in-one:1.50.0
+    image: jaegertracing/all-in-one:1.51
     environment:
       - METRICS_STORAGE_TYPE=prometheus
       - PROMETHEUS_SERVER_URL=http://prometheus:9090
@@ -37,7 +37,6 @@ services:
       - "8889:8889"   # Prometheus exporter metrics
       - "13133:13133" # health_check extension
       - "4317:4317"   # OTLP gRPC receiver
-      - "55679:55679" # zpages extension
     depends_on:
       - jaeger
   prometheus:
@@ -47,7 +46,7 @@ services:
     ports:
       - "9090:9090"
   grafana:
-    image: grafana/grafana:10.2.0
+    image: grafana/grafana:10.2.1
     volumes:
       - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
       - ./dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
@@ -60,7 +59,7 @@ services:
     ports:
       - "3000:3000"
   loki:
-    image: grafana/loki:main-60ea954
+    image: grafana/loki:main-3a7b5d2
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - ./loki.yml:/etc/loki/local-config.yaml

@@ -1,7 +1,7 @@
-FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
+FROM mcr.microsoft.com/dotnet/runtime:8.0 AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0.403 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0.100 AS build
 WORKDIR /src
 COPY ["OrderGenerator/OrderGenerator.csproj", "OrderGenerator/"]
 RUN dotnet restore "OrderGenerator/OrderGenerator.csproj"
