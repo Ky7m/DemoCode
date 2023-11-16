@@ -11,7 +11,6 @@ public class OrderConsumer(ILogger<OrderConsumer> logger, OrderMetrics orderMetr
     public async Task Consume(ConsumeContext<PlaceOrder> context)
     {
         logger.LogInformation("Received PlaceOrder, OrderId = {OrderId}", context.Message.OrderId);
-        orderMetrics.Increment();
 
         // This is normally where some business logic would occur
         await Task.Delay(TimeSpan.FromSeconds(5), context.CancellationToken);
@@ -28,7 +27,7 @@ public class OrderConsumer(ILogger<OrderConsumer> logger, OrderMetrics orderMetr
         };
 
         logger.LogInformation("Publishing OrderPlaced, OrderId = {OrderId}", context.Message.OrderId);
-
+        orderMetrics.Increment();
         await context.Publish(orderPlaced);
     }
 
