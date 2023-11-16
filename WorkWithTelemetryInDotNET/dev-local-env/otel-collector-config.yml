@@ -10,8 +10,13 @@ exporters:
 
   debug:
 
-  otlp:
+  otlp/jaeger:
     endpoint: "jaeger:4317"
+    tls:
+      insecure: true
+      
+  otlp/aspire:
+    endpoint: "aspire:18889"
     tls:
       insecure: true
   
@@ -37,7 +42,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug, otlp]
+      exporters: [debug, otlp/jaeger]
     metrics:
       receivers: [otlp]
       processors: [batch]
