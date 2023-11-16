@@ -6,18 +6,24 @@ using Shared.Contracts;
 namespace BillingService;
 
 [UsedImplicitly]
-public partial class OrderPlacedConsumer(ILogger<OrderPlacedConsumer> logger) : IConsumer<OrderPlaced>
+public class OrderPlacedConsumer(ILogger<OrderPlacedConsumer> logger) : IConsumer<OrderPlaced>
 {
-    [LoggerMessage(Level = LogLevel.Information, Message = "BillingService has received OrderPlaced, OrderId = {OrderId}")]
-    public static partial void LogOrderReceivedEvent(ILogger logger, Guid orderId);
-
     public Task Consume(ConsumeContext<OrderPlaced> context)
     {
-        if (logger.IsEnabled(LogLevel.Information))
-        {
-            LogOrderReceivedEvent(logger, context.Message.OrderId);
-        }
-        Activity.Current?.AddTag("payment.transaction.id", Guid.NewGuid().ToString());
+        var paymentMethod = Random.Shared.GetItems(["CreditCard", "PayPal", "Invoice"],1)[0];
+        var paymentTransactionInfo = new PaymentTransactionInfo(Guid.NewGuid(), paymentMethod);
+        
+        logger.LogOrderPaymentInfo(context.Message.OrderId, paymentTransactionInfo);
+        
+        Activity.Current?.AddTag("payment.transaction.id", paymentTransactionInfo.TransactionId);
         return Task.CompletedTask;
     }
+}
+
+public record PaymentTransactionInfo(Guid TransactionId, string PaymentMethod);
+
+public static partial class LoggerExtensions
+{
+    [LoggerMessage(Level = LogLevel.Information, Message = "BillingService has received OrderPlaced, OrderId = {OrderId}")]
+    public static partial void LogOrderPaymentInfo(this ILogger logger, Guid orderId, [LogProperties] PaymentTransactionInfo paymentTransactionInfo);
 }

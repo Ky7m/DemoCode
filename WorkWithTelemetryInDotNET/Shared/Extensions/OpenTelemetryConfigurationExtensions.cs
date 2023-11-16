@@ -97,8 +97,8 @@ public static class OpenTelemetryConfigurationExtensions
             .WithMetrics(builder =>
             {
                 builder
-                    .AddMeter(MassTransit.Monitoring.InstrumentationOptions.MeterName, OrderMetrics.MeterName)
-                    .AddBuiltInMeters()
+                    .AddMeter(MassTransit.Monitoring.InstrumentationOptions.MeterName)
+                    .AddMeter(OrderMetrics.MeterName)
                     .AddProcessInstrumentation()
                     .AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()
@@ -136,10 +136,4 @@ public static class OpenTelemetryConfigurationExtensions
                     serviceInstanceId: Environment.MachineName)
                 .AddTelemetrySdk();
     }
-    
-    private static MeterProviderBuilder AddBuiltInMeters(this MeterProviderBuilder meterProviderBuilder) =>
-        meterProviderBuilder.AddMeter(
-            "Microsoft.AspNetCore.Hosting",
-            "Microsoft.AspNetCore.Server.Kestrel",
-            "System.Net.Http");
 }
