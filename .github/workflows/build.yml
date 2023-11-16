@@ -29,6 +29,7 @@ jobs:
         dotnet-version: | 
           6.x
           7.x
+          8.x
     - name: Initialize CodeQL
       if: matrix.operating-system == 'ubuntu-latest' 
       uses: github/codeql-action/init@v2
