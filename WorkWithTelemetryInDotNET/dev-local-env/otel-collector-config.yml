@@ -14,11 +14,6 @@ exporters:
     endpoint: "jaeger:4317"
     tls:
       insecure: true
-      
-  otlp/aspire:
-    endpoint: "aspire:18889"
-    tls:
-      insecure: true
   
   loki:
     endpoint: "http://loki:3100/loki/api/v1/push"

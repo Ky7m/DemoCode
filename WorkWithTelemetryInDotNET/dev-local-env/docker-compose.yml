@@ -65,13 +65,4 @@ services:
     volumes:
       - ./loki.yml:/etc/loki/local-config.yaml
     ports:
-      - "3100:3100" 
-#  aspire:
-#    build:
-#      context: ../
-#      dockerfile: AppHost/Dockerfile
-#    environment:
-#      - DOTNET_DASHBOARD_OTLP_ENDPOINT_URL=http://0.0.0.0:18889
-#      - ASPNETCORE_URLS=http://0.0.0.0:18888
-#    ports:
-#      - "18888:18888"
+      - "3100:3100"
