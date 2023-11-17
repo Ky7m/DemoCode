@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 
 namespace Shared.Metrics;
@@ -14,8 +15,8 @@ public sealed class OrderMetrics
         _orderPlacedCounter = meter.CreateCounter<int>("Placed Orders", "{orders}", "Number of orders placed");
     }
     
-    public void Increment()
+    public void Increment(string productType)
     {
-        _orderPlacedCounter.Add(1);
+        _orderPlacedCounter.Add(1, new KeyValuePair<string, object>("product.type", productType));
     }
 }

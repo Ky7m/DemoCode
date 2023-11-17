@@ -16,10 +16,11 @@ public class OrderConsumer(ILogger<OrderConsumer> logger, OrderMetrics orderMetr
         await Task.Delay(TimeSpan.FromSeconds(5), context.CancellationToken);
 
         // test throwing transient exceptions
-        if (Random.Shared.Next(0, 5) == 0)
+        if (Random.Shared.Next(0, 10) == 0)
         {
             throw new Exception("Oops:" + context.Message.OrderId);
         }
+        var orderType = Random.Shared.GetItems(["Book", "Toy", "Game"], 1)[0];
 
         var orderPlaced = new OrderPlaced
         {
@@ -27,7 +28,7 @@ public class OrderConsumer(ILogger<OrderConsumer> logger, OrderMetrics orderMetr
         };
 
         logger.LogInformation("Publishing OrderPlaced, OrderId = {OrderId}", context.Message.OrderId);
-        orderMetrics.Increment();
+        orderMetrics.Increment(orderType);
         await context.Publish(orderPlaced);
     }
 
