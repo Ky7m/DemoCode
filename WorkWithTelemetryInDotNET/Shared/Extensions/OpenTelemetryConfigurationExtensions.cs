@@ -1,5 +1,4 @@
 using System;
-using Azure.Monitor.OpenTelemetry.Exporter;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,18 +38,10 @@ public static class OpenTelemetryConfigurationExtensions
         {
             options.FilterHttpRequestMessage = req =>
             {
-                // filter app insights
-                if (string.Equals(req.RequestUri?.Host, "dc.services.visualstudio.com", StringComparison.OrdinalIgnoreCase)
-                    ||
-                    req.RequestUri?.Host.Contains("applicationinsights.azure.com", StringComparison.OrdinalIgnoreCase) == true)
-                {
-                    return false;
-                }
-            
                 if (string.Equals(req.RequestUri?.Host, "localhost", StringComparison.OrdinalIgnoreCase))
                 {
-                    // filter log request to SEQ or opentelemetry.proto.collector.logs
-                    return req.RequestUri?.Port != 5341 && req.RequestUri?.Port != 4317;
+                    // filter log request to opentelemetry.proto.collector.logs
+                    return req.RequestUri?.Port != 4317;
                 }
             
                 return true;
@@ -86,12 +77,6 @@ public static class OpenTelemetryConfigurationExtensions
                     builder.SetSampler(new AlwaysOnSampler());
                 }
                 
-                var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
-                if (!string.IsNullOrEmpty(appiConnectionString))
-                {
-                    builder.AddAzureMonitorTraceExporter(x => x.ConnectionString = appiConnectionString);
-                }
-                
                 builder.AddOtlpExporter();
             })
             .WithMetrics(builder =>
@@ -103,11 +88,6 @@ public static class OpenTelemetryConfigurationExtensions
                     .AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation();
-                var appiConnectionString = configuration.GetValue<string>("ApplicationInsights:ConnectionString");
-                if (!string.IsNullOrEmpty(appiConnectionString))
-                {
-                    builder.AddAzureMonitorMetricExporter(x => x.ConnectionString = appiConnectionString);
-                }
 
                 builder.AddOtlpExporter();
             });

@@ -10,7 +10,7 @@ public class OrderConsumer(ILogger<OrderConsumer> logger, OrderMetrics orderMetr
 {
     public async Task Consume(ConsumeContext<PlaceOrder> context)
     {
-        logger.LogInformation("Received PlaceOrder, OrderId = {OrderId}", context.Message.OrderId);
+        logger.LogInformation("OrderService received PlaceOrder, OrderId = {OrderId}", context.Message.OrderId);
 
         // This is normally where some business logic would occur
         await Task.Delay(TimeSpan.FromSeconds(5), context.CancellationToken);
@@ -27,14 +27,14 @@ public class OrderConsumer(ILogger<OrderConsumer> logger, OrderMetrics orderMetr
             OrderId = context.Message.OrderId
         };
 
-        logger.LogInformation("Publishing OrderPlaced, OrderId = {OrderId}", context.Message.OrderId);
+        logger.LogInformation("OrderService published OrderPlaced, OrderId = {OrderId}", context.Message.OrderId);
         orderMetrics.Increment(orderType);
         await context.Publish(orderPlaced);
     }
 
     public Task Consume(ConsumeContext<CancelOrder> context)
     {
-        logger.LogInformation("Received CancelOrder,OrderId = {OrderId}", context.Message.OrderId);
+        logger.LogInformation("OrderService received CancelOrder, OrderId = {OrderId}", context.Message.OrderId);
         return Task.CompletedTask;
     }
 }

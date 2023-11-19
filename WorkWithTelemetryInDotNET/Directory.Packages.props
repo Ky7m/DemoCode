@@ -23,8 +23,6 @@
     <PackageVersion Include="Serilog.Sinks.OpenTelemetry" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.0.0-beta.8" />
-    <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Telemetry" Version="8.0.0" />
     <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.6.0" />
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.6.0" />

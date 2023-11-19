@@ -24,6 +24,6 @@ public record PaymentTransactionInfo(Guid TransactionId, string PaymentMethod);
 
 public static partial class LoggerExtensions
 {
-    [LoggerMessage(Level = LogLevel.Information, Message = "BillingService has received OrderPlaced, OrderId = {OrderId}")]
+    [LoggerMessage(Level = LogLevel.Information, Message = "BillingService received OrderPlaced, OrderId = {OrderId}")]
     public static partial void LogOrderPaymentInfo(this ILogger logger, Guid orderId, [LogProperties] PaymentTransactionInfo paymentTransactionInfo);
 }

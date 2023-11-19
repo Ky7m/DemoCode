@@ -95,7 +95,7 @@
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "percent"
         },
         "overrides": [
           {
@@ -161,7 +161,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "irate(process_cpu_time_seconds_total{job=\"$job\", instance=\"$instance\"}[$__rate_interval])",
+          "expr": "process_cpu_time_seconds_total{job=\"$job\", instance=\"$instance\"}",
           "legendFormat": "{{exported_job}}{{label_name}}",
           "range": true,
           "refId": "CPU Usage"
@@ -274,7 +274,7 @@
           },
           "editorMode": "code",
           "expr": "max_over_time(process_memory_usage_bytes{job=\"$job\", instance=\"$instance\"}[$__rate_interval])",
-          "legendFormat": "{{exported_job}}",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "Memory Usage"
         }
@@ -339,9 +339,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -380,7 +381,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd",
+            "mode": "palette-classic",
             "seriesBy": "max"
           },
           "custom": {
@@ -468,9 +469,9 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "max_over_time(process_runtime_dotnet_gc_committed_memory_size_bytes{job=\"$job\", instance=\"$instance\"}[$__rate_interval])",
+          "expr": "process_runtime_dotnet_gc_committed_memory_size_bytes{job=\"$job\", instance=\"$instance\"}",
           "hide": false,
-          "legendFormat": "{{exported_job}} - Committed Memory Size",
+          "legendFormat": "Committed Memory Size",
           "range": true,
           "refId": "Committed Memory Size"
         },
@@ -480,8 +481,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "max_over_time(process_runtime_dotnet_gc_objects_size_bytes{job=\"$job\", instance=\"$instance\"}[$__rate_interval])",
-          "legendFormat": "{{exported_job}} - Objects Size",
+          "expr": "process_runtime_dotnet_gc_objects_size_bytes{job=\"$job\", instance=\"$instance\"}",
+          "legendFormat": "Objects Size",
           "range": true,
           "refId": "Objects Size"
         },
@@ -492,10 +493,10 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "irate(process_runtime_dotnet_gc_allocations_size_bytes_total{job=\"$job\", instance=\"$instance\"}[$__rate_interval])",
+          "expr": "process_runtime_dotnet_gc_allocations_size_bytes_total{job=\"$job\", instance=\"$instance\"}",
           "hide": false,
           "instant": false,
-          "legendFormat": "{{exported_job}} - Allocations Size",
+          "legendFormat": "Allocations Size",
           "range": true,
           "refId": "Allocations Size"
         }
@@ -1007,7 +1008,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "idelta(process_runtime_dotnet_gc_collections_count_total{job=\"$job\", instance=\"$instance\"}[$__rate_interval])",
+          "expr": "process_runtime_dotnet_gc_collections_count_total{job=\"$job\", instance=\"$instance\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "{{exported_job}} {{label_name}}",
@@ -1118,13 +1119,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "idelta(process_runtime_dotnet_exceptions_count_total{job=\"$job\", instance=\"$instance\"}[$__rate_interval])",
-          "legendFormat": "{{exported_job}}",
+          "expr": "process_runtime_dotnet_exceptions_count_total{job=\"$job\", instance=\"$instance\"}",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "Exceptions"
         }
       ],
-      "title": "Exceptions",
+      "title": "Total Exceptions",
       "type": "timeseries"
     },
     {
@@ -1173,9 +1174,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -1238,9 +1240,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.2.0",
+      "pluginVersion": "10.2.1",
       "targets": [
         {
           "datasource": {
@@ -1270,14 +1273,14 @@
       {
         "current": {
           "selected": false,
-          "text": "otel-collector",
-          "value": "otel-collector"
+          "text": "BillingService",
+          "value": "BillingService"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
         },
-        "definition": "label_values(process_runtime_dotnet_gc_collections_count_total, job)",
+        "definition": "label_values(process_cpu_count,job)",
         "hide": 0,
         "includeAll": false,
         "label": "Job",
@@ -1285,8 +1288,9 @@
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(process_runtime_dotnet_gc_collections_count_total, job)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(process_cpu_count,job)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
         "regex": "",
@@ -1297,14 +1301,14 @@
       {
         "current": {
           "selected": false,
-          "text": "otel-collector:8889",
-          "value": "otel-collector:8889"
+          "text": "C02FRHNUMD6M",
+          "value": "C02FRHNUMD6M"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
         },
-        "definition": "label_values(process_runtime_dotnet_gc_collections_count_total{job=~\"$job\"}, instance)",
+        "definition": "label_values(process_cpu_count{job=~\"$job\"},instance)",
         "hide": 0,
         "includeAll": false,
         "label": "Instance",
@@ -1312,8 +1316,9 @@
         "name": "instance",
         "options": [],
         "query": {
-          "query": "label_values(process_runtime_dotnet_gc_collections_count_total{job=~\"$job\"}, instance)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(process_cpu_count{job=~\"$job\"},instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
         "regex": "",

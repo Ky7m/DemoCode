@@ -53,7 +53,7 @@ try
         {
             OrderId = Guid.NewGuid()
         };
-        app.Logger.LogInformation("Sending PlaceOrder command via WebAPI, OrderId = {OrderId}", command.OrderId);
+        app.Logger.LogInformation("/api/orders sent PlaceOrder command, OrderId = {OrderId}", command.OrderId);
         await bus.Publish(command);
         return Results.Ok(command);
     });

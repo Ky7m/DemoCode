@@ -20,7 +20,7 @@ public class OrderGeneratorWorker(ILogger<OrderGeneratorWorker> logger, IBus bus
                 await CancelOrder(orderId);
             }
 
-            await Task.Delay(TimeSpan.FromMilliseconds(500), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
         }
     }
 
@@ -30,7 +30,7 @@ public class OrderGeneratorWorker(ILogger<OrderGeneratorWorker> logger, IBus bus
         {
             OrderId = orderId
         };
-        logger.LogInformation("Sending PlaceOrder, OrderId = {OrderId}", orderId);
+        logger.LogInformation("OrderGenerator sent PlaceOrder, OrderId = {OrderId}", orderId);
         return bus.Publish(message);
     }
 
@@ -40,7 +40,7 @@ public class OrderGeneratorWorker(ILogger<OrderGeneratorWorker> logger, IBus bus
         {
             OrderId = orderId
         };
-        logger.LogInformation("Sending CancelOrder, OrderId = {OrderId}", orderId);
+        logger.LogInformation("OrderGenerator sent CancelOrder, OrderId = {OrderId}", orderId);
         return bus.Publish(message);
     }
 }

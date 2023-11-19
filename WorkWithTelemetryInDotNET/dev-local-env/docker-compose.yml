@@ -5,45 +5,23 @@ services:
       ports:
       - "15672:15672"
       - "5672:5672"
-  seq:
-      image: datalust/seq:2023.4
-      ports:
-      - "5341:5341"
-      - "15341:80"
-      environment:
-      - ACCEPT_EULA=Y
-  jaeger:
-    image: jaegertracing/all-in-one:1.51
-    environment:
-      - METRICS_STORAGE_TYPE=prometheus
-      - PROMETHEUS_SERVER_URL=http://prometheus:9090
-      - PROMETHEUS_QUERY_SUPPORT_SPANMETRICS_CONNECTOR=true
-      - JAEGER_DISABLED=true
-    ports:
-      - "6831:6831/udp"
-      - "6832:6832/udp"
-      - "5778:5778"
-      - "16686:16686"
-      - "14268:14268"
-      - "14250:14250"
-      - "9411:9411"
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.88.0
+    image: otel/opentelemetry-collector-contrib:0.89.0
     command: "--config=/etc/otel-collector-config.yml"
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
     ports:
       - "1888:1888"   # pprof extension
-      - "8888:8888"   # Prometheus metrics exposed by the collector
-      - "8889:8889"   # Prometheus exporter metrics
       - "13133:13133" # health_check extension
       - "4317:4317"   # OTLP gRPC receiver
-    depends_on:
-      - jaeger
   prometheus:
-    image: prom/prometheus:v2.47.2
+    image: prom/prometheus:v2.48.0
+    command:
+      - --config.file=/etc/prometheus.yaml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=exemplar-storage
     volumes:
-      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "./prometheus.yml:/etc/prometheus.yaml"
     ports:
       - "9090:9090"
   grafana:
@@ -57,6 +35,7 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor
     ports:
       - "3000:3000"
   loki:
@@ -66,3 +45,10 @@ services:
       - ./loki.yml:/etc/loki/local-config.yaml
     ports:
       - "3100:3100"
+  tempo:
+    image: grafana/tempo:main-44761ce
+    command: -config.file=/etc/tempo.yaml
+    volumes:
+      - ./tempo.yml:/etc/tempo.yaml
+    ports:
+      - "3200:3200"

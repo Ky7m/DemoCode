@@ -5,22 +5,21 @@ receivers:
       http:
 
 exporters:
-  prometheus:
-    endpoint: "0.0.0.0:8889"
-
   debug:
-
-  otlp/jaeger:
-    endpoint: "jaeger:4317"
+  
+  prometheusremotewrite:
+    endpoint: "http://prometheus:9090/api/v1/write"
+    tls:
+      insecure: true
+    
+  otlp/tempo:
+    endpoint: "tempo:4317"
     tls:
       insecure: true
   
   loki:
     endpoint: "http://loki:3100/loki/api/v1/push"
     
-  otlphttp:
-    endpoint: "http://seq:5341/ingest/otlp"
-
 processors:
   batch:
     
@@ -37,11 +36,11 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug, otlp/jaeger]
+      exporters: [debug, otlp/tempo]
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug, prometheus]
+      exporters: [debug, prometheusremotewrite]
     logs:
       receivers: [otlp]
-      exporters: [debug, loki, otlphttp]
+      exporters: [debug, loki]
