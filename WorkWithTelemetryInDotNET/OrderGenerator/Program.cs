@@ -62,13 +62,6 @@ try
 }
 catch (Exception ex)
 {
-    // https://githubmemory.com/repo/dotnet/runtime/issues/60600
-    var type = ex.GetType().Name;
-    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
-    {
-        throw;
-    }
-
     Log.Fatal(ex, "An unhandled exception occured during bootstrapping");
 }
 finally
