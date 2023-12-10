@@ -18,7 +18,7 @@ public static class OpenTelemetryConfigurationExtensions
 {
     public static IServiceCollection AddOpenTelemetryDefaults(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
-        services.Configure<AspNetCoreInstrumentationOptions>(options =>
+        services.Configure<AspNetCoreTraceInstrumentationOptions>(options =>
         {
             options.Filter = httpContext =>
             {
@@ -34,7 +34,7 @@ public static class OpenTelemetryConfigurationExtensions
             options.RecordException = true;
         });
 
-        services.Configure<HttpClientInstrumentationOptions>(options =>
+        services.Configure<HttpClientTraceInstrumentationOptions>(options =>
         {
             options.FilterHttpRequestMessage = req =>
             {

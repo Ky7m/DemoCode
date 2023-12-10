@@ -6,7 +6,7 @@ services:
       - "15672:15672"
       - "5672:5672"
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.89.0
+    image: otel/opentelemetry-collector-contrib:0.90.1
     command: "--config=/etc/otel-collector-config.yml"
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
@@ -15,7 +15,7 @@ services:
       - "13133:13133" # health_check extension
       - "4317:4317"   # OTLP gRPC receiver
   prometheus:
-    image: prom/prometheus:v2.48.0
+    image: prom/prometheus:v2.48.1
     command:
       - --config.file=/etc/prometheus.yaml
       - --web.enable-remote-write-receiver
@@ -25,7 +25,7 @@ services:
     ports:
       - "9090:9090"
   grafana:
-    image: grafana/grafana:10.2.1
+    image: grafana/grafana:10.2.2
     volumes:
       - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
       - ./dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
@@ -39,14 +39,14 @@ services:
     ports:
       - "3000:3000"
   loki:
-    image: grafana/loki:main-3a7b5d2
+    image: grafana/loki:main-5e34967
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - ./loki.yml:/etc/loki/local-config.yaml
     ports:
       - "3100:3100"
   tempo:
-    image: grafana/tempo:main-44761ce
+    image: grafana/tempo:main-6872df7
     command: -config.file=/etc/tempo.yaml
     volumes:
       - ./tempo.yml:/etc/tempo.yaml
