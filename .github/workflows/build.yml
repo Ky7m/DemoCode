@@ -32,7 +32,7 @@ jobs:
           8.x
     - name: Initialize CodeQL
       if: matrix.operating-system == 'ubuntu-latest' 
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: 'csharp'
     - name: Install dependencies
@@ -41,6 +41,6 @@ jobs:
       run: dotnet build ${{ matrix.dotnetCoreProjects }} /p:UseSharedCompilation=false --configuration Release --no-restore
     - name: Perform CodeQL Analysis
       if: matrix.operating-system == 'ubuntu-latest'
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
     - name: Test
       run: dotnet test ${{ matrix.dotnetCoreProjects }} --no-restore --verbosity normal
