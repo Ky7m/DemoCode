@@ -4,7 +4,7 @@
       <settings>
         <option name="envFilePath" value="" />
         <option name="commandLineOptions" value="--build" />
-        <option name="sourceFilePath" value="dev-local-env/docker-compose.yml" />
+        <option name="sourceFilePath" value=".devcontainer/docker-compose.yml" />
       </settings>
     </deployment>
     <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />

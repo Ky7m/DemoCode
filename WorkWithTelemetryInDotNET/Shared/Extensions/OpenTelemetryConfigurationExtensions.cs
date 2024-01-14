@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenTelemetry.Instrumentation.AspNetCore;
 using OpenTelemetry.Instrumentation.Http;
-using OpenTelemetry.Instrumentation.SqlClient;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -49,13 +48,6 @@ public static class OpenTelemetryConfigurationExtensions
             options.RecordException = true;
         });
         
-        services.Configure<SqlClientInstrumentationOptions>(options =>
-        {
-            options.RecordException = true;
-            options.SetDbStatementForText = true;
-            options.SetDbStatementForStoredProcedure = true;
-        });
-        
         services.Configure<MassTransit.Monitoring.InstrumentationOptions>(_ =>
         {
         });
@@ -68,8 +60,7 @@ public static class OpenTelemetryConfigurationExtensions
                 builder
                     .AddSource(environment.ApplicationName, MassTransit.Logging.DiagnosticHeaders.DefaultListenerName)
                     .AddAspNetCoreInstrumentation()
-                    .AddHttpClientInstrumentation()
-                    .AddSqlClientInstrumentation();
+                    .AddHttpClientInstrumentation();
                 
                 if (environment.IsDevelopment())
                 {

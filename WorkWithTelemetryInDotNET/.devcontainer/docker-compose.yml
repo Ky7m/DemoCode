@@ -1,5 +1,12 @@
 version: "3.9"
 services:
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/dotnet:8.0
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+    network_mode: host
+    volumes:
+      - ../..:/workspaces:cached
   rabbitmq:
       image: rabbitmq:3.12.10-management-alpine
       ports:
