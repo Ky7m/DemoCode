@@ -1,6 +1,6 @@
 {
   "name": "WorkWithTelemetryInDotNET",
-  "dockerComposeFile": "docker-compose.yml",
+  "dockerComposeFile": ["docker-compose.yml", "docker-compose.dev.yml"],
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "hostRequirements": {
@@ -20,7 +20,8 @@
     "vscode": {
       "extensions": [
         "ms-dotnettools.vscode-dotnet-runtime",
-        "ms-dotnettools.csdevkit"
+        "ms-dotnettools.csdevkit",
+        "ms-azuretools.vscode-docker"
       ]
     }
   },

@@ -1,14 +1,7 @@
 version: "3.9"
 services:
-  devcontainer:
-    image: mcr.microsoft.com/devcontainers/dotnet:8.0
-    # Overrides default command so things don't shut down after the process ends.
-    command: sleep infinity
-    network_mode: host
-    volumes:
-      - ../..:/workspaces:cached
   rabbitmq:
-      image: rabbitmq:3.12.10-management-alpine
+      image: rabbitmq:3.12-management-alpine
       ports:
       - "15672:15672"
       - "5672:5672"
@@ -22,7 +15,7 @@ services:
       - "13133:13133" # health_check extension
       - "4317:4317"   # OTLP gRPC receiver
   prometheus:
-    image: prom/prometheus:v2.48.1
+    image: prom/prometheus:v2.49.1
     command:
       - --config.file=/etc/prometheus.yaml
       - --web.enable-remote-write-receiver
@@ -32,7 +25,7 @@ services:
     ports:
       - "9090:9090"
   grafana:
-    image: grafana/grafana:10.2.3
+    image: grafana/grafana:10.3.1
     volumes:
       - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
       - ./dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
@@ -46,14 +39,14 @@ services:
     ports:
       - "3000:3000"
   loki:
-    image: grafana/loki:main-76bf505
+    image: grafana/loki:main-a24bd1e
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - ./loki.yml:/etc/loki/local-config.yaml
     ports:
       - "3100:3100"
   tempo:
-    image: grafana/tempo:main-3cc44fc
+    image: grafana/tempo:main-9d82759
     command: -config.file=/etc/tempo.yaml
     volumes:
       - ./tempo.yml:/etc/tempo.yaml

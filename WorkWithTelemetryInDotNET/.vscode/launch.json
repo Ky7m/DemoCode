@@ -1,0 +1,73 @@
+{
+    "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "Run All",
+            "configurations": [
+                "OrderGenerator",
+                "OrderService",
+                "BillingService",
+                "ShippingService"
+            ],
+            "stopAll": true
+        }
+    ],
+    "configurations": [
+        {
+            "name": "OrderGenerator",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/OrderGenerator/bin/Debug/net8.0/OrderGenerator.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/OrderGenerator",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "BillingService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/BillingService/bin/Debug/net8.0/BillingService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/BillingService",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "OrderService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/OrderService/bin/Debug/net8.0/OrderService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/OrderService",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "ShippingService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/ShippingService/bin/Debug/net8.0/ShippingService.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/ShippingService",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        }
+    ]
+}
