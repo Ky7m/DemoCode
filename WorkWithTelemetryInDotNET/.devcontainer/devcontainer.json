@@ -14,7 +14,8 @@
       "version": "none",
       "dotnetRuntimeVersions": "7.0",
       "aspNetCoreRuntimeVersions": "7.0"
-    }
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   },
   "customizations": {
     "vscode": {
