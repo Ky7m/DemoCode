@@ -17,6 +17,11 @@ exporters:
     tls:
       insecure: true
   
+  otlp/aspire:
+    endpoint: "aspire-dashboard:18889"
+    tls:
+      insecure: true
+  
   loki:
     endpoint: "http://loki:3100/loki/api/v1/push"
     
@@ -36,11 +41,11 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug, otlp/tempo]
+      exporters: [debug, otlp/tempo, otlp/aspire]
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug, prometheusremotewrite]
+      exporters: [debug, prometheusremotewrite, otlp/aspire]
     logs:
       receivers: [otlp]
-      exporters: [debug, loki]
+      exporters: [debug, loki, otlp/aspire]

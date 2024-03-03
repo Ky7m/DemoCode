@@ -6,7 +6,7 @@ services:
       - "15672:15672"
       - "5672:5672"
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.91.0
+    image: otel/opentelemetry-collector-contrib:0.95.0
     command: "--config=/etc/otel-collector-config.yml"
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
@@ -15,7 +15,7 @@ services:
       - "13133:13133" # health_check extension
       - "4317:4317"   # OTLP gRPC receiver
   prometheus:
-    image: prom/prometheus:v2.49.1
+    image: prom/prometheus:v2.50.1
     command:
       - --config.file=/etc/prometheus.yaml
       - --web.enable-remote-write-receiver
@@ -25,7 +25,7 @@ services:
     ports:
       - "9090:9090"
   grafana:
-    image: grafana/grafana:10.3.1
+    image: grafana/grafana:10.3.3
     volumes:
       - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml
       - ./dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
@@ -46,9 +46,13 @@ services:
     ports:
       - "3100:3100"
   tempo:
-    image: grafana/tempo:main-9d82759
+    image: grafana/tempo:main-23f9d00
     command: -config.file=/etc/tempo.yaml
     volumes:
       - ./tempo.yml:/etc/tempo.yaml
     ports:
       - "3200:3200"
+  aspire-dashboard:
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.4
+    ports:
+      - "18888:18888"
