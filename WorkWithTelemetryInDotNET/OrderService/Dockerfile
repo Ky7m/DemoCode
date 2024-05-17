@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled AS base
 USER $APP_UID
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0.101-jammy AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0.300-jammy AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["OrderService/OrderService.csproj", "OrderService/"]
