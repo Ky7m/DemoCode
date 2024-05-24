@@ -3,6 +3,8 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using OpenTelemetry;
 using OpenTelemetry.Instrumentation.AspNetCore;
 using OpenTelemetry.Instrumentation.Http;
 using OpenTelemetry.Metrics;
@@ -52,13 +54,23 @@ public static class OpenTelemetryConfigurationExtensions
         {
         });
 
+        services.AddLogging(builder =>
+        {
+            builder.AddOpenTelemetry(logging =>
+            {
+                logging.IncludeFormattedMessage = true;
+                logging.IncludeScopes = true;
+            });
+        });
+
+        var serviceName = environment.ApplicationName;
         services
             .AddOpenTelemetry()
-            .ConfigureResource(ConfigureResource)
+            .ConfigureResource(builder => builder.AddService(serviceName))
             .WithTracing(builder =>
             {
                 builder
-                    .AddSource(environment.ApplicationName, MassTransit.Logging.DiagnosticHeaders.DefaultListenerName)
+                    .AddSource(serviceName, MassTransit.Logging.DiagnosticHeaders.DefaultListenerName)
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation();
                 
@@ -67,8 +79,6 @@ public static class OpenTelemetryConfigurationExtensions
                     // We want to view all traces in development
                     builder.SetSampler(new AlwaysOnSampler());
                 }
-                
-                builder.AddOtlpExporter();
             })
             .WithMetrics(builder =>
             {
@@ -79,32 +89,9 @@ public static class OpenTelemetryConfigurationExtensions
                     .AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation();
-
-                builder.AddOtlpExporter();
-            });
-            
-            // services.AddLogging(builder =>
-            // {
-            //     builder.AddOpenTelemetry(options =>
-            //     {
-            //         var resourceBuilder = ResourceBuilder.CreateDefault();
-            //         ConfigureResource(resourceBuilder);
-            //         options.SetResourceBuilder(resourceBuilder);
-            //         
-            //         options.IncludeFormattedMessage = true;
-            //         options.ParseStateValues = true;
-            //         options.IncludeScopes = true;
-            //
-            //         options.AddOtlpExporter();
-            //     });
-            // });
+            })
+            .UseOtlpExporter();
 
         return services;
-
-        void ConfigureResource(ResourceBuilder builder) =>
-            builder.AddService(serviceName: environment.ApplicationName,
-                    serviceVersion: typeof(OpenTelemetryConfigurationExtensions).Assembly.GetName().Version?.ToString() ?? "unknown",
-                    serviceInstanceId: Environment.MachineName)
-                .AddTelemetrySdk();
     }
 }

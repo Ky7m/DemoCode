@@ -3,7 +3,6 @@ using Shared.Extensions;
 using Shared.Metrics;
 
 var host = Host.CreateDefaultBuilder(args)
-    .UseSerilogDefaults()
     .ConfigureServices((context, services) =>
         services
             .AddMassTransitSharedConfiguration(x =>

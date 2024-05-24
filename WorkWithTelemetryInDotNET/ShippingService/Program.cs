@@ -2,7 +2,6 @@ using Shared.Extensions;
 using ShippingService;
 
 var host = Host.CreateDefaultBuilder(args)
-    .UseSerilogDefaults()
     .ConfigureServices((context, services) =>
         services
             .AddMassTransitSharedConfiguration(x =>

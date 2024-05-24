@@ -2,7 +2,6 @@ using BillingService;
 using Shared.Extensions;
 
 var host = Host.CreateDefaultBuilder(args)
-    .UseSerilogDefaults()
     .ConfigureServices((context, services) =>
         services
             .AddMassTransitSharedConfiguration(x =>
