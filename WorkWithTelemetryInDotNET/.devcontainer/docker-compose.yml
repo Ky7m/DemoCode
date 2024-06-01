@@ -39,14 +39,14 @@ services:
     ports:
       - "3000:3000"
   loki:
-    image: grafana/loki:main-a24bd1e
+    image: grafana/loki:3.0.0
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - ./loki.yml:/etc/loki/local-config.yaml
     ports:
       - "3100:3100"
   tempo:
-    image: grafana/tempo:main-23f9d00
+    image: grafana/tempo:2.5.0
     command: -config.file=/etc/tempo.yaml
     volumes:
       - ./tempo.yml:/etc/tempo.yaml
@@ -56,3 +56,5 @@ services:
     image: mcr.microsoft.com/dotnet/aspire-dashboard:8.0.0
     ports:
       - "18888:18888"
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true

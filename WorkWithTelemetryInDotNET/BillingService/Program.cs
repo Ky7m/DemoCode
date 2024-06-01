@@ -7,7 +7,7 @@ var host = Host.CreateDefaultBuilder(args)
             .AddMassTransitSharedConfiguration(x =>
             {
                 x.AddConsumer<OrderPlacedConsumer>()
-                    .Endpoint(x => x.Name = "billing");
+                    .Endpoint(endpoint => endpoint.Name = "billing");
             })    
             .AddOpenTelemetryDefaults(context.Configuration, context.HostingEnvironment)
     )
