@@ -23,8 +23,4 @@
             <Link>.dockerignore</Link>
         </Content>
     </ItemGroup>
-
-    <ItemGroup>
-      <PackageVersion Update="Microsoft.Extensions.Telemetry" Version="8.5.0" />
-    </ItemGroup>
 </Project>

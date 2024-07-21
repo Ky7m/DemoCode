@@ -66,6 +66,7 @@ public static class OpenTelemetryConfigurationExtensions
         var serviceName = environment.ApplicationName;
         services
             .AddOpenTelemetry()
+            .UseOtlpExporter()
             .ConfigureResource(builder => builder.AddService(serviceName))
             .WithTracing(builder =>
             {
@@ -89,8 +90,7 @@ public static class OpenTelemetryConfigurationExtensions
                     .AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation();
-            })
-            .UseOtlpExporter();
+            });
 
         return services;
     }
