@@ -1,0 +1,48 @@
+﻿
+@page "/acceptTerms"
+@using System.ComponentModel.DataAnnotations
+@attribute [StreamRendering]
+
+@inject ApiServiceClient ApiService
+
+<PageTitle>Accept Terms</PageTitle>
+
+<h1>Accept Terms</h1>
+
+<EditForm Model="Model" OnSubmit="OnSubmitAsync" FormName="AcceptTerms">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label for="fullName" class="form-label">Full Name</label>
+        <InputText id="fullName" class="form-control" @bind-Value="Model!.FullName" />
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <InputText id="email" type="email" class="form-control" @bind-Value="Model!.Email" />
+    </div>
+    <button type="submit" class="btn btn-primary">Accept</button>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private AcceptTermsModel? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+    private async Task OnSubmitAsync()
+    {
+        await ApiService.AcceptTerms(Model?.FullName, Model?.Email);
+        Model = new();
+    }
+
+    public class AcceptTermsModel
+    {
+        [Required]
+        [StringLength(50)]
+        public string? FullName { get; set; }
+        
+        [Required]
+        [EmailAddress]
+        public string? Email { get; set; }
+    }
+}
