@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "aspire-dashboard": {
+      "type": "http",
+      "url": "http://localhost:23250/mcp"
+    }
+  }
+}
