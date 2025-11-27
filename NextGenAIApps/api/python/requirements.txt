@@ -1,0 +1,2 @@
+pandas==2.3.0
+pyahocorasick==2.2.0
