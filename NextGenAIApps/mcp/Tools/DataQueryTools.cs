@@ -47,7 +47,7 @@ public sealed class DataQueryTools(
     {
         var schemaContext = await GetSqlSchemaContextAsync("[dbo].[Images]");
         
-        var agent = chatClient.CreateAIAgent(
+        var agent = chatClient.AsAIAgent(
             name: "NaturalLanguageToSqlAgent",
             instructions:
             $"""
@@ -123,7 +123,7 @@ public sealed class DataQueryTools(
             return "No results found.";
         }
 
-        var agent = chatClient.CreateAIAgent(
+        var agent = chatClient.AsAIAgent(
             name: "SummarizationAgent",
             instructions:
             """
