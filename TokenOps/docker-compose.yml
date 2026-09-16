@@ -1,6 +1,7 @@
 services:
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.160.0
+    restart: unless-stopped
     volumes:
       - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
     ports:
@@ -11,6 +12,7 @@ services:
       - aspire-dashboard
   grafana-lgtm:
     image: grafana/otel-lgtm:0.33.0
+    restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
