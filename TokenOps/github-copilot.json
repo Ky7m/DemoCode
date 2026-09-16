@@ -1222,7 +1222,7 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "Breakdown of Copilot feature usage over the selected range. Uses operation names because the local Prometheus metrics do not expose gen_ai.agent.name.",
+      "description": "Breakdown of Copilot feature/agent usage. Shows which Copilot features (Chat, Edit Agent, Commit Generator, Explore, etc.) are being used most, grouped by gen_ai.agent.name reported on invoke_agent spans.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1271,62 +1271,50 @@
       },
       "id": 8,
       "options": {
-        "barRadius": 0.05,
-        "barWidth": 0.7,
-        "fullHighlight": false,
-        "groupWidth": 0.7,
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value",
+            "percent"
+          ]
         },
-        "orientation": "horizontal",
-        "showValue": "auto",
-        "stacking": "none",
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "sort": "desc",
         "tooltip": {
           "hideZeros": false,
           "mode": "single",
           "sort": "none"
-        },
-        "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 0
+        }
       },
       "pluginVersion": "12.4.3",
       "targets": [
         {
-          "expr": "sort_desc(topk(7, round(sum by (gen_ai_operation_name) (max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range])))) or label_replace((round(sum(sum by (gen_ai_operation_name) (max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))) - sum(topk(7, sum by (gen_ai_operation_name) (max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))))) > 0), \"gen_ai_operation_name\", \"other\", \"\", \"\"))",
+          "expr": "sort_desc(topk(7, round(sum by (gen_ai_agent_name) (max_over_time(gen_ai_invoke_agent_duration_count{gen_ai_agent_name!=\"\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range])))) or label_replace((round(sum(sum by (gen_ai_agent_name) (max_over_time(gen_ai_invoke_agent_duration_count{gen_ai_agent_name!=\"\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))) - sum(topk(7, sum by (gen_ai_agent_name) (max_over_time(gen_ai_invoke_agent_duration_count{gen_ai_agent_name!=\"\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))))) > 0), \"gen_ai_agent_name\", \"other\", \"\", \"\"))",
           "refId": "A",
-          "format": "table",
           "instant": true,
           "range": false,
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "legendFormat": "{{gen_ai_operation_name}}"
-        }
-      ],
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true
-            },
-            "indexByName": {
-              "gen_ai_operation_name": 0,
-              "Value": 1
-            },
-            "renameByName": {
-              "gen_ai_operation_name": "featureName",
-              "Value": "CallCount"
-            }
-          }
+          "legendFormat": "{{gen_ai_agent_name}}"
         }
       ],
       "title": "Copilot Feature Usage",
-      "type": "barchart"
+      "type": "piechart"
     },
     {
       "datasource": {
@@ -2010,7 +1998,15 @@
       "id": 16,
       "options": {
         "cellHeight": "sm",
-        "enablePagination": true,
+        "footer": {
+          "countRows": true,
+          "enablePagination": true,
+          "fields": [],
+          "reducer": [
+            "count"
+          ],
+          "show": true
+        },
         "showHeader": true,
         "sortBy": [
           {
