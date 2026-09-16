@@ -1,0 +1,52 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+      grpc:
+        endpoint: 0.0.0.0:4317
+
+exporters:
+  debug:
+  
+  azure_monitor:
+    connection_string: ""
+
+  otlp/lgtm:
+    endpoint: grafana-lgtm:4317
+    tls:
+      insecure: true
+  
+  prometheus_remote_write:
+    endpoint: http://grafana-lgtm:9090/api/v1/write
+    tls:
+      insecure: true
+    # Keep metric names identical to the OTel names with dots replaced by
+    # underscores. Without this the exporter appends unit and _total suffixes,
+    # and the dashboard queries would have to guess at them.
+    translation_strategy: UnderscoreEscapingWithoutSuffixes
+    resource_to_telemetry_conversion:
+      enabled: false
+
+  otlp/aspire:
+    endpoint: aspire-dashboard:18889
+    tls:
+      insecure: true
+
+processors:
+  batch:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, azure_monitor, otlp/lgtm, otlp/aspire]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, azure_monitor, prometheus_remote_write, otlp/aspire]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug, azure_monitor, otlp/lgtm, otlp/aspire]

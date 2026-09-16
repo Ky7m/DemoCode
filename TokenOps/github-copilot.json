@@ -1,0 +1,2379 @@
+{
+  "__inputs": [
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "barchart",
+      "name": "Bar chart",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.4.3"
+    },
+    {
+      "type": "panel",
+      "id": "piechart",
+      "name": "Pie chart",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "traces",
+      "name": "Traces",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "tempo",
+      "name": "Tempo",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Monitors GitHub Copilot OpenTelemetry telemetry using Prometheus metrics and Tempo traces. Tracks agent operations, token consumption, model latency, tool calls, reliability, and trace drill-down.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Doc",
+      "tooltip": "Documentation",
+      "type": "link",
+      "url": "https://aka.ms/amg/dash-doc/gh-copilot"
+    }
+  ],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "panels": [],
+      "title": "Summary",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "Key performance indicators for agent operations over the selected dashboard time range. Estimated total cost is the sum of github.copilot.nano_aiu span values converted to AI Credits.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Operations"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Input Tokens"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Output Tokens"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Avg Response Time"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sum_over_time"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "si:nAI Credits"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "displayName",
+                "value": "Est. Total Cost"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "metricsQueryType": "instant",
+          "queryType": "traceql",
+          "query": "{ resource.service.name =~ \"${source:regex}\" && span.github.copilot.nano_aiu != nil } | sum_over_time(span.github.copilot.nano_aiu)",
+          "legendFormat": "Est. Total Cost",
+          "refId": "E"
+        },
+        {
+          "expr": "round(sum_over_time((sum(clamp_min(max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) - max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m), 0) or (max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) unless max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m))))[$__range:1m]))",
+          "refId": "A",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Total Operations"
+        },
+        {
+          "expr": "sum_over_time((sum(clamp_min(max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) - max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m), 0) or (max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) unless max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m))))[$__range:1m])",
+          "refId": "B",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Total Input Tokens"
+        },
+        {
+          "expr": "sum_over_time((sum(clamp_min(max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"output\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) - max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"output\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m), 0) or (max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"output\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) unless max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"output\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m))))[$__range:1m])",
+          "refId": "C",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Total Output Tokens"
+        },
+        {
+          "expr": "sum_over_time((sum(clamp_min(max_over_time(gen_ai_client_operation_duration_sum{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) - max_over_time(gen_ai_client_operation_duration_sum{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m), 0) or (max_over_time(gen_ai_client_operation_duration_sum{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) unless max_over_time(gen_ai_client_operation_duration_sum{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m))))[$__range:1m]) / clamp_min(sum_over_time((sum(clamp_min(max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) - max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m), 0) or (max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) unless max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m))))[$__range:1m]), 1e-9)",
+          "refId": "D",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Avg Response Time"
+        }
+      ],
+      "title": "Agent Summary Statistics",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "mixed",
+        "uid": "-- Mixed --"
+      },
+      "description": "LLM calls, chat sessions, tool calls, reasoning calls, and average time to first token over the selected dashboard time range.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "LLM Calls"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Chat Sessions"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "E"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Avg TTFT"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "ms"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Tool Calls"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "D"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Reasoning Calls"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "hide": true,
+          "metricsQueryType": "instant",
+          "query": "{ resource.service.name =~ \"${source:regex}\" && span.gen_ai.response.model != nil } | count_over_time()",
+          "queryType": "traceql",
+          "refId": "L"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$L",
+          "refId": "A",
+          "type": "math"
+        },
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "hide": true,
+          "metricsQueryType": "instant",
+          "query": "{ resource.service.name =~ \"${source:regex}\" && span.gen_ai.conversation.id != nil } | count_over_time() by (span.gen_ai.conversation.id)",
+          "queryType": "traceql",
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "S",
+          "reducer": "last",
+          "refId": "SR",
+          "type": "reduce"
+        },
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "hide": true,
+          "metricsQueryType": "instant",
+          "query": "{ resource.service.name =~ \"${source:regex}\" && span.gen_ai.operation.name = \"execute_tool\" } | count_over_time()",
+          "queryType": "traceql",
+          "refId": "T"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$T",
+          "refId": "C",
+          "type": "math"
+        },
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "hide": true,
+          "metricsQueryType": "instant",
+          "query": "{ resource.service.name =~ \"${source:regex}\" && span.gen_ai.response.model != nil && span.copilot_chat.reasoning_content != nil } | count_over_time()",
+          "queryType": "traceql",
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$R",
+          "refId": "D",
+          "type": "math"
+        },
+        {
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          },
+          "hide": true,
+          "metricsQueryType": "instant",
+          "query": "{ resource.service.name =~ \"${source:regex}\" && span.gen_ai.response.model != nil && span.github.copilot.server_duration != nil } | avg_over_time(span.github.copilot.server_duration)",
+          "queryType": "traceql",
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$F",
+          "refId": "E",
+          "type": "math"
+        }
+      ],
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "SR"
+          },
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "SR"
+          },
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "seriesToRows",
+            "reducers": [
+              "count"
+            ]
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "SR"
+          },
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "SR"
+          },
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Count"
+              ]
+            }
+          }
+        }
+      ],
+      "title": "Chat & Tool Summary",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 101,
+      "panels": [],
+      "title": "Usage Over Time",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Number of operations in each dashboard time interval, grouped by operation type.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "decimals": 0,
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 1,
+      "maxDataPoints": 60,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": true,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "round(sum by (gen_ai_operation_name) (clamp_min(max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) - max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval), 0) or (max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) unless max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval))))",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Count {{gen_ai_operation_name}}"
+        }
+      ],
+      "title": "Operations Over Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Total token consumption (input + output) over time, broken down by model.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "decimals": 0,
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Tokens",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 2,
+      "maxDataPoints": 60,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": true,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "round(sum by (gen_ai_response_model) (clamp_min(max_over_time(gen_ai_client_token_usage_sum{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) - max_over_time(gen_ai_client_token_usage_sum{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval), 0) or (max_over_time(gen_ai_client_token_usage_sum{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) unless max_over_time(gen_ai_client_token_usage_sum{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval)))) > 0",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "TotalTokens {{gen_ai_response_model}}"
+        }
+      ],
+      "title": "Token Consumption Over Time by Model",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 102,
+      "panels": [],
+      "title": "Model Performance",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Breakdown of LLM calls by model. Shows which AI models are being used and how frequently.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 17
+      },
+      "id": 3,
+      "options": {
+        "displayLabels": [
+          "name",
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value",
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "sort": "desc",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "topk(7, round(sum by (gen_ai_response_model) (max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"chat\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))))",
+          "refId": "A",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "{{gen_ai_response_model}}"
+        }
+      ],
+      "title": "Model Usage Distribution",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Average and P90 response duration per response model. Helps identify which models are slower.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 17
+      },
+      "id": 4,
+      "options": {
+        "barRadius": 0.05,
+        "barWidth": 0.7,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "sort_desc(round(1000 * sum by (gen_ai_response_model) (max_over_time(gen_ai_client_operation_duration_sum{gen_ai_operation_name=\"chat\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range])) / clamp_min(sum by (gen_ai_response_model) (max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"chat\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range])), 1e-9)))",
+          "refId": "A",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Avg Duration"
+        },
+        {
+          "expr": "round(1000 * histogram_quantile(0.90, sum by (le, gen_ai_response_model) (max_over_time(gen_ai_client_operation_duration_bucket{gen_ai_operation_name=\"chat\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))))",
+          "refId": "B",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "P90 Duration"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "gen_ai_response_model",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "p": true,
+              "Time": true,
+              "Time 1": true,
+              "Time 2": true
+            },
+            "indexByName": {
+              "gen_ai_response_model": 0,
+              "Value #A": 1,
+              "Value #B": 2,
+              "p": 3
+            },
+            "renameByName": {
+              "gen_ai_response_model": "model",
+              "Value #A": "Avg Duration",
+              "Value #B": "P90 Duration"
+            }
+          }
+        }
+      ],
+      "title": "Response Duration by Model (Avg / P90)",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Time to First Token (TTFT) percentiles per response model. Uses the response-duration fallback when TTFT is not exported with response-model labels.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 17
+      },
+      "id": 5,
+      "options": {
+        "barRadius": 0.05,
+        "barWidth": 0.7,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "round(1000 * histogram_quantile(0.50, sum by (le, gen_ai_response_model) (max_over_time(gen_ai_client_operation_duration_bucket{gen_ai_operation_name=\"chat\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))))",
+          "refId": "A",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "P50 TTFT"
+        },
+        {
+          "expr": "round(1000 * histogram_quantile(0.90, sum by (le, gen_ai_response_model) (max_over_time(gen_ai_client_operation_duration_bucket{gen_ai_operation_name=\"chat\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))))",
+          "refId": "B",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "P90 TTFT"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "gen_ai_response_model",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Time 1": true,
+              "Time 2": true
+            },
+            "indexByName": {
+              "gen_ai_response_model": 0,
+              "Value #A": 1,
+              "Value #B": 2
+            },
+            "renameByName": {
+              "gen_ai_response_model": "model",
+              "Value #A": "P50 TTFT",
+              "Value #B": "P90 TTFT"
+            }
+          }
+        }
+      ],
+      "title": "Time to First Token by Model (P50 / P90)",
+      "type": "barchart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 104,
+      "panels": [],
+      "title": "Agent & Feature Activity",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Breakdown of Copilot feature usage over the selected range. Uses operation names because the local Prometheus metrics do not expose gen_ai.agent.name.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 26
+      },
+      "id": 8,
+      "options": {
+        "barRadius": 0.05,
+        "barWidth": 0.7,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "sort_desc(topk(7, round(sum by (gen_ai_operation_name) (max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range])))) or label_replace((round(sum(sum by (gen_ai_operation_name) (max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))) - sum(topk(7, sum by (gen_ai_operation_name) (max_over_time(gen_ai_client_operation_duration_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))))) > 0), \"gen_ai_operation_name\", \"other\", \"\", \"\"))",
+          "refId": "A",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "{{gen_ai_operation_name}}"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {
+              "gen_ai_operation_name": 0,
+              "Value": 1
+            },
+            "renameByName": {
+              "gen_ai_operation_name": "featureName",
+              "Value": "CallCount"
+            }
+          }
+        }
+      ],
+      "title": "Copilot Feature Usage",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Top tools invoked by Copilot during agent interactions. Shows the top seven tool names over the selected range and groups the remaining tools as other.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 26
+      },
+      "id": 9,
+      "options": {
+        "barRadius": 0.05,
+        "barWidth": 0.7,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "sort_desc(topk(7, round(sum by (gen_ai_tool_name) (max_over_time(github_copilot_tool_call_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range])))) or label_replace((round(sum(sum by (gen_ai_tool_name) (max_over_time(github_copilot_tool_call_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))) - sum(topk(7, sum by (gen_ai_tool_name) (max_over_time(github_copilot_tool_call_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__range]))))) > 0), \"gen_ai_tool_name\", \"other\", \"\", \"\"))",
+          "refId": "A",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "{{gen_ai_tool_name}}"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "indexByName": {
+              "gen_ai_tool_name": 0,
+              "Value": 1
+            },
+            "renameByName": {
+              "gen_ai_tool_name": "toolName",
+              "Value": "CallCount"
+            }
+          }
+        }
+      ],
+      "title": "Top Tool Calls",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Copilot activity over time: chat sessions, LLM calls, and tool calls counted per dashboard interval.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 26
+      },
+      "id": 10,
+      "maxDataPoints": 60,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": true,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "round(sum(clamp_min(max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) - max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval), 0) or (max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) unless max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"invoke_agent\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval))))",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Count Chat Sessions"
+        },
+        {
+          "expr": "round(sum(clamp_min(max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"chat\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) - max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"chat\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval), 0) or (max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"chat\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) unless max_over_time(gen_ai_client_operation_duration_count{gen_ai_operation_name=\"chat\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval))))",
+          "refId": "B",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Count LLM Calls"
+        },
+        {
+          "expr": "round(sum(clamp_min(max_over_time(github_copilot_tool_call_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) - max_over_time(github_copilot_tool_call_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval), 0) or (max_over_time(github_copilot_tool_call_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) unless max_over_time(github_copilot_tool_call_count{job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval))))",
+          "refId": "C",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Count Tool Calls"
+        }
+      ],
+      "title": "Sessions, Turns & Tool Calls Over Time",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "id": 105,
+      "panels": [],
+      "title": "Token Efficiency & Cost",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Detailed breakdown of LLM calls and total input tokens per model over the selected dashboard time range.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TotalInputTokens"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-blues"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 35
+      },
+      "id": 14,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "TotalInputTokens"
+          }
+        ]
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "round(sum by (gen_ai_response_model) (sum_over_time((clamp_min(max_over_time(gen_ai_client_operation_duration_count{gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) - max_over_time(gen_ai_client_operation_duration_count{gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m), 0) or (max_over_time(gen_ai_client_operation_duration_count{gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) unless max_over_time(gen_ai_client_operation_duration_count{gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m)))[$__range:1m])))",
+          "refId": "A",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Calls"
+        },
+        {
+          "expr": "round(sum by (gen_ai_response_model) (sum_over_time((clamp_min(max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) - max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m), 0) or (max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m]) unless max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[1m] offset 1m)))[$__range:1m])))",
+          "refId": "B",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "TotalInputTokens"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "gen_ai_response_model",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Time 1": true,
+              "Time 2": true
+            },
+            "indexByName": {
+              "gen_ai_response_model": 0,
+              "Value #A": 1,
+              "Value #B": 2
+            },
+            "renameByName": {
+              "gen_ai_response_model": "model",
+              "Value #A": "Calls",
+              "Value #B": "TotalInputTokens"
+            }
+          }
+        }
+      ],
+      "title": "Token Usage by Model",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Input vs Output token ratio over time. A high ratio indicates large prompts with relatively small responses, which is typical for code context.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Tokens",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 35
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": true,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "round(sum(clamp_min(max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) - max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval), 0) or (max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) unless max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"input\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval))))",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Input Tokens"
+        },
+        {
+          "expr": "round(sum(clamp_min(max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"output\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) - max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"output\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval), 0) or (max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"output\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval]) unless max_over_time(gen_ai_client_token_usage_sum{gen_ai_token_type=\"output\", gen_ai_response_model=~\".+\", job=~\"${source:regex}\", otel_scope_name=\"github.copilot\"}[$__interval] offset $__interval))))",
+          "refId": "B",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Output Tokens"
+        }
+      ],
+      "title": "Input vs Output Tokens Over Time",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 43
+      },
+      "id": 106,
+      "panels": [],
+      "title": "Errors & Reliability",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Exceptions thrown by Copilot Chat over time. Includes canceled operations, MCP server errors, and other failures.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 44
+      },
+      "id": 11,
+      "maxDataPoints": 60,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": true,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "sum(rate(traces_spanmetrics_calls_total{service=~\"${source:regex}\", status_code=\"STATUS_CODE_ERROR\"}[$__rate_interval]))",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "Errors"
+        }
+      ],
+      "title": "Exceptions Over Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "Detailed exception log showing each error with timestamp, type, and message. Useful for debugging Copilot issues like MCP server failures or canceled requests.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": [
+                "countAll"
+              ]
+            },
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ExceptionType"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 120
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timestamp"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 180
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 44
+      },
+      "id": 16,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "timestamp"
+          }
+        ]
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "expr": "sum by (span_name) (traces_spanmetrics_calls_total{service=~\"${source:regex}\", status_code=\"STATUS_CODE_ERROR\"})",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "legendFormat": "{{span_name}}"
+        }
+      ],
+      "title": "Exception Details",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 52
+      },
+      "id": 107,
+      "panels": [],
+      "title": "Select a trace",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "tempo",
+        "uid": "tempo"
+      },
+      "description": "Recent GitHub Copilot invoke_agent traces from Tempo. Select a trace ID to inspect its spans; matched span details include token attributes when exported.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "links": [
+            {
+              "targetBlank": false,
+              "title": "Show trace details",
+              "url": "/d/GitHubCopilot/github-copilot?${__url_time_range}&${source:queryparam}&var-copilotTraceId=${__data.fields.traceID}#panel-110"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "startTime"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "timestamp"
+              },
+              {
+                "id": "custom.width",
+                "value": 209
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "traceName"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "operation"
+              },
+              {
+                "id": "custom.width",
+                "value": 287
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "traceService"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Source"
+              },
+              {
+                "id": "custom.width",
+                "value": 190
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "traceDuration"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "duration"
+              },
+              {
+                "id": "unit",
+                "value": "ms"
+              },
+              {
+                "id": "custom.width",
+                "value": 122
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "success"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "applyToRow": false,
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "False": {
+                        "color": "red",
+                        "index": 0
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 77
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "traceID"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TraceId"
+              },
+              {
+                "id": "custom.width",
+                "value": 340
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 53
+      },
+      "id": 108,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "timestamp"
+          }
+        ]
+      },
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "traceql",
+          "query": "{ resource.service.name =~ \"${source:regex}\" && span.gen_ai.operation.name = \"invoke_agent\" && span.gen_ai.usage.input_tokens != nil && span.gen_ai.usage.output_tokens != nil } | select(span.gen_ai.operation.name, span.gen_ai.response.model, span.gen_ai.usage.input_tokens, span.gen_ai.usage.output_tokens) with (most_recent=true)",
+          "limit": 50,
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "nested": true
+            },
+            "indexByName": {
+              "startTime": 0,
+              "traceService": 1,
+              "traceName": 2,
+              "traceDuration": 3,
+              "traceID": 4,
+              "nested": 5
+            }
+          }
+        }
+      ],
+      "title": "Recent Operations",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 61
+      },
+      "id": 109,
+      "panels": [],
+      "title": "Trace detail",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "tempo",
+        "uid": "tempo"
+      },
+      "description": "Detailed trace visualization for the selected Tempo trace ID.",
+      "gridPos": {
+        "h": 27,
+        "w": 24,
+        "x": 0,
+        "y": 62
+      },
+      "id": 110,
+      "options": {},
+      "pluginVersion": "12.4.3",
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "traceql",
+          "query": "$copilotTraceId",
+          "datasource": {
+            "type": "tempo",
+            "uid": "tempo"
+          }
+        }
+      ],
+      "title": "Trace Visualization",
+      "type": "traces"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 42,
+  "tags": [
+    "github-copilot",
+    "copilot",
+    "ai",
+    "llm",
+    "opentelemetry",
+    "application-insights",
+    "Azure-managed"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": [
+            "VS Code Copilot",
+            "Copilot CLI"
+          ],
+          "value": [
+            "copilot-chat",
+            "github-copilot"
+          ]
+        },
+        "description": "Filter by telemetry source: VS Code Copilot, Copilot CLI, or both.",
+        "includeAll": false,
+        "label": "Source",
+        "multi": true,
+        "name": "source",
+        "options": [
+          {
+            "selected": true,
+            "text": "VS Code Copilot",
+            "value": "copilot-chat"
+          },
+          {
+            "selected": true,
+            "text": "Copilot CLI",
+            "value": "github-copilot"
+          }
+        ],
+        "query": "VS Code Copilot : copilot-chat, Copilot CLI : github-copilot",
+        "type": "custom",
+        "valuesFormat": "csv"
+      },
+      {
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "description": "Tempo trace ID to display in the trace visualization.",
+        "hide": 2,
+        "label": "Trace ID",
+        "name": "copilotTraceId",
+        "options": [],
+        "query": "",
+        "type": "textbox"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "GitHub Copilot",
+  "uid": "GitHubCopilot",
+  "version": 1,
+  "weekStart": ""
+}
