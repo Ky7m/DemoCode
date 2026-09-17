@@ -582,14 +582,6 @@
             "id": "byRefId",
             "options": "SR"
           },
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "SR"
-          },
           "id": "reduce",
           "options": {
             "includeTimeField": false,
@@ -600,10 +592,6 @@
           }
         },
         {
-          "filter": {
-            "id": "byRefId",
-            "options": "SR"
-          },
           "id": "reduce",
           "options": {
             "includeTimeField": false,
@@ -614,15 +602,11 @@
           }
         },
         {
-          "filter": {
-            "id": "byRefId",
-            "options": "SR"
-          },
           "id": "filterFieldsByName",
           "options": {
-            "include": {
+            "exclude": {
               "names": [
-                "Count"
+                "Field"
               ]
             }
           }
